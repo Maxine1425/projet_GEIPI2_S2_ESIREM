@@ -1,1 +1,3 @@
 import Player
+
+print("Test")
