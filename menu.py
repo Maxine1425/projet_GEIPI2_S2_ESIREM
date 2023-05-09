@@ -19,7 +19,7 @@ while True :
 
 while True :
     choix_menu = input ()
-    if choix_menu == 'b':
+
 
 
 
