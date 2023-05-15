@@ -23,3 +23,6 @@ class Monstre:
     def get_stats(self):
         stats = [self.name, self.PV, self.ATQ, self.DEF, self.VIT]
         return stats
+
+    def print_stats(self):
+        print(self.name, self.rare, self.type, self.PV, self.ATQ, self.DEF, self.VIT)
