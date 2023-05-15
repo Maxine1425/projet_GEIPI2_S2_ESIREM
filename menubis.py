@@ -1,18 +1,6 @@
-from tkinter import *
-import time
-from datetime import date, timezone, datetime
-import pytz
-from datetime import datetime
+import pygame
+from pygame.locals import *
 
-heure = datetime.now()
-currentTime = heure.strftime("%H:%M:%S")
+pygame.init()
 
-fenetre = Tk()
-
-texte_a_afficher = "Heure :" + currentTime
-
-label = Label(fenetre, text=(texte_a_afficher) )
-
-label.pack()
-
-fenetre.mainloop()
+fenetre = pygame.display.set_mode((640, 480))
