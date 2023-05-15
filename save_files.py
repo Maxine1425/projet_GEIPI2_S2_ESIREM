@@ -1,11 +1,11 @@
-def sauvegarde_argent(name, player_data):
-    file_name = name + "_money.txt"
-    with open(file_name, 'w') as current:
-        current.write(player_data)
+# def sauvegarde_argent(name, player_data):
+#     file_name = name + "_money.txt"
+#     with open(file_name, 'w') as current:
+#         current.write(player_data)
 
 
 # def sauvegarde_monster(name, monster_data):
-#     file_name = name + "_money.txt"
+#     file_name = name + "_monster.txt"
 #     with open(file_name, 'w') as current:
 #         current.write(monter_data)
 
