@@ -26,6 +26,7 @@ class Player:
         for i in range(length):
             print(self.monster_list[i].name)
 
+
     def sauvegarde_argent(self):
         file_name = self.name + "_money.txt"
         money_data = self.balance + "\n" + self.mod
@@ -34,7 +35,21 @@ class Player:
 
     def sauvegarde_monstre(self):
         file_name = self.name + "_monster.txt"
-        lenght = len(self.monster_list)
+        length = len(self.monster_list)
         with open(file_name, 'w') as current:
-            for i in range(lenght):
-                current.write(self.monster_list[i].name)
+            for i in range(length):
+                current.write(str(self.monster_list[i].name))
+                current.write("\n")
+                current.write(str(self.monster_list[i].rare))
+                current.write("\n")
+                current.write(str(self.monster_list[i].type))
+                current.write("\n")
+                current.write(str(self.monster_list[i].PV))
+                current.write("\n")
+                current.write(str(self.monster_list[i].ATQ))
+                current.write("\n")
+                current.write(str(self.monster_list[i].DEF))
+                current.write("\n")
+                current.write(str(self.monster_list[i].VIT))
+                current.write("\n")
+                current.write("%\n")
