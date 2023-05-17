@@ -1,12 +1,16 @@
+from pathlib import Path
+import os
+
+
 class Player:
 
     def __init__(self, name, balance, mod):
         self.name = name
         self.balance = balance
         self.mod = mod
-        self.monster_list = [] #Liste contenant tout les monstres que le joueur possède
+        self.monster_list = []  # Liste contenant tout les monstres que le joueur possède
 
-    def add_monstre(self, Monstre): #Ajoute un monstre à la l'inventaire de monstres du joueur
+    def add_monstre(self, Monstre):  # Ajoute un monstre à la l'inventaire de monstres du joueur
         try:
             length = len(self.monster_list)
             if length == 0:
@@ -16,7 +20,7 @@ class Player:
         except:
             print("An error has occurred")
 
-    def print_monster_name(self): #Affiche sur le terminal le nom de tout les monstres du joueur
+    def print_monster_name(self):  # Affiche sur le terminal le nom de tout les monstres du joueur
         length = len(self.monster_list)
         for i in range(length):
             print(self.monster_list[i].name)
@@ -25,16 +29,28 @@ class Player:
         self.sauvegarde_monstre()
         self.sauvegarde_argent()
 
-    def sauvegarde_argent(self): #Sauvegarde l'argent et les mod du joueur dans un fichier nomdujoueur_money.txt
+    def sauvegarde_argent(self):  # Sauvegarde l'argent et les mod du joueur dans un fichier nomdujoueur_money.txt
         file_name = self.name + "_money.txt"
+        save_folder_path = "save files/" + self.name
+        file_to_open = save_folder_path + "/" + file_name
         money_data = self.balance + "\n" + self.mod
-        with open(file_name, 'w') as current:
+        with open(file_to_open, 'w') as current:
             current.write(money_data)
 
-    def sauvegarde_monstre(self): #Sauvegarde les monstres du joueur dans un fichier nomdujoueur_monster.txt
+    def sauvegarde_monstre(self):  # Sauvegarde les monstres du joueur dans un fichier nomdujoueur_monster.txt
         file_name = self.name + "_monster.txt"
+        save_folder = Path("save files/")
+
+        try:
+            path = os.path.join(save_folder, self.name)
+            os.mkdir(path)
+            print("File created!\n")
+        except:
+            print("File already exists !\n")
+
+        file_to_open = save_folder / self.name / file_name
         length = len(self.monster_list)
-        with open(file_name, 'w') as current:
+        with open(file_to_open, 'w') as current:
             for i in range(length):
                 current.write(str(self.monster_list[i].name))
                 current.write("\n")
