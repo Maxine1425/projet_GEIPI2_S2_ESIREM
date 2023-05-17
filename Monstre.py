@@ -1,9 +1,11 @@
 import random
+
+
 class Monstre:
     def __init__(self, name, rare, type):
         self.name = name
-        self.rare = rare #Niveau de rareté de 1 à 10
-        self.type = type #Type entre Attaque et Defense
+        self.rare = rare  # Niveau de rareté de 1 à 10
+        self.type = type  # Type entre Attaque et Defense
         if type == "Attaque":
             self.PV = random.randint(10, 60)
             self.ATQ = random.randint(25, 40)
@@ -17,7 +19,31 @@ class Monstre:
             self.DEF = random.randint(15, 30)
             self.VIT = random.randint(1, 15)
 
+        self.initial_max_PV = self.PV
 
-    def get_stats(self): #Renvoie un tableau avec les stats du monstre
+    def get_stats(self):  # Renvoie un tableau avec les stats du monstre
         stats = [self.name, self.PV, self.ATQ, self.DEF, self.VIT]
         return stats
+
+    def dealDamage(self, damage):
+        damage = damage + 0.3 * self.DEF
+        self.PV = self.PV - damage
+        if self.PV < 0:
+            self.PV = 0
+
+
+
+    def choix_attaque(self, choice, opponent):
+        if choice == 1:
+            self.attaque(opponent)
+        elif choice == 2:
+            self.soin()
+
+    def attaque(self, target):
+        target.dealDamage(self.ATQ * 1.5)
+
+    def soin(self):
+        if self.PV + (self.initial_max_PV * 0.5) <= self.initial_max_PV:
+            self.PV = self.PV + (self.initial_max_PV * 0.5)
+        elif self.PV + (self.initial_max_PV * 0.5) > self.initial_max_PV:
+            self.PV = self.initial_max_PV
