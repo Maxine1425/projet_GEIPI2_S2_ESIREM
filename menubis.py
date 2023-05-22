@@ -1,6 +1,13 @@
+import afficher_heure
 import pygame
 from pygame.locals import *
 pygame.init()
+import os
+import time
+from datetime import date, timezone, datetime
+import pytz
+from datetime import datetime
+
 
 fenetre = pygame.display.set_mode((990, 660),) #creation de la fenetre
 
@@ -14,10 +21,20 @@ fenetre.blit(button_menu_monstre, ( 220,570))
 button_inventaire = pygame.image.load("button_inventaire.png").convert_alpha() #l'image sera avec un fond transparant
 fenetre.blit(button_inventaire, ( 460,570))
 
-clickable_area_boutique = pygame.Rect((220, 377), (149, 66))
-clickable_area_menu_monstre = pygame.Rect((220, 377), (149, 66))
-clickable_area_inventaire = pygame.Rect((220, 377), (149, 66))
+# creation des zones de click
+clickable_area_boutique = pygame.Rect((30, 570), (160, 49))
+clickable_area_menu_monstre = pygame.Rect((220, 570), (210, 49))
+clickable_area_inventaire = pygame.Rect((460, 570), (168, 49))
 
+#afficher l'heure et la date
+font = pygame.font.Font(None,36) #Police principale
+
+thread_3 = afficher_heure.Afficher_heure()
+thread_3.start()
+thread_3.join()
+
+heure_a_afficher = font.render("Heure : " + str(thread_3.result), True, (0, 0, 0), (255, 255, 255))
+fenetre.blit(heure_a_afficher, (10, 10))
 
 pygame.display.flip() #ligne pour gerer le rafraichissement de la fenetre
 
