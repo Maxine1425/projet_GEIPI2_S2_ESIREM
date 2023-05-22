@@ -6,6 +6,7 @@ class Monstre:
         self.name = name
         self.rare = rare  # Niveau de rareté de 1 à 10
         self.type = type  # Type entre Attaque et Defense
+        self.isKO = False
         if type == "Attaque":
             self.PV = random.randint(10, 60)
             self.ATQ = random.randint(25, 40)
@@ -25,13 +26,14 @@ class Monstre:
         stats = [self.name, self.PV, self.ATQ, self.DEF, self.VIT]
         return stats
 
+    def get_Pv(self):
+        return self.PV
+
     def dealDamage(self, damage):
         damage = damage + 0.3 * self.DEF
         self.PV = self.PV - damage
         if self.PV < 0:
             self.PV = 0
-
-
 
     def choix_attaque(self, choice, opponent):
         if choice == 1:
@@ -47,3 +49,9 @@ class Monstre:
             self.PV = self.PV + (self.initial_max_PV * 0.5)
         elif self.PV + (self.initial_max_PV * 0.5) > self.initial_max_PV:
             self.PV = self.initial_max_PV
+
+    def koMon(self):
+        self.isKO = True
+
+    def revMon(self):
+        self.isKO = False
