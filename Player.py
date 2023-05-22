@@ -10,7 +10,7 @@ class Player:
         self.mod = mod
         self.monster_list = []  # Liste contenant tout les monstres que le joueur possède
 
-    def add_monstre(self, Monstre):  # Ajoute un monstre à la l'inventaire de monstres du joueur
+    def add_monstre(self, Monstre):  # Ajoute un monstre à l'inventaire de monstres du joueur
         try:
             length = len(self.monster_list)
             if length == 0:

@@ -1,6 +1,7 @@
 import random
 import Monstre
 import Player
+import Battle
 
 player_name = input("Veuillez rentrer votre pseudo :")
 monster_type = ["Attaque", "Defense"] #Differentes possibilites de type
@@ -42,3 +43,7 @@ test_joueur.add_monstre(testmnstr_end)
 test_joueur.print_monster_name()
 
 test_joueur.save_all() #Sauvegarde de l'argent dans un fichier txt et de l'inventaire de monstre dans un fichier txt
+
+combat = Battle.Battle(testmnstr_attaque,testmnstr_defense)
+
+combat.letsBattle()
