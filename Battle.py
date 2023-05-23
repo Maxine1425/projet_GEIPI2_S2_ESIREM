@@ -1,5 +1,6 @@
 import os
 import random
+import pygame
 import Monstre
 import Player
 import time
@@ -113,9 +114,9 @@ class Battle:
     def letsBattle(self):
         fast_one = self.battleSpeedCheck()
         slow_one = self.otherOne()
-        print(fast_one.name + " has " + str(fast_one.VIT) + " SPD\n")
-        print(slow_one.name + " has " + str(slow_one.VIT) + " SPD\n")
-            
+        print(fast_one.name + " has " + str(fast_one.PV) + " HPs\n")
+        print(slow_one.name + " has " + str(slow_one.PV) + " HPs\n")
+
 
 
 

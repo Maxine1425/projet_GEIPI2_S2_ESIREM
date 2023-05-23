@@ -1,5 +1,4 @@
 from threading import Thread
-
 class Afficher_heure(Thread):
     def __init__(self):
         Thread.__init__(self)
