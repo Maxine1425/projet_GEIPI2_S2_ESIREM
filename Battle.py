@@ -115,8 +115,6 @@ class Battle:
         slow_one = self.otherOne()
         print(fast_one.name + " has " + str(fast_one.VIT) + " SPD\n")
         print(slow_one.name + " has " + str(slow_one.VIT) + " SPD\n")
-
-        while self.goingOn:
             
 
 

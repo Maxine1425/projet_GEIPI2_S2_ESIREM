@@ -6,7 +6,7 @@ pygame.init()
 fenetre = pygame.display.set_mode((990, 660),) #creation de la fenetre
 
 fond = pygame.image.load("fond_menu.png").convert() #on ajoute a fond une image j'utilise .convert pour etre sur qu'elle soit toujours au bon format
-fenetre.blit(fond, (0,0)) #on cole sur la fenetre l'image fond et l'angle haut gauche de cette image sera en (0;0)
+fenetre.blit(fond, (0,0)) #on colle sur la fenetre l'image fond et l'angle haut gauche de cette image sera en (0;0)
 
 button_boutique = pygame.image.load("button_boutique.png").convert_alpha() #l'image sera avec un fond transparant
 fenetre.blit(button_boutique, ( 30,570))
