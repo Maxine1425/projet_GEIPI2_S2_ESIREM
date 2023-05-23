@@ -2,12 +2,6 @@ import afficher_heure
 import pygame
 from pygame.locals import *
 pygame.init()
-import os
-import time
-from datetime import date, timezone, datetime
-import pytz
-from datetime import datetime
-
 
 fenetre = pygame.display.set_mode((990, 660),) #creation de la fenetre
 
