@@ -3,7 +3,10 @@ import Battle
 import Monstre
 import pygame
 from pygame.locals import *
+from Money import Compteur
 
+argent = Compteur()
+argent.demarrer()
 
 pygame.init()
 
@@ -16,7 +19,7 @@ y = 660/2
 fond = pygame.image.load("images/fond_menu.png").convert() #on ajoute a fond une image j'utilise .convert pour etre sur qu'elle soit toujours au bon format
 fenetre.blit(fond, (0,0)) #on colle sur la fenetre l'image fond et l'angle haut gauche de cette image sera en (0;0)
 
-salameche = pygame.image.load("Salameche.png").convert_alpha()
+salameche = pygame.image.load("images/Salameche.png").convert_alpha()
 bulbizarre = pygame.image.load("images/Bulbizarre.png").convert_alpha()
 hpbarfull = pygame.image.load("images/VIE_FULL.png")
 hpbar45 = pygame.image.load("images/VIEQC.png")
@@ -49,8 +52,10 @@ while continuer: #boucle pour que la fenetre reste ouverte
             continuer = 0  # On arrete la boucle
         elif event.type == MOUSEBUTTONUP and event.button == 1:
             print("ouvre la boutique")
+            argent.ajouter_mod(15)
         elif event.type == MOUSEBUTTONUP and event.button == 1:
             print("ouvre menu monstre")
+            argent.soustraire(50)
         elif event.type == MOUSEBUTTONUP and event.button == 1:
             print("ouvre inventaire")
 
@@ -65,4 +70,4 @@ while continuer: #boucle pour que la fenetre reste ouverte
     fenetre.blit(hpbarfull, (70, 450))
 
     pygame.display.flip()
-    print(pygame.mouse.get_pos()) #90,430
+    print(argent.compteur)
