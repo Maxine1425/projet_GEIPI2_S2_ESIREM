@@ -2,9 +2,14 @@ import pygame
 from pygame.locals import *
 from datetime import datetime
 from datetime import date
+from Money import Compteur
 import boutique
 from time import strftime
 pygame.init()
+
+#creation d'un compteur pour afficher argent
+argent = Compteur()
+argent.demarrer()
 
 #creation de la fenetre principal
 fenetre = pygame.display.set_mode((990, 660),)
@@ -18,7 +23,7 @@ fenetre.blit(fond, (0, 0)) #on colle sur la fenetre l'image fond et l'angle haut
 
 def afficher_menu(test, fenetre):
     if test == 1:
-        fenetre.blit(fond_menu_boutique, (20, 350))
+        fenetre.blit(fond_menu_boutique, (350, 20))
 
 
 fond_donee = pygame.image.load("images/fond_donee.jpg").convert()
@@ -55,14 +60,18 @@ pygame.display.flip() #ligne pour gerer le rafraichissement de la fenetre
 continuer = 1
 
 a = 0
+
 while continuer: #boucle pour que la fenetre reste ouverte
     for event in pygame.event.get():  # On parcours la liste de tous les evenements recus
         if event.type == QUIT:  # Si un de ces evenements est de type QUIT
             continuer = 0  # On arrete la boucle
+            argent.stopper()
         elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique.collidepoint(event.pos):
+
            print("ouvre la boutique")
            a = 1
            pygame.display.flip()
+
         elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_menu_monstre.collidepoint(event.pos):
             print("ouvre menu monstre")
         elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_inventaire.collidepoint(event.pos):
@@ -75,7 +84,7 @@ while continuer: #boucle pour que la fenetre reste ouverte
     fenetre.blit(button_menu_monstre, (220, 570))
     fenetre.blit(button_inventaire, (460, 570))
     #fenetre.blit(affiche_menu_boutique, ())
-    boutique.afficher_menu(a, fenetre)
+    afficher_menu(a, fenetre)
 
     #afficher l'heure
     font = pygame.font.Font("Vogue.ttf", 20)  # Police principale
@@ -96,7 +105,7 @@ while continuer: #boucle pour que la fenetre reste ouverte
 
     #afficher l'argent
     font = pygame.font.Font("Vogue.ttf", 20)
-    argent_a_afficher = font.render("Votre argent : " + date_1, True, (0, 0, 0),)
+    argent_a_afficher = font.render("Votre argent : " + str(argent.compteur), True, (0, 0, 0),)
     argent_a_afficher_sans_fond = argent_a_afficher.convert_alpha()
     fenetre.blit(argent_a_afficher, (35, 100))
 
