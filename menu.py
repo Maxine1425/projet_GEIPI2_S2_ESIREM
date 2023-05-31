@@ -13,7 +13,7 @@ fenetre = pygame.display.set_mode((990, 660),)
 pygame.display.set_caption("Jeux")
 
 #affichage des fond et boutton
-fond = pygame.image.load("fond_menu.png").convert() #on ajoute a fond une image j'utilise .convert pour etre sur qu'elle soit toujours au bon format
+fond = pygame.image.load("images/fond_menu.png").convert() #on ajoute a fond une image j'utilise .convert pour etre sur qu'elle soit toujours au bon format
 fenetre.blit(fond, (0, 0)) #on colle sur la fenetre l'image fond et l'angle haut gauche de cette image sera en (0;0)
 
 def afficher_menu(test, fenetre):
@@ -21,7 +21,7 @@ def afficher_menu(test, fenetre):
         fenetre.blit(fond_menu_boutique, (20, 350))
 
 
-fond_donee = pygame.image.load("fond_donee.jpg").convert()
+fond_donee = pygame.image.load("images/fond_donee.jpg").convert()
 # Creation de la surface de l'ombre
 ombre = pygame.Surface(fond_donee.get_size()).convert_alpha()
 ombre.fill((0, 0, 0, 70))  # Couleur de l'ombre (noir semi-transparent)
@@ -34,13 +34,13 @@ y_ombre = 0 + 5  # Decalage vertical de l'ombre
 fenetre.blit(ombre, (x_ombre, y_ombre))
 fenetre.blit(fond_donee, (0, 0))
 
-button_boutique = pygame.image.load("button_boutique.png").convert_alpha() #l'image sera avec un fond transparant
+button_boutique = pygame.image.load("images/button_boutique.png").convert_alpha() #l'image sera avec un fond transparant
 fenetre.blit(button_boutique, (30, 570))
-button_menu_monstre = pygame.image.load("button_menu-monstre.png").convert_alpha() #l'image sera avec un fond transparant
+button_menu_monstre = pygame.image.load("images/button_menu-monstre.png").convert_alpha() #l'image sera avec un fond transparant
 fenetre.blit(button_menu_monstre, (220, 570))
-button_inventaire = pygame.image.load("button_inventaire.png").convert_alpha() #l'image sera avec un fond transparant
+button_inventaire = pygame.image.load("images/button_inventaire.png").convert_alpha() #l'image sera avec un fond transparant
 fenetre.blit(button_inventaire, (460, 570))
-fond_menu_boutique = pygame.image.load("fond_boutique.jpg").convert()
+fond_menu_boutique = pygame.image.load("images/fond_boutique.jpg").convert()
 
 # creation des zones de click
 clickable_area_boutique = pygame.Rect((30, 570), (160, 49))

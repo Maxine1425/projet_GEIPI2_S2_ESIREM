@@ -13,13 +13,20 @@ fenetre = pygame.display.set_mode((990, 660),) #creation de la fenetre
 x = 990/2
 y = 660/2
 
-fond = pygame.image.load("fond_menu.png").convert() #on ajoute a fond une image j'utilise .convert pour etre sur qu'elle soit toujours au bon format
+fond = pygame.image.load("images/fond_menu.png").convert() #on ajoute a fond une image j'utilise .convert pour etre sur qu'elle soit toujours au bon format
 fenetre.blit(fond, (0,0)) #on colle sur la fenetre l'image fond et l'angle haut gauche de cette image sera en (0;0)
 
 salameche = pygame.image.load("Salameche.png").convert_alpha()
-bulbizarre = pygame.image.load("Bulbizarre.png").convert_alpha()
-floor1 = pygame.image.load("battlefloor.png")
-floor2 = pygame.image.load("battlefloor.png")
+bulbizarre = pygame.image.load("images/Bulbizarre.png").convert_alpha()
+hpbarfull = pygame.image.load("images/VIE_FULL.png")
+hpbar45 = pygame.image.load("images/VIEQC.png")
+hpbar35 = pygame.image.load("images/VIETC.png")
+hpbar25 = pygame.image.load("images/VIEDC.png")
+hpbar15 = pygame.image.load("images/VIEUC.png")
+hpbarempty = pygame.image.load("images/VIE_EMPTY.png")
+
+floor1 = pygame.image.load("images/battlefloor.png")
+floor2 = pygame.image.load("images/battlefloor.png")
 
 pressed = pygame.key.get_pressed()
 
@@ -50,18 +57,12 @@ while continuer: #boucle pour que la fenetre reste ouverte
 
     # fenetre.fill(BLANC)
     fenetre.blit(fond, (0, 0))
-    compteur+=1
-    font = pygame.font.Font(None, 36)
-    texte = font.render(str(compteur), True, NOIR)
-    rect = texte.get_rect()
-    rect.centerx = x
-    rect.centery = y
-    fenetre.blit(texte, rect)
 
     fenetre.blit(floor1, (600, 200))
     fenetre.blit(floor2, (50, 350))
     fenetre.blit(bulbizarre, (620, 150))
     fenetre.blit(salameche, (70, 300))
+    fenetre.blit(hpbarfull, (70, 450))
 
     pygame.display.flip()
-
+    print(pygame.mouse.get_pos()) #90,430
