@@ -1,6 +1,6 @@
 from pathlib import Path
 import os
-
+from Money import Compteur
 
 class Player:
 
@@ -29,7 +29,9 @@ class Player:
         self.sauvegarde_monstre()
         self.sauvegarde_argent()
 
-    def sauvegarde_argent(self):  # Sauvegarde l'argent et les mod du joueur dans un fichier nomdujoueur_money.txt
+    def sauvegarde_argent(self, compteur):  # Sauvegarde l'argent et les mod du joueur dans un fichier nomdujoueur_money.txt
+        self.balance = compteur.compteur
+        self.mod = compteur.mod
         file_name = self.name + "_money.txt"
         save_folder_path = "save files/" + self.name
         file_to_open = save_folder_path + "/" + file_name
