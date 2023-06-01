@@ -3,8 +3,6 @@ from pygame.locals import *
 from datetime import datetime
 from datetime import date
 from Money import Compteur
-import boutique
-from time import strftime
 pygame.init()
 
 #creation d'un compteur pour afficher argent
@@ -17,7 +15,7 @@ fenetre = pygame.display.set_mode((990, 660),)
 #nom du jeu apparait
 pygame.display.set_caption("Jeux")
 
-#affichage des fond et boutton
+#affichage des fonds et boutton
 fond = pygame.image.load("images/fond_menu.png").convert() #on ajoute a fond une image j'utilise .convert pour etre sur qu'elle soit toujours au bon format
 fenetre.blit(fond, (0, 0)) #on colle sur la fenetre l'image fond et l'angle haut gauche de cette image sera en (0;0)
 
@@ -48,7 +46,7 @@ fenetre.blit(button_inventaire, (460, 570))
 fond_menu_boutique = pygame.image.load("images/fond_boutique.jpg").convert()
 
 # creation des zones de click
-clickable_area_boutique = pygame.Rect((30, 570), (160, 49))
+clickable_area_boutique = pygame.Rect((30, 570), (160, 49)) # (position)(taille)
 clickable_area_menu_monstre = pygame.Rect((220, 570), (210, 49))
 clickable_area_inventaire = pygame.Rect((460, 570), (168, 49))
 
@@ -61,17 +59,20 @@ continuer = 1
 
 a = 0
 
-while continuer: #boucle pour que la fenetre reste ouverte
+#boucle de gestion de la fentre
+while continuer:
     for event in pygame.event.get():  # On parcours la liste de tous les evenements recus
         if event.type == QUIT:  # Si un de ces evenements est de type QUIT
             continuer = 0  # On arrete la boucle
             argent.stopper()
         elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique.collidepoint(event.pos):
-
-           print("ouvre la boutique")
-           a = 1
-           pygame.display.flip()
-
+            if a == 0 :
+                print("ouvre la boutique")
+                a = 1
+                pygame.display.flip()
+            elif a == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique.collidepoint(event.pos):
+                a = 0
+                print("ferme la boutique")
         elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_menu_monstre.collidepoint(event.pos):
             print("ouvre menu monstre")
         elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_inventaire.collidepoint(event.pos):
