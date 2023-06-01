@@ -3,8 +3,6 @@ from pygame.locals import *
 from datetime import datetime
 from datetime import date
 from Money import Compteur
-import boutique
-from time import strftime
 pygame.init()
 
 #creation d'un compteur pour afficher argent
@@ -17,13 +15,15 @@ fenetre = pygame.display.set_mode((990, 660),)
 #nom du jeu apparait
 pygame.display.set_caption("Jeux")
 
-#affichage des fond et boutton
+#affichage des fonds et boutton
 fond = pygame.image.load("images/fond_menu.png").convert() #on ajoute a fond une image j'utilise .convert pour etre sur qu'elle soit toujours au bon format
 fenetre.blit(fond, (0, 0)) #on colle sur la fenetre l'image fond et l'angle haut gauche de cette image sera en (0;0)
 
 def afficher_menu(test, fenetre):
     if test == 1:
         fenetre.blit(fond_menu_boutique, (350, 20))
+        fenetre.blit(mod_x2, (400, 70))
+
 
 
 fond_donee = pygame.image.load("images/fond_donee.jpg").convert()
@@ -46,11 +46,13 @@ fenetre.blit(button_menu_monstre, (220, 570))
 button_inventaire = pygame.image.load("images/button_inventaire.png").convert_alpha() #l'image sera avec un fond transparant
 fenetre.blit(button_inventaire, (460, 570))
 fond_menu_boutique = pygame.image.load("images/fond_boutique.jpg").convert()
+mod_x2 = pygame.image.load("images/X2.png").convert_alpha()
 
 # creation des zones de click
-clickable_area_boutique = pygame.Rect((30, 570), (160, 49))
+clickable_area_boutique = pygame.Rect((30, 570), (160, 49)) # (position)(taille)
 clickable_area_menu_monstre = pygame.Rect((220, 570), (210, 49))
 clickable_area_inventaire = pygame.Rect((460, 570), (168, 49))
+clickable_area_boutique_mod_2 = pygame.Rect((400, 70), (80, 80))
 
 #creation de l'orloge pour afficher l'heure
 horloge = pygame.time.Clock()
@@ -61,17 +63,22 @@ continuer = 1
 
 a = 0
 
-while continuer: #boucle pour que la fenetre reste ouverte
+#boucle de gestion de la fentre
+while continuer:
     for event in pygame.event.get():  # On parcours la liste de tous les evenements recus
         if event.type == QUIT:  # Si un de ces evenements est de type QUIT
             continuer = 0  # On arrete la boucle
             argent.stopper()
         elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique.collidepoint(event.pos):
-
-           print("ouvre la boutique")
-           a = 1
-           pygame.display.flip()
-
+            if a == 0 :
+                print("ouvre la boutique")
+                a = 1
+                pygame.display.flip()
+            elif a == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique.collidepoint(event.pos):
+                a = 0
+                print("ferme la boutique")
+            elif a == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique_mod_2.collidepoint(event.pos):
+                print("x2")
         elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_menu_monstre.collidepoint(event.pos):
             print("ouvre menu monstre")
         elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_inventaire.collidepoint(event.pos):
@@ -79,10 +86,12 @@ while continuer: #boucle pour que la fenetre reste ouverte
 
     #permet de reactualiser le fond
     fenetre.blit(fond, (0, 0))
+    fenetre.blit(ombre, (x_ombre, y_ombre))
     fenetre.blit(fond_donee, (0, 0))
     fenetre.blit(button_boutique, (30, 570))
     fenetre.blit(button_menu_monstre, (220, 570))
     fenetre.blit(button_inventaire, (460, 570))
+
     #fenetre.blit(affiche_menu_boutique, ())
     afficher_menu(a, fenetre)
 
@@ -112,4 +121,3 @@ while continuer: #boucle pour que la fenetre reste ouverte
     #gere l'actualisation de l'heure
     pygame.display.flip()
     horloge.tick(60)
-
