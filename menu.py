@@ -69,12 +69,8 @@ while continuer: #boucle pour que la fenetre reste ouverte
         elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique.collidepoint(event.pos):
 
            print("ouvre la boutique")
-           if a == 0:
-               a = 1
-               pygame.display.flip()
-           elif a == 1:
-               a = 0
-               pygame.display.flip()
+           a = 1
+           pygame.display.flip()
 
         elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_menu_monstre.collidepoint(event.pos):
             print("ouvre menu monstre")
