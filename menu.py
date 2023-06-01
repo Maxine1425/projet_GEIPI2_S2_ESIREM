@@ -23,6 +23,8 @@ def afficher_menu(test, fenetre):
     if test == 1:
         fenetre.blit(fond_menu_boutique, (350, 20))
         fenetre.blit(mod_x2, (400, 70))
+        fenetre.blit(mod_x5,(500, 70))
+        fenetre.blit(mod_x10,(600, 70))
 
 
 
@@ -47,12 +49,16 @@ button_inventaire = pygame.image.load("images/button_inventaire.png").convert_al
 fenetre.blit(button_inventaire, (460, 570))
 fond_menu_boutique = pygame.image.load("images/fond_boutique.jpg").convert()
 mod_x2 = pygame.image.load("images/X2.png").convert_alpha()
+mod_x5 = pygame.image.load("images/X5.png").convert_alpha()
+mod_x10 = pygame.image.load("images/X10.png").convert_alpha()
 
 # creation des zones de click
 clickable_area_boutique = pygame.Rect((30, 570), (160, 49)) # (position)(taille)
 clickable_area_menu_monstre = pygame.Rect((220, 570), (210, 49))
 clickable_area_inventaire = pygame.Rect((460, 570), (168, 49))
 clickable_area_boutique_mod_2 = pygame.Rect((400, 70), (80, 80))
+clickable_area_boutique_mod_5 = pygame.Rect((500, 70), (80, 80))
+clickable_area_boutique_mod_10 = pygame.Rect((600, 70), (80, 80))
 
 #creation de l'orloge pour afficher l'heure
 horloge = pygame.time.Clock()
@@ -77,8 +83,15 @@ while continuer:
             elif a == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique.collidepoint(event.pos):
                 a = 0
                 print("ferme la boutique")
-            elif a == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique_mod_2.collidepoint(event.pos):
-                print("x2")
+        elif a == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique_mod_2.collidepoint(
+                event.pos):
+            print("x2")
+        elif a == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique_mod_5.collidepoint(
+                event.pos):
+            print("x5")
+        elif a == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique_mod_10.collidepoint(
+                event.pos):
+            print("x10")
         elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_menu_monstre.collidepoint(event.pos):
             print("ouvre menu monstre")
         elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_inventaire.collidepoint(event.pos):
