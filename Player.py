@@ -1,25 +1,43 @@
 from pathlib import Path
 import os
-
+from Money import Compteur
 
 class Player:
 
     def __init__(self, name, balance, mod):
-        self.name = name
-        self.balance = balance
-        self.mod = mod
-        self.monster_list = []  # Liste contenant tout les monstres que le joueur possède
+        """
 
-    def add_monstre(self, Monstre):  # Ajoute un monstre à l'inventaire de monstres du joueur
+        :param name:
+        :param balance:
+        :param mod:
+        """
+        self.name = name
+        self.wallet = Compteur()
+        if balance != 0:
+            self.wallet.compteur = balance
+        self.wallet.mod = mod
+        self.monster_list = []  # Liste contenant tout les monstres que le joueur possède
+        self.wallet.demarrer()
+
+    def add_monstre(self, monstre):  # Ajoute un monstre à l'inventaire de monstres du joueur
         try:
             length = len(self.monster_list)
             if length == 0:
-                self.monster_list.append(Monstre)
+                self.monster_list.append(monstre)
             else:
-                self.monster_list.insert(length, Monstre)
+                self.monster_list.insert(length, monstre)
         except:
             print("An error has occurred")
 
+
+    def ajouter_mod(self, montant):
+        if self.wallet.ajouter_mod(montant):
+            return True
+        elif not self.wallet.ajouter_mod(montant):
+            return False
+
+    def achat(self, montant):
+        self.wallet.compteur.soustraire(montant)
     def print_monster_name(self):  # Affiche sur le terminal le nom de tout les monstres du joueur
         length = len(self.monster_list)
         for i in range(length):
@@ -29,11 +47,13 @@ class Player:
         self.sauvegarde_monstre()
         self.sauvegarde_argent()
 
-    def sauvegarde_argent(self):  # Sauvegarde l'argent et les mod du joueur dans un fichier nomdujoueur_money.txt
+    def sauvegarde_argent(self, compteur):  # Sauvegarde l'argent et les mod du joueur dans un fichier nomdujoueur_money.txt
+        self.wallet.compteur = compteur.compteur
+        self.mod = compteur.mod
         file_name = self.name + "_money.txt"
         save_folder_path = "save files/" + self.name
         file_to_open = save_folder_path + "/" + file_name
-        money_data = self.balance + "\n" + self.mod
+        money_data = self.wallet.compteur + "\n" + self.mod
         with open(file_to_open, 'w') as current:
             current.write(money_data)
 
@@ -67,3 +87,4 @@ class Player:
                 current.write(str(self.monster_list[i].VIT))
                 current.write("\n")
                 current.write("%\n")
+

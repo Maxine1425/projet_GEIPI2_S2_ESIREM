@@ -91,11 +91,16 @@ import time
 
 class Battle:
     def __init__(self, Monster1, Monster2):
-        self.goingOn = True
+        """
+
+        :param Monster1: Ce monstre doit obligatoirement etre celui du joueur
+        :param Monster2: Ce monstre est celui de l'ordinateur
+        """
+        self.going_on = True
         self.opponent1 = Monster1
         self.opponent2 = Monster2
 
-    def battleSpeedCheck(self):
+    def battle_speed_check(self):
         if self.opponent1.VIT > self.opponent2.VIT:
             return self.opponent1
         elif self.opponent2.VIT > self.opponent1.VIT:
@@ -104,20 +109,61 @@ class Battle:
             rand = [self.opponent1, self.opponent2]
         return random.choice(rand)
 
-    def otherOne(self):
-        fastest = self.battleSpeedCheck()
+    def other_one(self, fastest):
         if fastest.name == self.opponent1.name:
             return self.opponent2
         elif fastest.name == self.opponent2.name:
             return self.opponent1
+    def lets_battle(self):
+        while self.opponent1.PV > 0 and self.opponent2.PV > 0:
+            print(self.opponent1.name + " a " + str(self.opponent1.PV))
+            print(self.opponent2.name + " a " + str(self.opponent2.PV))
+            # Phase de choix
+            choix1 = int(input(self.opponent1.name + " c'est votre tour!\n\n1. Pour attaquer\n2. Pour se soigner\n"))
+            if self.opponent2.PV <= 0.5 * self.opponent2.initial_max_PV:
+                choix2 = 2
+            else:
+                choix2 = 1
 
-    def letsBattle(self):
-        fast_one = self.battleSpeedCheck()
-        slow_one = self.otherOne()
-        print(fast_one.name + " has " + str(fast_one.PV) + " HPs\n")
-        print(slow_one.name + " has " + str(slow_one.PV) + " HPs\n")
+            # Phase d'action
+            fast_one = self.battle_speed_check()
+            slow_one = self.other_one(fast_one)
+
+            if fast_one == self.opponent1:
+                if choix1 == 1:
+                    time.sleep(1)
+                    print(self.opponent1.name + " attaque " + self.opponent2.name + "!")
+                    fast_one.choix_attaque(choix1, slow_one)
+                    if slow_one.PV > 0:
+                        time.sleep(1)
+                        slow_one.choix_attaque(choix2, fast_one)
+                elif choix1 == 2:
+                    time.sleep(1)
+                    print(self.opponent1.name + " se soigne !")
+                    fast_one.choix_attaque(choix1, slow_one)
+                    time.sleep(1)
+                    slow_one.choix_attaque(choix2, fast_one)
 
 
+            else:
+                if choix2 == 1:
+                    time.sleep(1)
+                    print(self.opponent2.name + " attaque " + self.opponent1.name + "!")
+                    fast_one.choix_attaque(choix2, slow_one)
+                    if slow_one.PV > 0:
+                        time.sleep(1)
+                        slow_one.choix_attaque(choix1, fast_one)
+                elif choix2 == 2:
+                    time.sleep(1)
+                    print(self.opponent2.name + " se soigne !")
+                    fast_one.choix_attaque(choix2, slow_one)
+                    time.sleep(1)
+                    slow_one.choix_attaque(choix1, fast_one)
 
-
-
+            if self.opponent1.PV <= 0:
+                print(f"{self.opponent1.name} est KO!")
+                self.opponent1.koMon()
+            elif self.opponent2.PV <= 0:
+                print(f"{self.opponent2.name} est KO!")
+                self.opponent2.koMon()
+        self.goingOn = False

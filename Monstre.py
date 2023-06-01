@@ -23,7 +23,7 @@ class Monstre:
         self.initial_max_PV = self.PV
 
     def get_stats(self):  # Renvoie un tableau avec les stats du monstre
-        stats = [self.name, self.PV, self.ATQ, self.DEF, self.VIT]
+        stats = [self.name, "PV = " + str(self.PV), "ATQ = " + str(self.ATQ), "DEF = " + str(self.DEF), "VIT = " + str(self.VIT)]
         return stats
 
     def get_Pv(self):

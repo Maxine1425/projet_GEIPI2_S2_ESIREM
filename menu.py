@@ -134,4 +134,3 @@ while continuer:
     #gere l'actualisation de l'heure
     pygame.display.flip()
     horloge.tick(60)
-
