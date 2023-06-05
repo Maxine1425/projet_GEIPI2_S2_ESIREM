@@ -30,14 +30,16 @@ class Player:
             print("An error has occurred")
 
 
-    def ajouter_mod(self, montant):
-        if self.wallet.ajouter_mod(montant):
+    def check_argent(self, montant):
+        if self.wallet.compteur-montant >= 0:
             return True
-        elif not self.wallet.ajouter_mod(montant):
+        else:
             return False
+    def ajouter_mod(self, valeur):
+        self.wallet.ajouter_mod(valeur)
 
     def achat(self, montant):
-        self.wallet.compteur.soustraire(montant)
+        self.wallet.soustraire(montant)
     def print_monster_name(self):  # Affiche sur le terminal le nom de tout les monstres du joueur
         length = len(self.monster_list)
         for i in range(length):
