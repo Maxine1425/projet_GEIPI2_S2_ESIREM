@@ -39,10 +39,6 @@ def draw_text(text, font, text_col, x, y):
 
 text_font = pygame.font.SysFont("Arial", 160)
 
-# testmnstr_attaque = Monstre.Monstre("Salameche", 10, "Attaque") #Creation de Salameche, de rarete 10 et de type Attaque
-# testmnstr_defense = Monstre.Monstre("Bulbizarre", 10, "Defense") #Creation de Bulbizarre, de rarete 10 et de type Defense
-# combat = Battle.Battle(testmnstr_attaque,testmnstr_defense)
-
 continuer = 1
 compteur = 0
 while continuer: #boucle pour que la fenetre reste ouverte
@@ -50,6 +46,7 @@ while continuer: #boucle pour que la fenetre reste ouverte
     for event in pygame.event.get():  # On parcours la liste de tous les evenements recus
         if event.type == QUIT:  # Si un de ces evenements est de type QUIT
             continuer = 0  # On arrete la boucle
+            argent.stopper()
         elif event.type == MOUSEBUTTONUP and event.button == 1:
             print("ouvre la boutique")
             argent.ajouter_mod(15)

@@ -4,6 +4,7 @@ import time
 import Monstre
 import Player
 import Battle
+from battle_screen import BattleScreen
 
 joueur_test = Player.Player("Louis", 0, 1)
 
@@ -18,6 +19,6 @@ joueur_test.add_monstre(salameche)
 print(salameche.get_stats())
 print(bulbizarre.get_stats())
 
-combat = Battle.Battle(salameche,bulbizarre)
+ecran_combat = BattleScreen(salameche, bulbizarre)
 
-combat.lets_battle()
+ecran_combat.battle_screen()

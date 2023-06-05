@@ -6,7 +6,7 @@ class Monstre:
         self.name = name
         self.rare = rare  # Niveau de rareté de 1 à 10
         self.type = type  # Type entre Attaque et Defense
-        self.isKO = False
+        self.isKO = False # Est ce que le monstr est KO 
         if type == "Attaque":
             self.PV = random.randint(10, 60)
             self.ATQ = random.randint(25, 40)
@@ -29,7 +29,7 @@ class Monstre:
     def get_Pv(self):
         return self.PV
 
-    def dealDamage(self, damage):
+    def deal_damage(self, damage):
         damage = damage + 0.3 * self.DEF
         self.PV = self.PV - damage
         if self.PV < 0:
@@ -50,8 +50,8 @@ class Monstre:
         elif self.PV + (self.initial_max_PV * 0.5) > self.initial_max_PV:
             self.PV = self.initial_max_PV
 
-    def koMon(self):
+    def ko_mon(self):
         self.isKO = True
 
-    def revMon(self):
+    def rev_mon(self):
         self.isKO = False
