@@ -49,7 +49,7 @@ class Battle:
 
             # On check quel monstre est le plus rapide
             fast_one = self.battle_speed_check()
-            slow_one = self.other_one(fast_one)
+            slow_one = self.other_one()
 
             # On agit en fonction du monstre le plus rapide
             if fast_one == self.opponent1:
