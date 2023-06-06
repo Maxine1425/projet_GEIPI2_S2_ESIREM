@@ -8,15 +8,15 @@ class Monstre:
         self.type = type  # Type entre Attaque et Defense
         self.isKO = False # Est ce que le monstr est KO 
         if type == "Attaque":
-            self.PV = random.randint(10, 60)
-            self.ATQ = random.randint(25, 40)
+            self.PV = random.randint(100, 600)
+            self.ATQ = random.randint(100, 160)
             self.DEF = random.randint(1, 15)
             self.VIT = random.randint(1, 15)
 
 
         elif type == "Defense":
-            self.PV = random.randint(50, 100)
-            self.ATQ = random.randint(1, 15)
+            self.PV = random.randint(500, 1000)
+            self.ATQ = random.randint(4, 60)
             self.DEF = random.randint(15, 30)
             self.VIT = random.randint(1, 15)
 
@@ -42,7 +42,7 @@ class Monstre:
             self.soin()
 
     def attaque(self, target):
-        target.dealDamage(self.ATQ * 1.5)
+        target.deal_damage(self.ATQ * 1.5)
 
     def soin(self):
         if self.PV + (self.initial_max_PV * 0.5) <= self.initial_max_PV:

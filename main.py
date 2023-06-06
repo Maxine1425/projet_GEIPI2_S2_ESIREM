@@ -1,6 +1,7 @@
 import random
 import time
 
+from test_menu_combat import Battle_Screen
 import Monstre
 import Player
 import Battle
@@ -19,6 +20,4 @@ joueur_test.add_monstre(salameche)
 print(salameche.get_stats())
 print(bulbizarre.get_stats())
 
-ecran_combat = BattleScreen(salameche, bulbizarre)
-
-ecran_combat.battle_screen()
+Battle_Screen(salameche, bulbizarre)
