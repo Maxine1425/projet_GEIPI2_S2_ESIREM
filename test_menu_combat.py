@@ -9,8 +9,12 @@ def unes():
     time.sleep(1)
 
 
+def draw_text(text, font, text_colour, x, y):
+    img = font.render(text, True, text_colour)
+    screen.blit(img, (x, y))
 
 def Battle_Screen(opponent1, opponent2):
+    text_font = pygame.font.SysFont("Helvetica", 30)
 
     combat = Battle(opponent1, opponent2)
     # Taille de la fenetre
@@ -134,6 +138,11 @@ def Battle_Screen(opponent1, opponent2):
         unes()
 
 
+        text_to_show = str(opponent1.name) + " a " + str(opponent1.PV) + "PV !\n"
+        + str(opponent2.name) + " a " + str(opponent2.PV) + "PV !"
+
+        draw_text(text_to_show, text_font, (0, 0, 0), 220, 150)
+
         print("--------------------------------------------------")
         print(str(opponent1.name) + " a " + str(opponent1.PV) + "PV !")
         print(str(opponent2.name) + " a " + str(opponent2.PV) + "PV !")
@@ -213,13 +222,13 @@ def Battle_Screen(opponent1, opponent2):
                         print(opponent2.name + " est KO!")
                         opponent2.ko_mon()
                         break
-                os.system('cls')
+
             else:
                 if opponent1.PV <= 0:
-                    print(opponent1.name + " est KO, le combat ne peut pas avoir lieu !\n")
+                    print(opponent1.name + " est KO, est termine !\n")
                     unes()
-                    break
+                    pygame.quit()
                 else:
-                    print(opponent2.name + " est KO, le combat ne peut pas avoir lieu !\n")
+                    print(opponent2.name + " est KO, le combat est termine !\n")
                     unes()
-                    break
+                    pygame.quit()
