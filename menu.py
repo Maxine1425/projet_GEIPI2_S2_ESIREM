@@ -11,8 +11,7 @@ class Menu:
     def __init__(self, joueur):
         self.joueur = joueur
         self.doit_lancer_menu = 1
-
-
+        self.doit_lancer_combat = 0
     def menu(self, lance):
 
         if lance == 1:
@@ -178,19 +177,21 @@ class Menu:
                             print("ferme le menu monstre")
                     elif doit_lancer_menu_monstre == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_lancer_combat.collidepoint(event.pos):
                         print("lancer un combat")
-                        doit_lancer_combat = 1
-                        doit_lancer_menu = 0
+                        self.doit_lancer_combat = 1
+                        self.doit_lancer_menu = 0
+                        continuer = 0
+                        pygame.display.flip()
                     #menu inventaire
                     elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_inventaire.collidepoint(event.pos):
                         if doit_lancer_menu_inventaire == 0:
-                            print("ouvre menu monstre")
+                            print("ouvre menu inventaire")
                             doit_lancer_menu_inventaire = 1
                             doit_lancer_menu_boutique = 0
                             doit_lancer_menu_monstre = 0
                             pygame.display.flip()
                         elif doit_lancer_menu_inventaire == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_inventaire.collidepoint(event.pos):
                             doit_lancer_menu_inventaire = 0
-                            print("ferme la boutique")
+                            print("ferme l inventaire")
 
 
 
@@ -231,3 +232,7 @@ class Menu:
                 #gere l'actualisation de l'heure
                 pygame.display.flip()
                 horloge.tick(60)
+
+
+    def quitter(self):
+        pygame.quit()

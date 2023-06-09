@@ -22,7 +22,7 @@ class Battle:
             rand = [self.opponent1, self.opponent2]
         return random.choice(rand)
 
-    def other_one(self): # Deduit le monstre le plus lent à partir du résultat de battle_speed_check()
+    def other_one(self): # Deduit le monstre le plus lent a partir du resultat de battle_speed_check()
         if self.battle_speed_check().name == self.opponent1.name:
             return self.opponent2
         elif self.battle_speed_check().name == self.opponent2.name:
@@ -86,7 +86,7 @@ class Battle:
                     slow_one.choix_attaque(choix1, fast_one)
 
 
-            # En fin de boucle, on check si un des deux monstre à en dessosu de 0 PV, et on le met KO si c'est le cas
+            # En fin de boucle, on check si un des deux monstre a en dessosu de 0 PV, et on le met KO si c'est le cas
             if self.opponent1.pv <= 0:
                 print(f"{self.opponent1.name} est KO!")
                 self.opponent1.ko_mon()

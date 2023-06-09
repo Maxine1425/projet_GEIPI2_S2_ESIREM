@@ -4,9 +4,9 @@ import random
 class Monstre:
     def __init__(self, name, rare, type):
         self.name = name
-        self.rare = rare  # Niveau de rareté de 1 à 10
+        self.rare = rare  # Niveau de rarete de 1 à 10
         self.type = type  # Type entre Attaque et Defense
-        self.isKO = False # Est ce que le monstr est KO 
+        self.isKO = False # Est ce que le monstre est KO
         if type == "Attaque":
             self.PV = random.randint(100, 600)
             self.ATQ = random.randint(100, 160)

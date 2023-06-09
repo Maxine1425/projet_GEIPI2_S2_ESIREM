@@ -12,6 +12,7 @@ def unes():
 
 def Battle_Screen(opponent1, opponent2):
 
+    pygame.init()
     combat = Battle(opponent1, opponent2)
     # Taille de la fenetre
     SCREEN_WIDTH = 990
