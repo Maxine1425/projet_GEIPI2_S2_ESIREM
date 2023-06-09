@@ -60,15 +60,15 @@ class Menu:
                 if lance == 1:
                     fenetre.blit(fond_menu_boutique, (350,20))
 
-                    nombre_x2 = font.render("vous avez : " + str(nombre_de_x2) , True, (0, 0, 0))
+                    nombre_x2 = font.render("vous avez : " + str(self.joueur.mod_list[0]) , True, (0, 0, 0))
                     fenetre.blit(nombre_x2, (355,60))
                     fenetre.blit(mod_x2, (600,30))
 
-                    nombre_x5 = font.render("vous avez : " + str(nombre_de_x5), True, (0, 0, 0))
+                    nombre_x5 = font.render("vous avez : " + str(self.joueur.mod_list[1]), True, (0, 0, 0))
                     fenetre.blit(nombre_x5, (355, 150))
                     fenetre.blit(mod_x5, (600, 120))
 
-                    nombre_x10 = font.render("vous avez : " + str(nombre_de_x10), True, (0, 0, 0))
+                    nombre_x10 = font.render("vous avez : " + str(self.joueur.mod_list[2]), True, (0, 0, 0))
                     fenetre.blit(nombre_x10, (355, 240))
                     fenetre.blit(mod_x10, (600, 210))
 

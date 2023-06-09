@@ -16,7 +16,7 @@ monstre_ordinateur = Monstre.Monstre("Monstre Ordinateur", 10, "Attaque")
 
 
 # creation des objets
-joueur = Player.Player("Louis", 50, 1)
+joueur = Player.Player("Louis", 50, 1, 0, 0, 0)
 menu_principal = Menu(joueur)
 combat = Battle(monstre_joueur, monstre_ordinateur)
 
