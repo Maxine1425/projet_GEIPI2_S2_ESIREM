@@ -4,18 +4,13 @@ from Money import Compteur
 
 class Player:
 
-    def __init__(self, name, balance, mod):
-        """
-
-        :param name:
-        :param balance:
-        :param mod:
-        """
+    def __init__(self, name, balance, mod, modp2, modp5, modp10):
         self.name = name
         self.wallet = Compteur()
         if balance != 0:
             self.wallet.compteur = balance
         self.wallet.mod = mod
+        self.mod_list = [ modp2, modp5, modp10]
         self.monster_list = []  # Liste contenant tout les monstres que le joueur possède
         self.wallet.demarrer()
 
