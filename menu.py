@@ -143,6 +143,7 @@ class Menu:
                             self.joueur.achat(montant_x2)
                             argent.ajouter_mod(2)
                             nombre_de_x2 = nombre_de_x2 + 1
+                            self.joueur.mod_list[0] += 1
 
                         else:
                             print("pas assez d'argent ") #voir comment l'afficher
@@ -153,6 +154,7 @@ class Menu:
                             self.joueur.achat(montant_x5)
                             argent.ajouter_mod(5)
                             nombre_de_x5 = nombre_de_x5 + 1
+                            self.joueur.mod_list[1] += 1
                         else:
                             print("pas assez d'argent ") #voir comment l'afficher
                     elif doit_lancer_menu_boutique == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique_mod_10.collidepoint(
@@ -162,6 +164,7 @@ class Menu:
                             self.joueur.achat(montant_x10)
                             argent.ajouter_mod(10)
                             nombre_de_x10 = nombre_de_x10 +1
+                            self.joueur.mod_list[2] += 1
                         else:
                             print("pas assez d'argent ") #voir comment l'afficher
                     #menu monstre
