@@ -239,3 +239,4 @@ class Menu:
 
     def quitter(self):
         pygame.quit()
+
