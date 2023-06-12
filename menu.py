@@ -60,7 +60,7 @@ class Menu:
                 if lance == 1:
                     fenetre.blit(fond_menu_boutique, (350,20))
 
-                    nombre_x2 = font.render("vous avez : " + str(self.joueur.mod_list[0]) , True, (0, 0, 0))
+                    nombre_x2 = font.render("vous avez : " + str(self.joueur.mod_list[0]), True, (0, 0, 0))
                     fenetre.blit(nombre_x2, (355,60))
                     fenetre.blit(mod_x2, (600,30))
 
@@ -239,4 +239,3 @@ class Menu:
 
     def quitter(self):
         pygame.quit()
-

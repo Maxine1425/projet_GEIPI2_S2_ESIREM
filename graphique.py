@@ -1,7 +1,6 @@
 import time
 
 import pygame
-import sys
 
 from menu import Menu
 import Player
@@ -21,23 +20,22 @@ joueur = Player.Player("Louis", 50, 1, 0, 0, 0)
 menu_principal = Menu(joueur)
 combat = Battle(monstre_joueur, monstre_ordinateur)
 
-lancer_menu = menu_principal.doit_lancer_menu
-lancer_combat = menu_principal.doit_lancer_combat
 
-while lancer_menu == 1:
-
+while True :
+    # recuperation des valeurs initiales
     lancer_menu = menu_principal.doit_lancer_menu
     lancer_combat = menu_principal.doit_lancer_combat
 
-
     if lancer_menu == 1:
+        # appel de la methode menu()
         menu_principal.menu(lancer_menu)
-        menu_principal.doit_lancer_menu = 0
-
-    elif lancer_combat == 1:
+        # mise a jour des valeurs apres l'appel de la methode
+        print(lancer_menu)
+    elif lancer_menu == 0:
         Battle_Screen(monstre_joueur, monstre_ordinateur)
-        menu_principal.quitter()
-        menu_principal.doit_lancer_combat = 0
+        print("Lancer combat")
+
+
 
 
 
