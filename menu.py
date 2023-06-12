@@ -33,23 +33,46 @@ class Menu:
             montant_x2 = 30
             montant_x5 = 100
             montant_x10 = 1000
+            montant_epee = 1000
+            montant_bouclier = 1000
+            montant_bottes = 1000
+            montant_soupe = 1000
 
             nombre_de_x2 = 0
             nombre_de_x5 = 0
             nombre_de_x10 = 0
+            nombre_epee = 1000
+            nombre_bouclier = 1000
+            nombre_bottes = 1000
+            nombre_soupe = 1000
 
             def afficher_menu_boutique(lance, fenetre):
                 if lance == 1:
+
                     fenetre.blit(fond_menu_boutique, (350, 20))
                     fenetre.blit(mod_x2, (400, 70))
                     fenetre.blit(mod_x5,(500, 70))
                     fenetre.blit(mod_x10,(600, 70))
+                    fenetre.blit(epee, (400, 170))
+                    fenetre.blit(bouclier, (500, 170))
+                    fenetre.blit(bottes, (600, 170))
+                    fenetre.blit(soupe, (700, 170))
+
                     prix_x2 = font.render(str(montant_x2)+ " po", True, (0, 0, 0))
                     fenetre.blit(prix_x2, (415, 150))
                     prix_x5 = font.render(str(montant_x5)+ " po", True, (0, 0, 0))
                     fenetre.blit(prix_x5, (515, 150))
                     prix_x10 = font.render(str(montant_x10)+" po", True, (0, 0, 0))
                     fenetre.blit(prix_x10, (615, 150))
+                    prix_epee = font.render(str(montant_epee)+" po", True, (0, 0, 0))
+                    fenetre.blit(prix_epee, (415, 250))
+                    prix_bouclier = font.render(str(montant_bouclier) + " po", True, (0, 0, 0))
+                    fenetre.blit(prix_bouclier, (515, 250))
+                    prix_bottes = font.render(str(montant_bottes) + " po", True, (0, 0, 0))
+                    fenetre.blit(prix_bottes, (615, 250))
+                    prix_soupe = font.render(str(montant_soupe) + " po", True, (0, 0, 0))
+                    fenetre.blit(prix_soupe, (715, 250))
+                    
 
             def afficher_menu_monstre(lance, fenetre):
                 if lance == 1:
@@ -71,6 +94,8 @@ class Menu:
                     nombre_x10 = font.render("vous avez : " + str(self.joueur.mod_list[2]), True, (0, 0, 0))
                     fenetre.blit(nombre_x10, (355, 240))
                     fenetre.blit(mod_x10, (600, 210))
+                    
+                    
 
 
 
@@ -97,6 +122,10 @@ class Menu:
             mod_x2 = pygame.image.load("images/X2.png").convert_alpha()
             mod_x5 = pygame.image.load("images/X5.png").convert_alpha()
             mod_x10 = pygame.image.load("images/X10.png").convert_alpha()
+            epee = pygame.image.load("images/epee.png").convert_alpha()
+            bouclier = pygame.image.load("images/bouclier.png").convert_alpha()
+            bottes = pygame.image.load("images/bottes.png").convert_alpha()
+            soupe = pygame.image.load("images/soupe.png").convert_alpha()
             button_lancer_combat = pygame.image.load("images/button_lancer_combat .png").convert_alpha()
 
             # creation des zones de click
@@ -106,6 +135,10 @@ class Menu:
             clickable_area_boutique_mod_2 = pygame.Rect((400, 70), (80, 80))
             clickable_area_boutique_mod_5 = pygame.Rect((500, 70), (80, 80))
             clickable_area_boutique_mod_10 = pygame.Rect((600, 70), (80, 80))
+            clickable_area_boutique_item_epee = pygame.Rect((400, 170), (80, 80))
+            clickable_area_boutique_item_bouclier = pygame.Rect((500, 170), (80, 80))
+            clickable_area_boutique_item_bottes = pygame.Rect((600 , 170), (80, 80))
+            clickable_area_boutique_item_soupe = pygame.Rect((700, 170), (80, 80))
             clickable_area_lancer_combat = pygame.Rect((360,350),(200,48))
 
             #creation de l'orloge pour afficher l'heure
@@ -167,6 +200,22 @@ class Menu:
                             self.joueur.mod_list[2] += 1
                         else:
                             print("pas assez d'argent ") #voir comment l'afficher
+                    elif doit_lancer_menu_boutique == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique_item_epee.collidepoint(event.pos) :
+                        print("achat epee")
+                        if self.joueur.check_argent(montant_x10):
+                            print("x10")
+                            self.joueur.achat(montant_x10)
+                            argent.ajouter_mod(10)
+                            nombre_de_x10 = nombre_de_x10 +1
+                            self.joueur.mod_list[2] += 1
+                        else:
+                            print("pas assez d'argent ") #voir comment l'afficher
+                    elif doit_lancer_menu_boutique == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique_item_bouclier.collidepoint(event.pos):
+                        print("achat bouclier")
+                    elif doit_lancer_menu_boutique == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique_item_bottes.collidepoint(event.pos):
+                        print("achat botte")
+                    elif doit_lancer_menu_boutique == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique_item_soupe.collidepoint(event.pos):
+                        print("acahat soupe")
                     #menu monstre
                     elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_menu_monstre.collidepoint(event.pos):
                         if doit_lancer_menu_monstre == 0:
