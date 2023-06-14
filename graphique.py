@@ -11,7 +11,7 @@ monstre_ordinateur = Monstre("Monstre Ordinateur", 10, "Attaque","images/Bulbiza
 
 
 # creation des objets
-joueur = Joueur("Louis", 50, 1, 0, 0, 0)
+joueur = Joueur("Louis", 0, 1, 0, 0, 0)
 menu_principal = Menu(joueur)
 combat = LogiqueCombat(monstre_joueur, monstre_ordinateur)
 
