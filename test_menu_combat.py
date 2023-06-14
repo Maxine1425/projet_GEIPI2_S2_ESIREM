@@ -227,7 +227,7 @@ def ecran_combat(opponent1, opponent2):
 
                 if soin_button.is_clicked(event):
                     action_text = "SOIN"
-                    if opponent2.PV <= 0.5 * opponent2.initial_max_PV:
+                    if 0.5 * opponent2.initial_max_PV >= opponent2.PV:
                         choix2 = 2
                     else:
                         choix2 = 1

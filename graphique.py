@@ -32,9 +32,10 @@ while True :
         # mise a jour des valeurs apres l'appel de la methode
         print(lancer_menu)
     elif lancer_menu == 0:
-        ecran_combat(monstre_joueur, monstre_ordinateur)
         print("Lancer combat")
-
+        ecran_combat(monstre_joueur, monstre_ordinateur)
+        print("Combat termine")
+        menu_principal.doit_lancer_menu = 1
 
 
 

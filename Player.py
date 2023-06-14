@@ -36,7 +36,7 @@ class Player:
         if item.type == "epee" and len(self.liste_epee) <= 3:
             self.liste_epee.append(item)
         elif item.type == "epee" and len(self.liste_epee) > 3:
-            print("trop d'épée")
+            print("trop d'epee")
         elif item.type == "bouclier":
             self.liste_bouclier.append(item)
         elif item.type == "bottes":
