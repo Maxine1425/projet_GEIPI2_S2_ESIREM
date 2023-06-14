@@ -11,12 +11,13 @@ import Monstre
 
 
 # Creez les instances de Monster avec les parametres appropries
-monstre_joueur = Monstre.Monstre("Monstre Joueur", 10, "Defense")
-monstre_ordinateur = Monstre.Monstre("Monstre Ordinateur", 10, "Attaque")
+monstre_joueur = Monstre.Monstre("Monstre Joueur", 10, "Defense", "images/Salameche.png")
+monstre_ordinateur = Monstre.Monstre("Monstre Ordinateur", 10, "Attaque", "images/Bulbizarre.png")
 
 
 # creation des objets
 joueur = Player.Player("Louis", 50, 1, 0, 0, 0)
+joueur.add_monstre(monstre_joueur)
 menu_principal = Menu(joueur)
 combat = Battle(monstre_joueur, monstre_ordinateur)
 
@@ -32,8 +33,12 @@ while True :
         # mise a jour des valeurs apres l'appel de la methode
         print(lancer_menu)
     elif lancer_menu == 0:
-        Battle_Screen(monstre_joueur, monstre_ordinateur)
         print("Lancer combat")
+        ecran_combat(monstre_joueur, monstre_ordinateur)
+        print("Combat termine")
+        menu_principal.doit_lancer_menu = 1
+
+
 
 
 

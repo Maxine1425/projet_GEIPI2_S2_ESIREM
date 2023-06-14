@@ -7,7 +7,7 @@ from datetime import date
 import Player
 import item
 
-pygame.init()
+
 
 class Menu:
 
@@ -16,6 +16,7 @@ class Menu:
         self.doit_lancer_menu = 1
         self.doit_lancer_combat = 0
     def menu(self, lance):
+        pygame.init()
 
         if lance == 1:
             argent = self.joueur.wallet
@@ -97,10 +98,8 @@ class Menu:
                     nombre_x10 = font.render("vous avez : " + str(self.joueur.mod_list[2]), True, (0, 0, 0))
                     fenetre.blit(nombre_x10, (355, 240))
                     fenetre.blit(mod_x10, (600, 210))
-                    
-                    
 
-
+            font = pygame.font.Font("Vogue.ttf", 20)  # Police principale
 
             fond_donee = pygame.image.load("images/fond_donee.jpg").convert()
             # Creation de la surface de l'ombre
@@ -160,7 +159,9 @@ class Menu:
                 for event in pygame.event.get():  # On parcours la liste de tous les evenements recus
                     if event.type == QUIT:  # Si un de ces evenements est de type QUIT
                         continuer = 0  # On arrete la boucle
+                        self.joueur.save_all()
                         argent.stopper()
+                        pygame.quit()
                     #boutique
                     elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique.collidepoint(event.pos):
                         if doit_lancer_menu_boutique == 0:
@@ -264,14 +265,12 @@ class Menu:
                 afficher_menu_inventaire(doit_lancer_menu_inventaire, fenetre)
 
                 #afficher l'heure
-                font = pygame.font.Font("Vogue.ttf", 20)  # Police principale
                 heure = datetime.now()
                 heure_1 = heure.strftime("%H:%M:%S")
                 heure_a_afficher = font.render(heure_1, True, (0, 0, 0),)
                 fenetre.blit(heure_a_afficher, (10, 40))
 
                 #afficher la date
-                font = pygame.font.Font("Vogue.ttf", 20)
                 current_date = date.today()
                 date_1 = current_date.strftime("%d/%m/%Y")
                 date_a_afficher = font.render(date_1, True, (0, 0, 0))
@@ -281,7 +280,6 @@ class Menu:
 
 
                 #afficher l'argent
-                font = pygame.font.Font("Vogue.ttf", 20)
                 argent_a_afficher = font.render("Votre argent : " + str(argent.compteur) + " po", True, (0, 0, 0),)
                 fenetre.blit(argent_a_afficher, (35, 100))
 

@@ -20,10 +20,23 @@ class Player:
 
         self.wallet.demarrer()
 
+    def get_nombre_epee(self):
+        return len(self.liste_epee)
+
+    def get_nombre_bouclier(self):
+        return len(self.liste_bouclier)
+
+    def get_nombre_bottes(self):
+        return len(self.liste_bottes)
+
+    def get_nombre_soupe(self):
+        return len(self.liste_soupe)
 
     def ajouter_item(self, item):
-        if item.type == "epee":
+        if item.type == "epee" and len(self.liste_epee) <= 3:
             self.liste_epee.append(item)
+        elif item.type == "epee" and len(self.liste_epee) > 3:
+            print("trop d'épée")
         elif item.type == "bouclier":
             self.liste_bouclier.append(item)
         elif item.type == "bottes":
@@ -35,6 +48,7 @@ class Player:
 
     def get_items(self):
         return self.liste_soupe + self.liste_bottes + self.liste_epee + self.liste_bouclier
+
     def add_monstre(self, monstre):  # Ajoute un monstre à l'inventaire de monstres du joueur
         try:
             length = len(self.monster_list)
@@ -69,13 +83,11 @@ class Player:
     def commencer_combat(self, adversaire):
         joueur = self.monster_list[0]
 
-    def sauvegarde_argent(self, compteur):  # Sauvegarde l'argent et les mod du joueur dans un fichier nomdujoueur_money.txt
-        self.wallet.compteur = compteur.compteur
-        self.mod = compteur.mod
+    def sauvegarde_argent(self):  # Sauvegarde l'argent et les mod du joueur dans un fichier nomdujoueur_money.txt
         file_name = self.name + "_money.txt"
         save_folder_path = "save files/" + self.name
         file_to_open = save_folder_path + "/" + file_name
-        money_data = self.wallet.compteur + "\n" + self.mod
+        money_data = str(self.wallet.compteur) + "\n" + str(self.wallet.mod) + "\n" + str(self.mod_list)
         with open(file_to_open, 'w') as current:
             current.write(money_data)
 
@@ -109,4 +121,30 @@ class Player:
                 current.write(str(self.monster_list[i].VIT))
                 current.write("\n")
                 current.write("%\n")
+
+    def sauvegarde_items(self):
+        file_name = self.name + "_items.txt"
+        save_folder = Path("save files/")
+
+        try:
+            path = os.path.join(save_folder, self.name)
+            os.mkdir(path)
+            print("File created!\n")
+        except:
+            print("File already exists !\n")
+
+        file_to_open = save_folder / self.name / file_name
+        length = len(self.monster_list)
+        with open(file_to_open, 'w') as current:
+            for i in range(length):
+                current.write(str(self.item[i].type))
+                current.write("\n")
+                current.write(str(self.item[i].valeur_atq))
+                current.write("\n")
+                current.write(str(self.item[i].valeur_pv))
+                current.write("\n")
+                current.write(str(self.item[i].valeur_def))
+                current.write("\n")
+                current.write(str(self.item[i].valeur_vit))
+                current.write("\n")
 

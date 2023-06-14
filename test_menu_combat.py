@@ -64,6 +64,8 @@ def ecran_victoire(vainqueur):
 
 
 def ecran_combat(opponent1, opponent2):
+    opponent1.PV = opponent1.initial_max_PV
+    opponent2.PV = opponent2.initial_max_PV
     pygame.init()
     text_font = pygame.font.SysFont("Helvetica", 30)
 

@@ -3,6 +3,7 @@ import random
 
 class Item :
     def __init__(self,rare,type):
+        self.type = type
         if type == "epee" :
             if rare == 1 :
                 self.valeur_atq = random.randint(1, 50)
