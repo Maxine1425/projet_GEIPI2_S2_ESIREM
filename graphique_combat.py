@@ -1,8 +1,8 @@
 import pygame
 import time
 import random
-from Button import Button
-from Battle import Battle
+from boutton import Button
+from logique_combat import LogiqueCombat
 import os
 
 pygame.init()
@@ -170,8 +170,8 @@ def ecran_combat(opponent1, opponent2):
         pv2_text = f"{round(opponent2.PV)}/{opponent2.initial_max_PV} PV"
 
         # Dessin des boutons
-        attaque_button.draw(screen)
-        soin_button.draw(screen)
+        attaque_button.dessiner(screen)
+        soin_button.dessiner(screen)
 
         afficher_texte(screen, pv1_text, text_font, WHITE, 70 + hp_images['FULL'].get_width() + 10, 300)
         afficher_texte(screen, pv2_text, text_font, WHITE, 620 + hp_images['FULL'].get_width() + 10, 200)
@@ -188,7 +188,7 @@ def ecran_combat(opponent1, opponent2):
             if event.type == pygame.QUIT:
                 running = False
 
-            if attaque_button.is_clicked(event):
+            if attaque_button.est_clique(event):
                 action_text = "ATTAQUE"
                 if opponent2.PV <= 0.5 * opponent2.initial_max_PV:
                     choix2 = random.randint(1,2)
@@ -225,7 +225,7 @@ def ecran_combat(opponent1, opponent2):
                             slow_one.choix_attaque(1, fast_one)
                 pass
 
-                if soin_button.is_clicked(event):
+                if soin_button.est_clique(event):
                     action_text = "SOIN"
                     if 0.5 * opponent2.initial_max_PV >= opponent2.PV:
                         choix2 = 2

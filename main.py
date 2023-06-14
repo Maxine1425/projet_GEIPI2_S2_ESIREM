@@ -1,10 +1,10 @@
 import random
 import time
 
-from test_menu_combat import *
-import Monstre
-import Player
-import Battle
+from graphique_combat import *
+import monstre
+import joueur
+import logique_combat
 from item import Item
 
 joueur_test = Player.Player("Louis", 0, 1, 0, 0, 0)

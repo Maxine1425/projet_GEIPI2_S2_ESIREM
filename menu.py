@@ -1,13 +1,10 @@
 import random
-
 import pygame
 from pygame.locals import *
 from datetime import datetime
 from datetime import date
-import Player
 import item
 
-pygame.init()
 
 class Menu:
 
@@ -18,23 +15,27 @@ class Menu:
 
     def quitter(self):
         pygame.quit()
+
+
+
     def menu(self, lance):
 
+        pygame.init()
+
         if lance == 1:
-            argent = self.joueur.wallet
-            # Acceder a l'argent du joueur : argent.compteur
-            # Acceder au mod du joueur : argent.mod
-            # Ajouter un mod au joueur : argent.ajouter_mod(valeur)
 
-            #creation de la fenetre principal
-            fenetre = pygame.display.set_mode((990, 660),)
+            argent = self.joueur.portefeuille
 
-            #nom du jeu apparait
+            # creation de la fenetre principal
+            fenetre = pygame.display.set_mode((990, 660), )
+
+            # nom du jeu apparait
             pygame.display.set_caption("Jeux de Louis et Maxine")
 
-            #affichage des fonds et boutton
-            fond = pygame.image.load("images/fond_menu.png").convert() #on ajoute a fond une image j'utilise .convert pour etre sur qu'elle soit toujours au bon format
-            fenetre.blit(fond, (0, 0)) #on colle sur la fenetre l'image fond et l'angle haut gauche de cette image sera en (0;0)
+            # initialisation des varriables
+            doit_lancer_menu_boutique = 0
+            doit_lancer_menu_monstre = 0
+            doit_lancer_menu_inventaire = 0
 
             montant_x2 = 30
             montant_x5 = 100
@@ -52,78 +53,11 @@ class Menu:
             nombre_bottes = 0
             nombre_soupe = 0
 
-            def afficher_menu_boutique(lance, fenetre):
-                if lance == 1:
-
-                    fenetre.blit(fond_menu_boutique, (350, 20))
-                    fenetre.blit(mod_x2, (400, 70))
-                    fenetre.blit(mod_x5,(500, 70))
-                    fenetre.blit(mod_x10,(600, 70))
-                    fenetre.blit(epee, (400, 170))
-                    fenetre.blit(bouclier, (500, 170))
-                    fenetre.blit(bottes, (600, 170))
-                    fenetre.blit(soupe, (700, 170))
-
-                    prix_x2 = font.render(str(montant_x2)+ " po", True, (0, 0, 0))
-                    fenetre.blit(prix_x2, (415, 150))
-                    prix_x5 = font.render(str(montant_x5)+ " po", True, (0, 0, 0))
-                    fenetre.blit(prix_x5, (515, 150))
-                    prix_x10 = font.render(str(montant_x10)+" po", True, (0, 0, 0))
-                    fenetre.blit(prix_x10, (615, 150))
-                    prix_epee = font.render(str(montant_epee)+" po", True, (0, 0, 0))
-                    fenetre.blit(prix_epee, (415, 250))
-                    prix_bouclier = font.render(str(montant_bouclier) + " po", True, (0, 0, 0))
-                    fenetre.blit(prix_bouclier, (515, 250))
-                    prix_bottes = font.render(str(montant_bottes) + " po", True, (0, 0, 0))
-                    fenetre.blit(prix_bottes, (615, 250))
-                    prix_soupe = font.render(str(montant_soupe) + " po", True, (0, 0, 0))
-                    fenetre.blit(prix_soupe, (715, 250))
-                    
-
-            def afficher_menu_monstre(lance, fenetre):
-                if lance == 1:
-                    fenetre.blit(fond_menu_boutique, (350, 20))
-                    fenetre.blit(button_lancer_combat, (360,350))
-
-            def afficher_menu_inventaire(lance, fenetre):
-                if lance == 1:
-                    fenetre.blit(fond_menu_boutique, (350,20))
-
-                    nombre_x2 = font.render(str(self.joueur.mod_list[0]), True, (0, 0, 0))
-                    fenetre.blit(nombre_x2, (355,60))
-                    fenetre.blit(mod_x2, (400,30))
-
-                    nombre_x5 = font.render(str(self.joueur.mod_list[1]), True, (0, 0, 0))
-                    fenetre.blit(nombre_x5, (500, 60))
-                    fenetre.blit(mod_x5, (545, 30))
-
-                    nombre_x10 = font.render(str(self.joueur.mod_list[2]), True, (0, 0, 0))
-                    fenetre.blit(nombre_x10, (645, 60))
-                    fenetre.blit(mod_x10, (690, 30))
-                    
-                    
-
-
-
-            fond_donee = pygame.image.load("images/fond_donee.jpg").convert()
-            # Creation de la surface de l'ombre
-            ombre = pygame.Surface(fond_donee.get_size()).convert_alpha()
-            ombre.fill((0, 0, 0, 70))  # Couleur de l'ombre (noir semi-transparent)
-
-            # Position de l'ombre
-            x_ombre = 0 + 5  # Decalage horizontal de l'ombre
-            y_ombre = 0 + 5  # Decalage vertical de l'ombre
-
-            # Affichage de l'ombre
-            fenetre.blit(ombre, (x_ombre, y_ombre))
-            fenetre.blit(fond_donee, (0, 0))
-
-            button_boutique = pygame.image.load("images/button_boutique.png").convert_alpha() #l'image sera avec un fond transparant
-            fenetre.blit(button_boutique, (30, 570))
-            button_menu_monstre = pygame.image.load("images/button_menu-monstre.png").convert_alpha() #l'image sera avec un fond transparant
-            fenetre.blit(button_menu_monstre, (220, 570))
-            button_inventaire = pygame.image.load("images/button_inventaire.png").convert_alpha() #l'image sera avec un fond transparant
-            fenetre.blit(button_inventaire, (460, 570))
+            #chargement des images
+            fond = pygame.image.load("images/fond_menu.png").convert()
+            button_boutique = pygame.image.load("images/button_boutique.png").convert_alpha()  # l'image sera avec un fond transparant
+            button_menu_monstre = pygame.image.load("images/button_menu-monstre.png").convert_alpha()  # l'image sera avec un fond transparant
+            button_inventaire = pygame.image.load("images/button_inventaire.png").convert_alpha()  # l'image sera avec un fond transparant
             fond_menu_boutique = pygame.image.load("images/fond_boutique.jpg").convert()
             mod_x2 = pygame.image.load("images/X2.png").convert_alpha()
             mod_x5 = pygame.image.load("images/X5.png").convert_alpha()
@@ -133,6 +67,8 @@ class Menu:
             bottes = pygame.image.load("images/bottes.png").convert_alpha()
             soupe = pygame.image.load("images/soupe.png").convert_alpha()
             button_lancer_combat = pygame.image.load("images/button_lancer_combat .png").convert_alpha()
+            fond_donee = pygame.image.load("images/fond_donee.jpg").convert()
+            # zone_ecriture = pygame.image.load("images/")
 
             # creation des zones de click
             clickable_area_boutique = pygame.Rect((30, 570), (160, 49)) # (position)(taille)
@@ -147,6 +83,75 @@ class Menu:
             clickable_area_boutique_item_soupe = pygame.Rect((700, 170), (80, 80))
             clickable_area_lancer_combat = pygame.Rect((360,350),(200,48))
 
+            # affichage des fonds et boutton de la fenetre principal (le menu sans rien d'ouvert)
+            fenetre.blit(fond, (0, 0))  # on colle sur la fenetre l'image fond et l'angle haut gauche de cette image sera en (0;0)
+            fenetre.blit(button_boutique, (30, 570))
+            fenetre.blit(button_menu_monstre, (220, 570))
+            fenetre.blit(button_inventaire, (460, 570))
+            # Creation de la surface de l'ombre
+            ombre = pygame.Surface(fond_donee.get_size()).convert_alpha()
+            ombre.fill((0, 0, 0, 70))  # Couleur de l'ombre (noir semi-transparent)
+
+            # Position de l'ombre
+            x_ombre = 0 + 5  # Decalage horizontal de l'ombre
+            y_ombre = 0 + 5  # Decalage vertical de l'ombre
+
+            # Affichage de l'ombre
+            fenetre.blit(ombre, (x_ombre, y_ombre))
+            fenetre.blit(fond_donee, (0, 0))
+
+            #definition de la fonction afficher_menu_boutique
+            def afficher_menu_boutique(lance, fenetre):
+                if lance == 1:
+
+                    fenetre.blit(fond_menu_boutique, (350, 20))
+                    fenetre.blit(mod_x2, (400, 70))
+                    fenetre.blit(mod_x5,(500, 70))
+                    fenetre.blit(mod_x10,(600, 70))
+                    fenetre.blit(epee, (400, 170))
+                    fenetre.blit(bouclier, (500, 170))
+                    fenetre.blit(bottes, (600, 170))
+                    fenetre.blit(soupe, (700, 170))
+
+                    prix_x2 = font.render(str(montant_x2) + " po", True, (0, 0, 0))
+                    fenetre.blit(prix_x2, (415, 150))
+                    prix_x5 = font.render(str(montant_x5)+ " po", True, (0, 0, 0))
+                    fenetre.blit(prix_x5, (515, 150))
+                    prix_x10 = font.render(str(montant_x10)+" po", True, (0, 0, 0))
+                    fenetre.blit(prix_x10, (615, 150))
+                    prix_epee = font.render(str(montant_epee)+" po", True, (0, 0, 0))
+                    fenetre.blit(prix_epee, (415, 250))
+                    prix_bouclier = font.render(str(montant_bouclier) + " po", True, (0, 0, 0))
+                    fenetre.blit(prix_bouclier, (515, 250))
+                    prix_bottes = font.render(str(montant_bottes) + " po", True, (0, 0, 0))
+                    fenetre.blit(prix_bottes, (615, 250))
+                    prix_soupe = font.render(str(montant_soupe) + " po", True, (0, 0, 0))
+                    fenetre.blit(prix_soupe, (715, 250))
+                    
+            #definition de la fonction afficher_menu_monstre
+            def afficher_menu_monstre(lance, fenetre):
+                if lance == 1:
+                    fenetre.blit(fond_menu_boutique, (350, 20))
+                    fenetre.blit(button_lancer_combat, (360,350))
+
+            #definition de la fonnction afficher_menu_inventaire
+            def afficher_menu_inventaire(lance, fenetre):
+                if lance == 1:
+                    fenetre.blit(fond_menu_boutique, (350,20))
+
+                    nombre_x2 = font.render(str(self.joueur.liste_mod[0]), True, (0, 0, 0))
+                    fenetre.blit(nombre_x2, (355,60))
+                    fenetre.blit(mod_x2, (400,30))
+
+                    nombre_x5 = font.render(str(self.joueur.liste_mod[1]), True, (0, 0, 0))
+                    fenetre.blit(nombre_x5, (500, 60))
+                    fenetre.blit(mod_x5, (545, 30))
+
+                    nombre_x10 = font.render(str(self.joueur.liste_mod[2]), True, (0, 0, 0))
+                    fenetre.blit(nombre_x10, (645, 60))
+                    fenetre.blit(mod_x10, (690, 30))
+
+
             #creation de l'orloge pour afficher l'heure
             horloge = pygame.time.Clock()
 
@@ -154,16 +159,12 @@ class Menu:
 
             continuer = 1
 
-            doit_lancer_menu_boutique = 0
-            doit_lancer_menu_monstre = 0
-            doit_lancer_menu_inventaire = 0
-
             #boucle de gestion de la fentre
             while continuer:
                 for event in pygame.event.get():  # On parcours la liste de tous les evenements recus
                     if event.type == QUIT:  # Si un de ces evenements est de type QUIT
                         continuer = 0  # On arrete la boucle
-                        self.joueur.save_all()
+                        self.joueur.tout_sauvegarder()
                         argent.stopper()
                         pygame.quit()
 
@@ -185,7 +186,7 @@ class Menu:
                             self.joueur.achat(montant_x2)
                             argent.ajouter_mod(2)
                             nombre_de_x2 = nombre_de_x2 + 1
-                            self.joueur.mod_list[0] += 1
+                            self.joueur.liste_mod[0] += 1
 
                         else:
                             print("pas assez d'argent ") #voir comment l'afficher
@@ -196,7 +197,7 @@ class Menu:
                             self.joueur.achat(montant_x5)
                             argent.ajouter_mod(5)
                             nombre_de_x5 = nombre_de_x5 + 1
-                            self.joueur.mod_list[1] += 1
+                            self.joueur.liste_mod[1] += 1
                         else:
                             print("pas assez d'argent ") #voir comment l'afficher
                     elif doit_lancer_menu_boutique == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique_mod_10.collidepoint(
@@ -206,11 +207,11 @@ class Menu:
                             self.joueur.achat(montant_x10)
                             argent.ajouter_mod(10)
                             nombre_de_x10 = nombre_de_x10 +1
-                            self.joueur.mod_list[2] += 1
+                            self.joueur.liste_mod[2] += 1
                         else:
                             print("pas assez d'argent ") #voir comment l'afficher
+
                     elif doit_lancer_menu_boutique == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique_item_epee.collidepoint(event.pos) :
-                        print("achat epee")
                         if self.joueur.check_argent(montant_epee):
                             print("epee")
                             self.joueur.achat(montant_epee)
@@ -220,12 +221,37 @@ class Menu:
 
                         else:
                             print("pas assez d'argent ") #voir comment l'afficher
+
                     elif doit_lancer_menu_boutique == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique_item_bouclier.collidepoint(event.pos):
-                        print("achat bouclier")
+                        if self.joueur.check_argent(montant_epee):
+                            print("bouclier")
+                            self.joueur.achat(montant_bouclier)
+                            valeur_aleatoir_rare = random.randint(1, 5)
+                            bouclier = item.Item(valeur_aleatoir_rare, "bouclier")
+                            self.joueur.ajouter_item(bouclier)
+                        else:
+                            print("pas assez d'argent ") #voir comment l'afficher
+
                     elif doit_lancer_menu_boutique == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique_item_bottes.collidepoint(event.pos):
-                        print("achat botte")
+                        if self.joueur.check_argent(montant_bottes):
+                            print("bottes")
+                            self.joueur.achat(montant_bottes)
+                            valeur_aleatoir_rare = random.randint(1, 5)
+                            epee = item.Item(valeur_aleatoir_rare, "bottes")
+                            self.joueur.ajouter_item(bottes)
+                        else:
+                            print("pas assez d'argent ") #voir comment l'afficher
+
                     elif doit_lancer_menu_boutique == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique_item_soupe.collidepoint(event.pos):
-                        print("acahat soupe")
+                        if self.joueur.check_argent(montant_soupe):
+                            print("soupe")
+                            self.joueur.achat(montant_soupe)
+                            valeur_aleatoir_rare = random.randint(1, 5)
+                            epee = item.Item(valeur_aleatoir_rare, "soupe")
+                            self.joueur.ajouter_item(soupe)
+                        else:
+                            print("pas assez d'argent ") #voir comment l'afficher
+
                     #menu monstre
                     elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_menu_monstre.collidepoint(event.pos):
                         if doit_lancer_menu_monstre == 0:
