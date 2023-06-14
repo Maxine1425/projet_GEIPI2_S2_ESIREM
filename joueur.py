@@ -51,11 +51,11 @@ class Joueur:
 
     def ajouter_monstre(self, monstre):  # Ajoute un monstre à l'inventaire de monstres du joueur
         try:
-            longueur = len(self.liste_monstre)
-            if longueur == 0:
+            length = len(self.liste_monstre)
+            if length == 0:
                 self.liste_monstre.append(monstre)
             else:
-                self.liste_monstre.insert(longueur, monstre)
+                self.liste_monstre.insert(length, monstre)
         except:
             print("Une erreur est survenue.")
 
@@ -64,31 +64,29 @@ class Joueur:
             return True
         else:
             return False
-        
+
     def ajouter_mod(self, valeur):
         self.portefeuille.ajouter_mod(valeur)
 
     def achat(self, montant):
         self.portefeuille.soustraire(montant)
-        
+
     def print_nom_monstre(self):  # Affiche sur le terminal le nom de tout les monstres du joueur
-        longueur = len(self.liste_monstre)
-        for i in range(longueur):
+        length = len(self.liste_monstre)
+        for i in range(length):
             print(self.liste_monstre[i].name)
 
+    import os
+
     def tout_sauvegarder(self):
-        chemin_fichier_sauvegarde = Path("fichiers de sauvegarde/")
-        try:
-            path = os.path.join(chemin_fichier_sauvegarde, self.name)
-            os.mkdir(path)
-            print("Fichier cree !\n")
-        except:
-            print("Le fichier existe deja !\n")
+        chemin_fichier_sauvegarde = "fichiers de sauvegarde/" + self.name
+        os.makedirs(chemin_fichier_sauvegarde, exist_ok=True)
         self.sauvegarde_monstre(chemin_fichier_sauvegarde)
         self.sauvegarde_argent(chemin_fichier_sauvegarde)
+        self.sauvegarde_items(chemin_fichier_sauvegarde)
 
     def sauvegarde_argent(self, chemin_fichier_sauvegarde):  # Sauvegarde l'argent et les mod du joueur dans un fichier nomdujoueur_money.txt
-        nom_fichier = self.name + "_argent.txt"
+        nom_fichier = "argent.txt"
         chemin_fichier_sauvegarde = "fichiers de sauvegarde/" + self.name
         fichier_a_ouvrir = chemin_fichier_sauvegarde + "/" + nom_fichier
         donnee_argent = str(self.portefeuille.compteur) + "\n" + str(self.portefeuille.mod) + "\n" + str(self.liste_mod)
@@ -96,12 +94,13 @@ class Joueur:
             current.write(donnee_argent)
 
     def sauvegarde_monstre(self, chemin_fichier_sauvegarde):  # Sauvegarde les monstres du joueur dans un fichier nomdujoueur_monster.txt
-        nom_fichier = self.name + "_monstre.txt"
+        nom_fichier = "monstre.txt"
+        chemin_fichier_sauvegarde = "fichiers de sauvegarde/" + self.name
         fichier_a_ouvrir = chemin_fichier_sauvegarde + "/" + nom_fichier
         longueur = len(self.liste_monstre)
         with open(fichier_a_ouvrir, 'w') as current:
             for i in range(longueur):
-                current.write(str(self.liste_monstre[i].name))
+                current.write(str(self.liste_monstre[i].nom))
                 current.write("\n")
                 current.write(str(self.liste_monstre[i].rare))
                 current.write("\n")
@@ -117,29 +116,55 @@ class Joueur:
                 current.write("\n")
                 current.write("%\n")
 
-    def sauvegarde_items(self):
-        nom_fichier = self.name + "_items.txt"
-        save_folder = Path("save files/")
-
-        try:
-            path = os.path.join(save_folder, self.name)
-            os.mkdir(path)
-            print("File created!\n")
-        except:
-            print("File already exists !\n")
-
-        fichier_a_ouvrir = save_folder / self.name / nom_fichier
-        longueur = len(self.liste_monstre)
+    def sauvegarde_items(self, chemin_fichier_sauvegarde):
+        nom_fichier = "item.txt"
+        chemin_fichier_sauvegarde = "fichiers de sauvegarde/" + self.name
+        fichier_a_ouvrir = chemin_fichier_sauvegarde + "/" + nom_fichier
+        longueur = len(self.liste_epee)
         with open(fichier_a_ouvrir, 'w') as current:
             for i in range(longueur):
-                current.write(str(self.item[i].type))
+                current.write("type = " + str(self.liste_epee[i].type))
                 current.write("\n")
-                current.write(str(self.item[i].valeur_atq))
+                current.write("rarete = " + str(self.liste_epee[i].rare))
                 current.write("\n")
-                current.write(str(self.item[i].valeur_pv))
+                current.write("valeur = " + str(self.liste_epee[i].valeur_atq))
                 current.write("\n")
-                current.write(str(self.item[i].valeur_def))
-                current.write("\n")
-                current.write(str(self.item[i].valeur_vit))
                 current.write("\n")
 
+            current.write("-------------------------------")
+            current.write("\n")
+            longueur = len(self.liste_bouclier)
+            for i in range(longueur):
+                current.write("type = " + str(self.liste_bouclier[i].type))
+                current.write("\n")
+                current.write("rarete = " + str(self.liste_bouclier[i].rare))
+                current.write("\n")
+                current.write("valeur = " + str(self.liste_bouclier[i].valeur_def))
+                current.write("\n")
+                current.write("\n")
+
+            current.write("-------------------------------")
+            current.write("\n")
+            longueur = len(self.liste_bottes)
+            for i in range(longueur):
+                current.write("type = " + str(self.liste_bottes[i].type))
+                current.write("\n")
+                current.write("rarete = " + str(self.liste_bottes[i].rare))
+                current.write("\n")
+                current.write("valeur = " + str(self.liste_bottes[i].valeur_vit))
+                current.write("\n")
+                current.write("\n")
+
+            current.write("-------------------------------")
+            current.write("\n")
+            longueur = len(self.liste_soupe)
+            for i in range(longueur):
+                current.write("type = " + str(self.liste_soupe[i].type))
+                current.write("\n")
+                current.write("rarete = " + str(self.liste_soupe[i].rare))
+                current.write("\n")
+                current.write("valeur = " + str(self.liste_soupe[i].valeur_pv))
+                current.write("\n")
+                current.write("\n")
+
+            current.write("\n")

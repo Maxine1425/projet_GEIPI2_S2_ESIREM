@@ -25,4 +25,3 @@ class LogiqueCombat:
             return self.combattant2
         elif self.comparaison_vitesse().name == self.combattant2.name:
             return self.combattant1
-

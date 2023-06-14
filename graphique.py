@@ -4,7 +4,7 @@ import pygame
 
 from menu import Menu
 import joueur
-from logique_combat import LogiqueCombat
+from logique_combat import Battle
 from graphique_combat import ecran_combat
 
 import monstre
@@ -16,9 +16,9 @@ monstre_ordinateur = monstre.Monstre("Monstre Ordinateur", 10, "Attaque","images
 
 
 # creation des objets
-joueur = joueur.Joueur("Louis", 50, 1, 0, 0, 0)
+joueur = Player.Player("Louis", 50, 1, 0, 0, 0)
 menu_principal = Menu(joueur)
-combat = LogiqueCombat(monstre_joueur, monstre_ordinateur)
+combat = Battle(monstre_joueur, monstre_ordinateur)
 
 
 while True :
