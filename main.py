@@ -1,20 +1,14 @@
-import random
-import time
-
-from test_menu_combat import *
-import Monstre
-import Player
-import Battle
+from joueur import Joueur
 from item import Item
+from monstre import Monstre
+joueur_test = Joueur("Louis", 0, 1, 0, 0, 0)
 
-joueur_test = Player.Player("Louis", 0, 1, 0, 0, 0)
+joueur_test.print_nom_monstre()
 
-joueur_test.print_monster_name()
+salameche = Monstre("Salameche", 10, "Attaque", "images/Salameche.png")
+bulbizarre = Monstre("Bulbizarre", 10, "Defense", "images/Bulbizarre.png")
 
-salameche = Monstre.Monstre("Salameche", 10, "Attaque", "images/Salameche.png")
-bulbizarre = Monstre.Monstre("Bulbizarre", 10, "Defense", "images/Bulbizarre.png")
-
-joueur_test.add_monstre(salameche)
+joueur_test.ajouter_monstre(salameche)
 
 print(salameche.get_stats())
 print(bulbizarre.get_stats())
@@ -23,13 +17,15 @@ epee = Item(1, "epee")
 bouclier = Item(1, "bouclier")
 soupe = Item(1, "soupe")
 bottes = Item(1, "bottes")
+bottes2 = Item(2, "bottes")
+bottes3 = Item(4, "bottes")
 
 joueur_test.ajouter_item(epee)
-print(joueur_test.get_items())
 joueur_test.ajouter_item(bouclier)
 joueur_test.ajouter_item(soupe)
-print(joueur_test.get_items())
 joueur_test.ajouter_item(bottes)
-print(joueur_test.get_items())
+joueur_test.ajouter_item(bottes2)
+joueur_test.ajouter_item(bottes3)
 
-joueur_test.save_all()
+
+joueur_test.tout_sauvegarder()

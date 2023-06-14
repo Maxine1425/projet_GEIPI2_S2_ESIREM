@@ -20,9 +20,9 @@ class Compteur:
         else:
             return False # ... sinon non
 
-
     def ajouter_mod(self, valeur):
         self.mod += valeur
+
     def demarrer(self):
         self.thread = threading.Thread(target=self.incrementer) # On cree un thread pour generer l'argent en arrière plan
         self.thread.start()  # Lancement du thread

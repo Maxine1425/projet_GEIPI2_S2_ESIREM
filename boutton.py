@@ -4,10 +4,10 @@ class Button:
         self.image = image
         self.rect = self.image.get_rect(topleft=(x, y))
 
-    def draw(self, surface):
+    def dessiner(self, surface):
         surface.blit(self.image, self.rect)
 
-    def is_clicked(self, event):
+    def est_clique(self, event):
         if event.type == pygame.MOUSEBUTTONDOWN:
             if self.rect.collidepoint(event.pos):
                 return True

@@ -3,16 +3,16 @@ import time
 import pygame
 
 from menu import Menu
-import Player
-from Battle import Battle
-from test_menu_combat import ecran_combat
+import joueur
+from logique_combat import Battle
+from graphique_combat import ecran_combat
 
-import Monstre
+import monstre
 
 
 # Creez les instances de Monster avec les parametres appropries
-monstre_joueur = Monstre.Monstre("Monstre Joueur", 10, "Defense","images/Salameche.png")
-monstre_ordinateur = Monstre.Monstre("Monstre Ordinateur", 10, "Attaque","images/Bulbizarre.png")
+monstre_joueur = monstre.Monstre("Monstre Joueur", 10, "Defense","images/Salameche.png")
+monstre_ordinateur = monstre.Monstre("Monstre Ordinateur", 10, "Attaque","images/Bulbizarre.png")
 
 
 # creation des objets
@@ -36,7 +36,3 @@ while True :
         ecran_combat(monstre_joueur, monstre_ordinateur)
         print("Combat termine")
         menu_principal.doit_lancer_menu = 1
-
-
-
-

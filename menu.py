@@ -1,13 +1,10 @@
 import random
-
 import pygame
 from pygame.locals import *
 from datetime import datetime
 from datetime import date
-import Player
 import item
 
-pygame.init()
 
 class Menu:
 
@@ -18,7 +15,9 @@ class Menu:
 
     def quitter(self):
         pygame.quit()
+
     def menu(self, lance):
+        pygame.init()
 
         if lance == 1:
             argent = self.joueur.wallet

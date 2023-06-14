@@ -1,8 +1,8 @@
 import pygame
 import time
 import random
-from Button import Button
-from Battle import Battle
+from boutton import Button
+from logique_combat import Battle
 import os
 
 pygame.init()

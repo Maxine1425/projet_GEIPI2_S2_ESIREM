@@ -2,11 +2,11 @@ import random
 
 
 class Monstre:
-    def __init__(self, name, rare, type, chemin_image):
-        self.name = name
+    def __init__(self, nom, rare, type, chemin_image):
+        self.nom = nom
         self.rare = rare  # Niveau de rarete de 1 à 10
         self.type = type  # Type entre Attaque et Defense
-        self.isKO = False  # Est-ce que le monstre est KO
+        self.est_ko = False  # Est-ce que le monstre est KO
         self.chemin_image = chemin_image  # Chemin vers l'image du monstre
 
         if type == "Attaque":
@@ -23,7 +23,7 @@ class Monstre:
         self.initial_max_PV = self.PV
 
     def get_stats(self):  # Renvoie un tableau avec les stats du monstre
-        stats = [self.name, "PV = " + str(self.PV), "ATQ = " + str(self.ATQ), "DEF = " + str(self.DEF),
+        stats = [self.nom, "PV = " + str(self.PV), "ATQ = " + str(self.ATQ), "DEF = " + str(self.DEF),
                  "VIT = " + str(self.VIT)]
         return stats
 
