@@ -2,7 +2,7 @@ import pygame
 import time
 import random
 from boutton import Button
-from logique_combat import Battle
+from logique_combat import LogiqueCombat
 import os
 
 pygame.init()
@@ -42,7 +42,7 @@ def ecran_victoire(vainqueur):
 
     # Préparation du texte
     font = pygame.font.SysFont('Helvetica', 40)
-    text = font.render("Le vainqueur est " + vainqueur.name, True, WHITE)
+    text = font.render("Le vainqueur est " + vainqueur.nom, True, WHITE)
     text_rect = text.get_rect()
     text_rect.center = (SCREEN_WIDTH // 2, rect.top - text_rect.height)  # Positionner au-dessus de l'image
 
@@ -170,8 +170,8 @@ def ecran_combat(opponent1, opponent2):
         pv2_text = f"{round(opponent2.PV)}/{opponent2.initial_max_PV} PV"
 
         # Dessin des boutons
-        attaque_button.draw(screen)
-        soin_button.draw(screen)
+        attaque_button.dessiner(screen)
+        soin_button.dessiner(screen)
 
         afficher_texte(screen, pv1_text, text_font, WHITE, 70 + hp_images['FULL'].get_width() + 10, 300)
         afficher_texte(screen, pv2_text, text_font, WHITE, 620 + hp_images['FULL'].get_width() + 10, 200)
@@ -179,7 +179,7 @@ def ecran_combat(opponent1, opponent2):
         pygame.display.flip()
         unes()
 
-        text_to_show = f"{opponent1.name} a {opponent1.PV}PV !\n{opponent2.name} a {opponent2.PV}PV !"
+        text_to_show = f"{opponent1.nom} a {opponent1.PV}PV !\n{opponent2.nom} a {opponent2.PV}PV !"
         combat_text_surface = text_font.render(text_to_show, True, BLACK)
         screen.blit(combat_text_surface, (220, 150))
 
@@ -188,7 +188,7 @@ def ecran_combat(opponent1, opponent2):
             if event.type == pygame.QUIT:
                 running = False
 
-            if attaque_button.is_clicked(event):
+            if attaque_button.est_clique(event):
                 action_text = "ATTAQUE"
                 if opponent2.PV <= 0.5 * opponent2.initial_max_PV:
                     choix2 = random.randint(1,2)
@@ -200,15 +200,15 @@ def ecran_combat(opponent1, opponent2):
                 # On agit en fonction du monstre le plus rapide
                 if fast_one == opponent1:
                     unes()
-                    print(opponent1.name + " attaque " + opponent2.name + "!")
+                    print(opponent1.nom + " attaque " + opponent2.nom + "!")
                     fast_one.choix_attaque(1, slow_one)
                     # Avant que le second n'attaque, on check si il n'est pas mort
                     if slow_one.PV > 0:
                         unes()
                         if choix2 == 1:
-                            print(slow_one.name + " attaque " + fast_one.name +  "!")
+                            print(slow_one.nom + " attaque " + fast_one.nom +  "!")
                         else:
-                            print(slow_one.name + " se soigne !")
+                            print(slow_one.nom + " se soigne !")
                     slow_one.choix_attaque(choix2, fast_one)
                     unes()
 
@@ -217,15 +217,15 @@ def ecran_combat(opponent1, opponent2):
                 else:
                     if choix2 == 1:
                         unes()
-                        print(opponent2.name + " attaque " + opponent1.name + "!")
+                        print(opponent2.nom + " attaque " + opponent1.nom + "!")
                         fast_one.choix_attaque(choix2, slow_one)
                         if slow_one.PV > 0:
                             unes()
-                            print(slow_one.name + " attaque !")
+                            print(slow_one.nom + " attaque !")
                             slow_one.choix_attaque(1, fast_one)
                 pass
 
-                if soin_button.is_clicked(event):
+                if soin_button.est_clique(event):
                     action_text = "SOIN"
                     if 0.5 * opponent2.initial_max_PV >= opponent2.PV:
                         choix2 = 2
@@ -234,28 +234,28 @@ def ecran_combat(opponent1, opponent2):
 
                     if fast_one == opponent1:
                         unes()
-                        print(opponent1.name + " se soigne !")
+                        print(opponent1.nom + " se soigne !")
                         fast_one.choix_attaque(2, slow_one)
                         unes()
                         slow_one.choix_attaque(choix2, fast_one)
 
                     else:
                         unes()
-                        print(opponent2.name + " se soigne !")
+                        print(opponent2.nom + " se soigne !")
                         fast_one.choix_attaque(2, slow_one)
                         unes()
                         slow_one.choix_attaque(choix2, fast_one)
                     pass
 
                 if opponent1.PV <= 0:
-                    action_text = f"{opponent1.name} est KO!"
+                    action_text = f"{opponent1.nom} est KO!"
                     opponent1.ko_mon()
                     time.sleep(1)
                     running = False
                     ecran_victoire(opponent2)
 
                 if opponent2.PV <= 0:
-                    action_text = f"{opponent2.name} est KO!"
+                    action_text = f"{opponent2.nom} est KO!"
                     opponent2.ko_mon()
                     time.sleep(1)
                     running = False

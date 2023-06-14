@@ -1,24 +1,19 @@
-import time
-
-import pygame
-
 from menu import Menu
-import joueur
-from logique_combat import Battle
+from logique_combat import LogiqueCombat
 from graphique_combat import ecran_combat
-
-import monstre
+from monstre import Monstre
+from joueur import Joueur
 
 
 # Creez les instances de Monster avec les parametres appropries
-monstre_joueur = monstre.Monstre("Monstre Joueur", 10, "Defense","images/Salameche.png")
-monstre_ordinateur = monstre.Monstre("Monstre Ordinateur", 10, "Attaque","images/Bulbizarre.png")
+monstre_joueur = Monstre("Monstre Joueur", 10, "Defense","images/Salameche.png")
+monstre_ordinateur = Monstre("Monstre Ordinateur", 10, "Attaque","images/Bulbizarre.png")
 
 
 # creation des objets
-joueur = Player.Player("Louis", 50, 1, 0, 0, 0)
+joueur = Joueur("Louis", 50, 1, 0, 0, 0)
 menu_principal = Menu(joueur)
-combat = Battle(monstre_joueur, monstre_ordinateur)
+combat = LogiqueCombat(monstre_joueur, monstre_ordinateur)
 
 
 while True :

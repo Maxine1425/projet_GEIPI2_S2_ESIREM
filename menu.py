@@ -16,9 +16,13 @@ class Menu:
     def quitter(self):
         pygame.quit()
 
+#<<<<<<< HEAD
 
 
+#=======
+#>>>>>>> origin/master
     def menu(self, lance):
+        pygame.init()
 
         pygame.init()
 
