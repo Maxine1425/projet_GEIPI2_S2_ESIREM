@@ -33,7 +33,8 @@ class Player:
         else:
             print("Invalid item type")
 
-
+    def get_items(self):
+        return self.liste_soupe + self.liste_bottes + self.liste_epee + self.liste_bouclier
     def add_monstre(self, monstre):  # Ajoute un monstre à l'inventaire de monstres du joueur
         try:
             length = len(self.monster_list)

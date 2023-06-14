@@ -1,8 +1,11 @@
+import random
+
 import pygame
 from pygame.locals import *
 from datetime import datetime
 from datetime import date
 import Player
+import item
 
 pygame.init()
 
@@ -202,12 +205,13 @@ class Menu:
                             print("pas assez d'argent ") #voir comment l'afficher
                     elif doit_lancer_menu_boutique == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique_item_epee.collidepoint(event.pos) :
                         print("achat epee")
-                        if self.joueur.check_argent(montant_x10):
-                            print("x10")
-                            self.joueur.achat(montant_x10)
-                            argent.ajouter_mod(10)
-                            nombre_de_x10 = nombre_de_x10 +1
-                            self.joueur.mod_list[2] += 1
+                        if self.joueur.check_argent(montant_epee):
+                            print("epee")
+                            self.joueur.achat(montant_epee)
+                            valeur_aleatoire_rare = random.randint(1,5)
+                            epee = item.Item(valeur_aleatoire_rare, "epee")
+                            self.joueur.ajouter_item(epee)
+
                         else:
                             print("pas assez d'argent ") #voir comment l'afficher
                     elif doit_lancer_menu_boutique == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique_item_bouclier.collidepoint(event.pos):
