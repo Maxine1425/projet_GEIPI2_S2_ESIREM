@@ -10,7 +10,7 @@ class Joueur:
         if balance != 0:
             self.portefeuille.compteur = balance
         self.portefeuille.mod = mod
-        self.liste_mod = [ modp2, modp5, modp10]
+        self.liste_mod = [modp2, modp5, modp10]
         self.liste_monstre = []  # Liste contenant tout les monstres que le joueur possède
 
         self.liste_epee = []

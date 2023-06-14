@@ -13,8 +13,8 @@ monstre_ordinateur = Monstre("Monstre Ordinateur", 10, "Attaque","images/Bulbiza
 # creation des objets
 joueur = Joueur("Louis", 0, 1, 0, 0, 0)
 menu_principal = Menu(joueur)
-combat = LogiqueCombat(monstre_joueur, monstre_ordinateur)
 
+joueur.ajouter_monstre(monstre_joueur)
 
 while True :
     # recuperation des valeurs initiales
@@ -28,6 +28,6 @@ while True :
         print(lancer_menu)
     elif lancer_menu == 0:
         print("Lancer combat")
-        ecran_combat(monstre_joueur, monstre_ordinateur)
+        ecran_combat(joueur, monstre_ordinateur)
         print("Combat termine")
         menu_principal.doit_lancer_menu = 1

@@ -56,3 +56,21 @@ class Monstre:
 
     def rev_mon(self):
         self.isKO = False
+
+
+class MonstreAttaque(Monstre):
+    def define_stats(self):
+        PV = random.randint(100, 600)
+        ATQ = random.randint(100, 160)
+        DEF = random.randint(1, 15)
+        VIT = random.randint(1, 15)
+        return PV, ATQ, DEF, VIT
+
+
+class MonstreDefense(Monstre):
+    def define_stats(self):
+        PV = random.randint(500, 1000)
+        ATQ = random.randint(4, 60)
+        DEF = random.randint(15, 30)
+        VIT = random.randint(1, 15)
+        return PV, ATQ, DEF, VIT
