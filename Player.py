@@ -12,7 +12,27 @@ class Player:
         self.wallet.mod = mod
         self.mod_list = [ modp2, modp5, modp10]
         self.monster_list = []  # Liste contenant tout les monstres que le joueur possède
+
+        self.liste_epee = []
+        self.liste_bouclier = []
+        self.liste_bottes = []
+        self.liste_soupe = []
+
         self.wallet.demarrer()
+
+
+    def ajouter_item(self, item):
+        if item.type == "epee":
+            self.liste_epee.append(item)
+        elif item.type == "bouclier":
+            self.liste_bouclier.append(item)
+        elif item.type == "bottes":
+            self.liste_bottes.append(item)
+        elif item.type == "soupe":
+            self.liste_soupe.append(item)
+        else:
+            print("Invalid item type")
+
 
     def add_monstre(self, monstre):  # Ajoute un monstre à l'inventaire de monstres du joueur
         try:
@@ -43,6 +63,10 @@ class Player:
     def save_all(self):
         self.sauvegarde_monstre()
         self.sauvegarde_argent()
+
+
+    def commencer_combat(self, adversaire):
+        joueur = self.monster_list[0]
 
     def sauvegarde_argent(self, compteur):  # Sauvegarde l'argent et les mod du joueur dans un fichier nomdujoueur_money.txt
         self.wallet.compteur = compteur.compteur

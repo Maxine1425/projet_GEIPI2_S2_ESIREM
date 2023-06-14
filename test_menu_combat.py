@@ -12,7 +12,7 @@ pygame.font.init()
 def unes():
     time.sleep(1)
 
-def draw_text(screen, text, font, color, x, y):
+def afficher_texte(screen, text, font, color, x, y):
     text_surface = font.render(text, True, color)
     text_rect = text_surface.get_rect()
     text_rect.topleft = (x, y)
@@ -63,7 +63,7 @@ def ecran_victoire(vainqueur):
         pygame.time.wait(50)  # Attendre un peu pour réduire l'utilisation du CPU
 
 
-def Battle_Screen(opponent1, opponent2):
+def ecran_combat(opponent1, opponent2):
     pygame.init()
     text_font = pygame.font.SysFont("Helvetica", 30)
 
@@ -171,8 +171,8 @@ def Battle_Screen(opponent1, opponent2):
         attaque_button.draw(screen)
         soin_button.draw(screen)
 
-        draw_text(screen, pv1_text, text_font, WHITE, 70 + hp_images['FULL'].get_width() + 10, 300)
-        draw_text(screen, pv2_text, text_font, WHITE, 620 + hp_images['FULL'].get_width() + 10, 200)
+        afficher_texte(screen, pv1_text, text_font, WHITE, 70 + hp_images['FULL'].get_width() + 10, 300)
+        afficher_texte(screen, pv2_text, text_font, WHITE, 620 + hp_images['FULL'].get_width() + 10, 200)
 
         pygame.display.flip()
         unes()
@@ -259,7 +259,7 @@ def Battle_Screen(opponent1, opponent2):
                     running = False
                     ecran_victoire(opponent1)
 
-            draw_text(screen, action_text, text_font, BLACK, SCREEN_WIDTH // 2, SCREEN_HEIGHT - 40)
+            afficher_texte(screen, action_text, text_font, BLACK, SCREEN_WIDTH // 2, SCREEN_HEIGHT - 40)
 
         pygame.display.flip()
 

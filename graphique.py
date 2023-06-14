@@ -5,7 +5,7 @@ import pygame
 from menu import Menu
 import Player
 from Battle import Battle
-from test_menu_combat import Battle_Screen
+from test_menu_combat import ecran_combat
 
 import Monstre
 

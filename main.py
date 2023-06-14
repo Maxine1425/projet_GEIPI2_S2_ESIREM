@@ -19,4 +19,5 @@ joueur_test.add_monstre(salameche)
 
 print(salameche.get_stats())
 print(bulbizarre.get_stats())
-Battle_Screen(salameche, bulbizarre)
+
+ecran_combat(salameche, bulbizarre)
