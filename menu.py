@@ -7,7 +7,7 @@ from datetime import date
 import Player
 import item
 
-
+pygame.init()
 
 class Menu:
 
@@ -15,8 +15,10 @@ class Menu:
         self.joueur = joueur
         self.doit_lancer_menu = 1
         self.doit_lancer_combat = 0
+
+    def quitter(self):
+        pygame.quit()
     def menu(self, lance):
-        pygame.init()
 
         if lance == 1:
             argent = self.joueur.wallet
@@ -45,10 +47,10 @@ class Menu:
             nombre_de_x2 = 0
             nombre_de_x5 = 0
             nombre_de_x10 = 0
-            nombre_epee = 1000
-            nombre_bouclier = 1000
-            nombre_bottes = 1000
-            nombre_soupe = 1000
+            nombre_epee = 0
+            nombre_bouclier = 0
+            nombre_bottes = 0
+            nombre_soupe = 0
 
             def afficher_menu_boutique(lance, fenetre):
                 if lance == 1:
@@ -87,19 +89,21 @@ class Menu:
                 if lance == 1:
                     fenetre.blit(fond_menu_boutique, (350,20))
 
-                    nombre_x2 = font.render("vous avez : " + str(self.joueur.mod_list[0]), True, (0, 0, 0))
+                    nombre_x2 = font.render(str(self.joueur.mod_list[0]), True, (0, 0, 0))
                     fenetre.blit(nombre_x2, (355,60))
-                    fenetre.blit(mod_x2, (600,30))
+                    fenetre.blit(mod_x2, (400,30))
 
-                    nombre_x5 = font.render("vous avez : " + str(self.joueur.mod_list[1]), True, (0, 0, 0))
-                    fenetre.blit(nombre_x5, (355, 150))
-                    fenetre.blit(mod_x5, (600, 120))
+                    nombre_x5 = font.render(str(self.joueur.mod_list[1]), True, (0, 0, 0))
+                    fenetre.blit(nombre_x5, (500, 60))
+                    fenetre.blit(mod_x5, (545, 30))
 
-                    nombre_x10 = font.render("vous avez : " + str(self.joueur.mod_list[2]), True, (0, 0, 0))
-                    fenetre.blit(nombre_x10, (355, 240))
-                    fenetre.blit(mod_x10, (600, 210))
+                    nombre_x10 = font.render(str(self.joueur.mod_list[2]), True, (0, 0, 0))
+                    fenetre.blit(nombre_x10, (645, 60))
+                    fenetre.blit(mod_x10, (690, 30))
+                    
+                    
 
-            font = pygame.font.Font("Vogue.ttf", 20)  # Police principale
+
 
             fond_donee = pygame.image.load("images/fond_donee.jpg").convert()
             # Creation de la surface de l'ombre
@@ -162,6 +166,7 @@ class Menu:
                         self.joueur.save_all()
                         argent.stopper()
                         pygame.quit()
+
                     #boutique
                     elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique.collidepoint(event.pos):
                         if doit_lancer_menu_boutique == 0:
@@ -209,8 +214,8 @@ class Menu:
                         if self.joueur.check_argent(montant_epee):
                             print("epee")
                             self.joueur.achat(montant_epee)
-                            valeur_aleatoire_rare = random.randint(1,5)
-                            epee = item.Item(valeur_aleatoire_rare, "epee")
+                            valeur_aleatoir_rare = random.randint(1, 5)
+                            epee = item.Item(valeur_aleatoir_rare, "epee")
                             self.joueur.ajouter_item(epee)
 
                         else:
@@ -238,6 +243,7 @@ class Menu:
                         self.doit_lancer_menu = 0
                         continuer = 0
                         pygame.display.flip()
+
                     #menu inventaire
                     elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_inventaire.collidepoint(event.pos):
                         if doit_lancer_menu_inventaire == 0:
@@ -265,12 +271,14 @@ class Menu:
                 afficher_menu_inventaire(doit_lancer_menu_inventaire, fenetre)
 
                 #afficher l'heure
+                font = pygame.font.Font("Vogue.ttf", 20)  # Police principale
                 heure = datetime.now()
                 heure_1 = heure.strftime("%H:%M:%S")
                 heure_a_afficher = font.render(heure_1, True, (0, 0, 0),)
                 fenetre.blit(heure_a_afficher, (10, 40))
 
                 #afficher la date
+                font = pygame.font.Font("Vogue.ttf", 20)
                 current_date = date.today()
                 date_1 = current_date.strftime("%d/%m/%Y")
                 date_a_afficher = font.render(date_1, True, (0, 0, 0))
@@ -280,6 +288,7 @@ class Menu:
 
 
                 #afficher l'argent
+                font = pygame.font.Font("Vogue.ttf", 20)
                 argent_a_afficher = font.render("Votre argent : " + str(argent.compteur) + " po", True, (0, 0, 0),)
                 fenetre.blit(argent_a_afficher, (35, 100))
 
@@ -288,5 +297,3 @@ class Menu:
                 horloge.tick(60)
 
 
-    def quitter(self):
-        pygame.quit()
