@@ -37,16 +37,40 @@ class Joueur:
     def ajouter_item(self, item):
         if item.type == "epee" and len(self.liste_epee) <= 1:
             self.liste_epee.append(item)
+            return 1
         elif item.type == "epee" and len(self.liste_epee) > 1:
-            print("trop d'epee")
-        elif item.type == "bouclier":
+            return 2
+
+        elif item.type == "bouclier" and len(self.liste_bouclier) <= 1:
             self.liste_bouclier.append(item)
-        elif item.type == "bottes":
+            return 1
+        elif item.type == "bouclier" and len(self.liste_bouclier) > 1:
+            return 2
+
+        elif item.type == "bottes" and len(self.liste_bottes) <= 1:
             self.liste_bottes.append(item)
-        elif item.type == "soupe":
+            return 1
+        elif item.type == "bottes" and len(self.liste_bottes) > 1:
+            return 2
+
+        elif item.type == "soupe" and len(self.liste_soupe) <= 1:
             self.liste_soupe.append(item)
+            return 1
+        elif item.type == "soupe" and len(self.liste_soupe) > 1:
+            return 2
+
         else:
             print("Type d'item invalide.")
+
+    def supprimer_item(self, item):
+        if item.type == "epee":
+            self.liste_epee = 0
+        elif item.type == "bouclier":
+            self.liste_bouclier = 0
+        elif item.type == "bottes":
+            self.liste_bottes = 0
+        elif item.type == "soupe":
+            self.liste_soupe = 0
 
     def get_items(self):
         return self.liste_soupe + self.liste_bottes + self.liste_epee + self.liste_bouclier
