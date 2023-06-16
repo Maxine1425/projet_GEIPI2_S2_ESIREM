@@ -38,25 +38,25 @@ class Joueur:
         if item.type == "epee" and len(self.liste_epee) == 0:
             self.liste_epee.append(item)
             return 1
-        elif item.type == "epee" and len(self.liste_epee) > 1:
+        elif item.type == "epee" and len(self.liste_epee) > 0:
             return 2
 
         elif item.type == "bouclier" and len(self.liste_bouclier) == 0:
             self.liste_bouclier.append(item)
             return 1
-        elif item.type == "bouclier" and len(self.liste_bouclier) > 1:
+        elif item.type == "bouclier" and len(self.liste_bouclier) > 0:
             return 2
 
         elif item.type == "bottes" and len(self.liste_bottes) == 0:
             self.liste_bottes.append(item)
             return 1
-        elif item.type == "bottes" and len(self.liste_bottes) > 1:
+        elif item.type == "bottes" and len(self.liste_bottes) > 0:
             return 2
 
         elif item.type == "soupe" and len(self.liste_soupe) == 0:
             self.liste_soupe.append(item)
             return 1
-        elif item.type == "soupe" and len(self.liste_soupe) > 1:
+        elif item.type == "soupe" and len(self.liste_soupe) > 0:
             return 2
 
         else:
