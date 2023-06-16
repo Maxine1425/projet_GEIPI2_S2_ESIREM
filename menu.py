@@ -4,6 +4,7 @@ from pygame.locals import *
 from datetime import datetime
 from datetime import date
 import item
+import time
 
 
 class Menu:
@@ -12,15 +13,11 @@ class Menu:
         self.joueur = joueur
         self.doit_lancer_menu = 1
         self.doit_lancer_combat = 0
+        self.temps_message = 0
 
     def quitter(self):
         pygame.quit()
 
-#<<<<<<< HEAD
-
-
-#=======
-#>>>>>>> origin/master
     def menu(self, lance):
         pygame.init()
 
@@ -58,7 +55,13 @@ class Menu:
             nombre_soupe = 0
 
             font = pygame.font.Font("Vogue.ttf", 20)
-            pas_assez_argent = font.render("Vous n'avez pas assez d'argent !", True, (0, 0, 0))
+
+            #affichage de texte
+            afficher_pas_assez_argent = False
+            afficher_epee = False
+            afficher_bouclier = False
+            afficher_bottes = False
+            afficher_soupe = False
 
             #chargement des images
             fond = pygame.image.load("images/fond_menu.png").convert()
@@ -135,6 +138,22 @@ class Menu:
                     fenetre.blit(prix_bottes, (615, 250))
                     prix_soupe = font.render(str(montant_soupe) + " po", True, (0, 0, 0))
                     fenetre.blit(prix_soupe, (715, 250))
+                    if afficher_pas_assez_argent:
+                        pas_assez_argent = font.render("Pas assez d'argent !", True, (0, 0, 0))
+                        fenetre.blit(pas_assez_argent, (655, 585))
+                    if afficher_epee:
+                        texte_epee = font.render("Vous avez achete une epee de rarete : " + str(epee.rare) + " et d'attaque : " + str(epee.valeur_atq),True, (255,255,255))
+                        fenetre.blit(texte_epee, (50, 450))
+                    if afficher_bouclier:
+                        texte_bouclier = font.render("Vous avez achete un bouclier de rarete : " + str(bouclier.rare) + " et de defance : " + str(bouclier.valeur_def),True, (255,255,255))
+                        fenetre.blit(texte_bouclier, (50, 450))
+                    if afficher_bottes:
+                        texte_bottes = font.render("Vous avez achete des bottes de rarete : " + str(bottes.rare) + " et de vitesse: " + str(bottes.valeur_vit),True, (255,255,255))
+                        fenetre.blit(texte_bottes, (50, 450))
+                    if afficher_soupe:
+                        texte_soupe = font.render("Vous avez achete de la soupe de rarete : " + str(soupe.rare) + " et de PV : " + str(soupe.valeur_pv),True, (255,255,255))
+                        fenetre.blit(texte_soupe, (50, 450))
+
 
             #definition de la fonction afficher_menu_monstre
             def afficher_menu_monstre(lance, fenetre):
@@ -178,19 +197,27 @@ class Menu:
 
                     #boutique
                     elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique.collidepoint(event.pos):
+                        afficher_pas_assez_argent = False
+                        afficher_epee = False
+                        afficher_bouclier = False
+                        afficher_bottes = False
+                        afficher_soupe = False
                         if doit_lancer_menu_boutique == 0:
-                            print("ouvre la boutique")
                             doit_lancer_menu_boutique = 1
                             doit_lancer_menu_monstre = 0
                             doit_lancer_menu_inventaire = 0
-                            pygame.display.flip()
+
                         elif doit_lancer_menu_boutique == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique.collidepoint(event.pos):
                             doit_lancer_menu_boutique = 0
-                            print("ferme la boutique")
 
                     #achat mod_x2
                     elif doit_lancer_menu_boutique == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique_mod_2.collidepoint(
                             event.pos):
+                        afficher_pas_assez_argent = False
+                        afficher_epee = False
+                        afficher_bouclier = False
+                        afficher_bottes = False
+                        afficher_soupe = False
                         if self.joueur.check_argent(montant_x2):
                             print("x2")
                             self.joueur.achat(montant_x2)
@@ -198,12 +225,16 @@ class Menu:
                             nombre_de_x2 = nombre_de_x2 + 1
                             self.joueur.liste_mod[0] += 1
                         else:
-                            fenetre.blit(pas_assez_argent, (640,550))
-
+                            afficher_pas_assez_argent = True
 
                     #achat mod_x5
                     elif doit_lancer_menu_boutique == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique_mod_5.collidepoint(
                             event.pos):
+                        afficher_pas_assez_argent = False
+                        afficher_epee = False
+                        afficher_bouclier = False
+                        afficher_bottes = False
+                        afficher_soupe = False
                         if self.joueur.check_argent(montant_x5):
                             print("x5")
                             self.joueur.achat(montant_x5)
@@ -211,11 +242,16 @@ class Menu:
                             nombre_de_x5 = nombre_de_x5 + 1
                             self.joueur.liste_mod[1] += 1
                         else:
-                            print("pas assez d'argent ") #voir comment l'afficher
+                            afficher_pas_assez_argent = True
 
                     #achat mod_x10
                     elif doit_lancer_menu_boutique == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique_mod_10.collidepoint(
                             event.pos):
+                        afficher_pas_assez_argent = False
+                        afficher_epee = False
+                        afficher_bouclier = False
+                        afficher_bottes = False
+                        afficher_soupe = False
                         if self.joueur.check_argent(montant_x10):
                             print("x10")
                             self.joueur.achat(montant_x10)
@@ -223,54 +259,93 @@ class Menu:
                             nombre_de_x10 = nombre_de_x10 +1
                             self.joueur.liste_mod[2] += 1
                         else:
-                            print("pas assez d'argent ") #voir comment l'afficher
+                            afficher_pas_assez_argent = True
+
+
 
                     #achat epee
                     elif doit_lancer_menu_boutique == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique_item_epee.collidepoint(event.pos) :
+                        afficher_pas_assez_argent = False
+                        afficher_epee = False
+                        afficher_bouclier = False
+                        afficher_bottes = False
+                        afficher_soupe = False
                         if self.joueur.check_argent(montant_epee):
                             self.joueur.achat(montant_epee)
                             valeur_aleatoir_rare = random.randint(1, 5)
                             epee = item.Item(valeur_aleatoir_rare, "epee")
                             self.joueur.ajouter_item(epee)
+                            afficher_epee = True
                             print("Vous avez achete une epee de rarete : " + str(epee.rare) + " et d'attaque : " + str(epee.valeur_atq) )
                         else:
-                            print("pas assez d'argent ") #voir comment l'afficher
+                            afficher_pas_assez_argent = True
+
+
 
                     #achat bouclier
                     elif doit_lancer_menu_boutique == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique_item_bouclier.collidepoint(event.pos):
+                        afficher_pas_assez_argent = False
+                        afficher_epee = False
+                        afficher_bouclier = False
+                        afficher_bottes = False
+                        afficher_soupe = False
                         if self.joueur.check_argent(montant_bouclier):
                             self.joueur.achat(montant_bouclier)
                             valeur_aleatoir_rare = random.randint(1, 5)
                             bouclier = item.Item(valeur_aleatoir_rare, "bouclier")
                             self.joueur.ajouter_item(bouclier)
+                            afficher_bouclier = True
                             print("Vous avez achete un bouclier de rarete : " + str(bouclier.rare) + " et de defance : " + str(bouclier.valeur_def))
                         else:
-                            print("pas assez d'argent ") #voir comment l'afficher
+                            afficher_pas_assez_argent = True
+
+
 
                     #achat bottes
                     elif doit_lancer_menu_boutique == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique_item_bottes.collidepoint(event.pos):
+                        afficher_pas_assez_argent = False
+                        afficher_epee = False
+                        afficher_bouclier = False
+                        afficher_bottes = False
+                        afficher_soupe = False
                         if self.joueur.check_argent(montant_bottes):
                             self.joueur.achat(montant_bottes)
                             valeur_aleatoir_rare = random.randint(1, 5)
                             bottes = item.Item(valeur_aleatoir_rare, "bottes")
                             self.joueur.ajouter_item(bottes)
+                            afficher_bottes = True
                             print("Vous avez achete des bottes de rarete : " + str(bottes.rare) + " et de vitesse: " + str(bottes.valeur_vit))
                         else:
-                            print("pas assez d'argent ") #voir comment l'afficher
+                            afficher_pas_assez_argent = True
+
+
 
                     #achat soupe
                     elif doit_lancer_menu_boutique == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_boutique_item_soupe.collidepoint(event.pos):
+                        afficher_pas_assez_argent = False
+                        afficher_epee = False
+                        afficher_bouclier = False
+                        afficher_bottes = False
+                        afficher_soupe = False
                         if self.joueur.check_argent(montant_soupe):
                             self.joueur.achat(montant_soupe)
                             valeur_aleatoir_rare = random.randint(1, 5)
                             soupe = item.Item(valeur_aleatoir_rare, "soupe")
                             self.joueur.ajouter_item(soupe)
+                            afficher_soupe = True
                             print("Vous avez achete de la soupe de rarete : " + str(soupe.rare) + " et de PV : " + str(soupe.valeur_pv))
                         else:
-                            print("pas assez d'argent ") #voir comment l'afficher
+                            afficher_pas_assez_argent = True
+
+
 
                     #menu monstre
                     elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_menu_monstre.collidepoint(event.pos):
+                        afficher_pas_assez_argent = False
+                        afficher_epee = False
+                        afficher_bouclier = False
+                        afficher_bottes = False
+                        afficher_soupe = False
                         if doit_lancer_menu_monstre == 0:
                             print("ouvre menu monstre")
                             doit_lancer_menu_monstre = 1
@@ -281,6 +356,11 @@ class Menu:
                             doit_lancer_menu_monstre = 0
                             print("ferme le menu monstre")
                     elif doit_lancer_menu_monstre == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_lancer_combat.collidepoint(event.pos):
+                        afficher_pas_assez_argent = False
+                        afficher_epee = False
+                        afficher_bouclier = False
+                        afficher_bottes = False
+                        afficher_soupe = False
                         print("lancer un combat")
                         self.doit_lancer_combat = 1
                         self.doit_lancer_menu = 0
@@ -289,6 +369,11 @@ class Menu:
 
                     #menu inventaire
                     elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_inventaire.collidepoint(event.pos):
+                        afficher_pas_assez_argent = False
+                        afficher_epee = False
+                        afficher_bouclier = False
+                        afficher_bottes = False
+                        afficher_soupe = False
                         if doit_lancer_menu_inventaire == 0:
                             print("ouvre menu inventaire")
                             doit_lancer_menu_inventaire = 1
