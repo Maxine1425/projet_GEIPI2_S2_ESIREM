@@ -297,8 +297,6 @@ class Menu:
                         afficher_soupe = False
                         afficher_deja_un = False
                         if self.joueur.check_argent(montant_epee):
-                            valeur_aleatoir_rare = random.randint(1, 5)
-                            epee = item.Item(valeur_aleatoir_rare, "epee")
                             if self.joueur.ajouter_item(epee) == 1 :
                                 afficher_epee = True
                                 self.joueur.achat(montant_epee)
@@ -320,11 +318,11 @@ class Menu:
                         afficher_soupe = False
                         afficher_deja_un = False
                         if self.joueur.check_argent(montant_bouclier):
-                            valeur_aleatoir_rare = random.randint(1, 5)
-                            bouclier = item.Item(valeur_aleatoir_rare, "bouclier")
                             if self.joueur.ajouter_item(bouclier) == 1 :
                                 self.joueur.achat(montant_bouclier)
                                 self.joueur.ajouter_item(bouclier)
+                                valeur_aleatoir_rare = random.randint(1, 5)
+                                bouclier = item.Item(valeur_aleatoir_rare, "bouclier")
                                 afficher_bouclier = True
                             elif self.joueur.ajouter_item(bouclier) == 2 :
                                 afficher_deja_un = True
@@ -340,11 +338,11 @@ class Menu:
                         afficher_soupe = False
                         afficher_deja_un = False
                         if self.joueur.check_argent(montant_bottes):
-                            valeur_aleatoir_rare = random.randint(1, 5)
-                            bottes = item.Item(valeur_aleatoir_rare, "bottes")
                             if self.joueur.ajouter_item(bottes) == 1 :
                                 self.joueur.achat(montant_bottes)
                                 self.joueur.ajouter_item(bottes)
+                                valeur_aleatoir_rare = random.randint(1, 5)
+                                bottes = item.Item(valeur_aleatoir_rare, "bottes")
                                 afficher_bottes = True
                             elif self.joueur.ajouter_item(bottes) == 2 :
                                 afficher_deja_un = True
@@ -360,11 +358,11 @@ class Menu:
                         afficher_soupe = False
                         afficher_deja_un = False
                         if self.joueur.check_argent(montant_soupe):
-                            valeur_aleatoir_rare = random.randint(1, 5)
-                            soupe = item.Item(valeur_aleatoir_rare, "soupe")
                             if self.joueur.ajouter_item(soupe) == 1 :
                                 self.joueur.achat(montant_soupe)
                                 self.joueur.ajouter_item(soupe)
+                                valeur_aleatoir_rare = random.randint(1, 5)
+                                soupe = item.Item(valeur_aleatoir_rare, "soupe")
                                 afficher_soupe = True
                             elif self.joueur.ajouter_item(soupe) == 2 :
                                 afficher_deja_un = True
@@ -451,5 +449,3 @@ class Menu:
                 #gere l'actualisation de l'heure
                 pygame.display.flip()
                 horloge.tick(60)
-
-

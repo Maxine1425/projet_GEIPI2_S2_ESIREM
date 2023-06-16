@@ -97,6 +97,9 @@ class Joueur:
     def achat(self, montant):
         self.portefeuille.soustraire(montant)
 
+    def vendre(self, montant):
+        self.portefeuille.compteur += montant
+
     def print_nom_monstre(self):  # Affiche sur le terminal le nom de tout les monstres du joueur
         length = len(self.liste_monstre)
         for i in range(length):
