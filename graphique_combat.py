@@ -177,12 +177,12 @@ def ecran_combat(joueur, opponent2):
             if attaque_button.est_clique(event):
                 action_text = "ATTAQUE"
                 combat.choix_ordinateur()
-                combat.phase_action()
+                combat.tour(1)
 
             if soin_button.est_clique(event):
                 action_text = "SOIN"
                 combat.choix_ordinateur()
-                combat.soin()
+                combat.tour(2)
 
             if combat.check_etat() == 1:
                 ecran_victoire(opponent1)
@@ -199,3 +199,4 @@ def ecran_combat(joueur, opponent2):
 
         clock.tick(60)
     pygame.quit()
+
