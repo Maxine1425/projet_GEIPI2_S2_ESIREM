@@ -50,6 +50,11 @@ class Menu:
             nombre_de_x5 = 0
             nombre_de_x10 = 0
 
+            nombre_epee = 0
+            nombre_bouclier = 0
+            nombre_bottes = 0
+            nombre_soupe = 0
+
             epee = item.Item(1, "epee")
             epee.rare = 0
             epee.valeur_atq = 0
@@ -88,7 +93,7 @@ class Menu:
             soupe_image = pygame.image.load("images/soupe.png").convert_alpha()
             button_lancer_combat = pygame.image.load("images/button_lancer_combat .png").convert_alpha()
             fond_donee = pygame.image.load("images/fond_donee.jpg").convert()
-
+            button_vendre = pygame.image.load("images/button_vendre.png").convert_alpha()
 
             # creation des zones de click
             clickable_area_boutique = pygame.Rect((30, 570), (160, 49)) # (position)(taille)
@@ -102,6 +107,11 @@ class Menu:
             clickable_area_boutique_item_bottes = pygame.Rect((600, 170), (80, 80))
             clickable_area_boutique_item_soupe = pygame.Rect((700, 170), (80, 80))
             clickable_area_lancer_combat = pygame.Rect((360, 350), (200, 48))
+            clickable_area_vendre_epee = pygame.Rect((780, 150), (157, 49))
+            clickable_area_vendre_bouclier = pygame.Rect((780, 220), (157, 49))
+            clickable_area_vendre_bottes = pygame.Rect((780, 300), (157, 49))
+            clickable_area_vendre_soupe = pygame.Rect((780, 370), (157, 49))
+
 
             # affichage des fonds et boutton de la fenetre principal (le menu sans rien d'ouvert)
             fenetre.blit(fond, (0, 0))  # on colle sur la fenetre l'image fond et l'angle haut gauche de cette image sera en (0;0)
@@ -192,18 +202,22 @@ class Menu:
                     epee_inventaire = font.render("Rare : " + str(epee.rare) + " et " + str(epee.valeur_atq) + " d'attaque", True, (0, 0, 0))
                     fenetre.blit(epee_inventaire, (500,160))
                     fenetre.blit(epee_image, (380,130))
+                    fenetre.blit(button_vendre,(780,150) )
 
                     bouclier_inventaire = font.render("Rare : " + str(bouclier.rare) + " et " + str(bouclier.valeur_def) + " de defense", True, (0, 0, 0))
                     fenetre.blit(bouclier_inventaire, (500,240))
                     fenetre.blit(bouclier_image, (380,210))
+                    fenetre.blit(button_vendre, (780, 220))
 
                     bottes_inventaire = font.render("Rare : " + str(bottes.rare) + " et " + str(bottes.valeur_vit) + " de vitesse", True, (0, 0, 0))
                     fenetre.blit(bottes_inventaire, (500,320))
                     fenetre.blit(bottes_image, (380,290))
+                    fenetre.blit(button_vendre, (780, 300))
 
                     soupe_inventaire = font.render("Rare : " + str(soupe.rare) + " et " + str(soupe.valeur_pv) + " de PV", True, (0, 0, 0))
                     fenetre.blit(soupe_inventaire, (500,390))
                     fenetre.blit(soupe_image, (380,350))
+                    fenetre.blit(button_vendre, (780, 370))
 
             #creation de l'orloge pour afficher l'heure
             horloge = pygame.time.Clock()
@@ -299,10 +313,12 @@ class Menu:
                         if self.joueur.check_argent(montant_epee):
                             if self.joueur.ajouter_item(epee) == 1 :
                                 afficher_epee = True
+                                nombre_epee += 1
                                 self.joueur.achat(montant_epee)
                                 valeur_aleatoir_rare = random.randint(1, 5)
                                 epee = item.Item(valeur_aleatoir_rare, "epee")
                                 self.joueur.ajouter_item(epee)
+                                print(nombre_epee)
 
                             elif self.joueur.ajouter_item(epee) == 2 :
                                 afficher_deja_un = True
@@ -324,6 +340,7 @@ class Menu:
                                 valeur_aleatoir_rare = random.randint(1, 5)
                                 bouclier = item.Item(valeur_aleatoir_rare, "bouclier")
                                 afficher_bouclier = True
+                                nombre_bouclier += 1
                             elif self.joueur.ajouter_item(bouclier) == 2 :
                                 afficher_deja_un = True
                         else:
@@ -344,6 +361,7 @@ class Menu:
                                 valeur_aleatoir_rare = random.randint(1, 5)
                                 bottes = item.Item(valeur_aleatoir_rare, "bottes")
                                 afficher_bottes = True
+                                nombre_bottes += 1
                             elif self.joueur.ajouter_item(bottes) == 2 :
                                 afficher_deja_un = True
                         else:
@@ -364,6 +382,7 @@ class Menu:
                                 valeur_aleatoir_rare = random.randint(1, 5)
                                 soupe = item.Item(valeur_aleatoir_rare, "soupe")
                                 afficher_soupe = True
+                                nombre_soupe += 1
                             elif self.joueur.ajouter_item(soupe) == 2 :
                                 afficher_deja_un = True
                         else:
@@ -409,6 +428,29 @@ class Menu:
                         elif doit_lancer_menu_inventaire == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_inventaire.collidepoint(event.pos):
                             doit_lancer_menu_inventaire = 0
 
+                    #vente epee
+                    elif doit_lancer_menu_inventaire == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_vendre_epee.collidepoint(event.pos) and nombre_epee == 1:
+                        print("epee vendu")
+                        self.joueur.supprimer_item(epee)
+                        self.joueur.vendre(montant_epee)
+                        nombre_epee -= 1
+                        print(nombre_epee)
+                    #vente bouclier
+                    elif doit_lancer_menu_inventaire == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_vendre_bouclier.collidepoint(event.pos):
+                        self.joueur.supprimer_item(bouclier)
+                        self.joueur.vendre(montant_bouclier)
+
+                    #vente bottes
+                    elif doit_lancer_menu_inventaire == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_vendre_bottes.collidepoint(event.pos):
+                        self.joueur.supprimer_item(bottes)
+                        self.joueur.vendre(montant_bottes)
+
+                    #vente soupe
+                    elif doit_lancer_menu_inventaire == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_vendre_soupe.collidepoint(event.pos):
+                        self.joueur.supprimer_item(soupe)
+                        self.joueur.vendre(montant_soupe)
+
+
 
 
 
@@ -449,3 +491,4 @@ class Menu:
                 #gere l'actualisation de l'heure
                 pygame.display.flip()
                 horloge.tick(60)
+
