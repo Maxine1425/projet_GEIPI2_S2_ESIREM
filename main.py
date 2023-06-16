@@ -1,31 +1,33 @@
-from joueur import Joueur
-from item import Item
+from menu import Menu
+from logique_combat import LogiqueCombat
+from graphique_combat import ecran_combat
 from monstre import Monstre
-joueur_test = Joueur("Louis", 0, 1, 0, 0, 0)
-
-joueur_test.print_nom_monstre()
-
-salameche = Monstre("Salameche", 10, "Attaque", "images/Salameche.png")
-bulbizarre = Monstre("Bulbizarre", 10, "Defense", "images/Bulbizarre.png")
-
-joueur_test.ajouter_monstre(salameche)
-
-print(salameche.get_stats())
-print(bulbizarre.get_stats())
-
-epee = Item(1, "epee")
-bouclier = Item(1, "bouclier")
-soupe = Item(1, "soupe")
-bottes = Item(1, "bottes")
-bottes2 = Item(2, "bottes")
-bottes3 = Item(4, "bottes")
-
-joueur_test.ajouter_item(epee)
-joueur_test.ajouter_item(bouclier)
-joueur_test.ajouter_item(soupe)
-joueur_test.ajouter_item(bottes)
-joueur_test.ajouter_item(bottes2)
-joueur_test.ajouter_item(bottes3)
+from joueur import Joueur
 
 
-joueur_test.tout_sauvegarder()
+# Creez les instances de Monster avec les parametres appropries
+monstre_joueur = Monstre("Monstre Joueur", 10, "Attaque","images/Salameche.png")
+monstre_ordinateur = Monstre("Monstre Ordinateur", 10, "Defense","images/Bulbizarre.png")
+
+
+# creation des objets
+joueur = Joueur("Louis", 5000, 1, 0, 0, 0)
+menu_principal = Menu(joueur)
+
+joueur.ajouter_monstre(monstre_joueur)
+
+while True:
+    # recuperation des valeurs initiales
+    lancer_menu = menu_principal.doit_lancer_menu
+    lancer_combat = menu_principal.doit_lancer_combat
+
+    if lancer_menu == 1:
+        # appel de la methode menu()
+        menu_principal.menu(lancer_menu)
+        # mise a jour des valeurs apres l'appel de la methode
+        print(lancer_menu)
+    elif lancer_menu == 0:
+        print("Lancer combat")
+        ecran_combat(joueur, monstre_ordinateur)
+        print("Combat termine")
+        menu_principal.doit_lancer_menu = 1

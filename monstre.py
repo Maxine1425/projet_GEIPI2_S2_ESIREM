@@ -1,5 +1,5 @@
 import random
-
+from item import *
 
 class Monstre:
     def __init__(self, nom, rare, type, chemin_image):
@@ -9,6 +9,10 @@ class Monstre:
         self.est_ko = False  # Est-ce que le monstre est KO
         self.chemin_image = chemin_image  # Chemin vers l'image du monstre
         self.choice = 1
+        self.item_equipe_epee = 0
+        self.item_equipe_bouclier = 0
+        self.item_equipe_bottes = 0
+        self.item_equipe_soupe = 0
 
         if type == "Attaque":
             self.PV = random.randint(100, 600)
@@ -59,6 +63,32 @@ class Monstre:
     def rev_mon(self):
         self.isKO = False
 
+    def modifier_stat_monstre(self):
+        self.ATQ += self.item_equipe_epee.valeur_atq
+        self.DEF += self.item_equipe_bouclier.valeut_def
+        self.VIT += self.item_equipe_bottes.valeur_vit
+        self.PV += self.item_equipe_soupe.valeut_pv
+    def modifier_item_monstre(self, item):
+        if item.type == "epee":
+            self.item_equipe_epee = item
+        if item.type == "bouclier":
+            self.item_equipe_bouclier = item
+        if item.type == "bottes":
+            self.item_equipe_bottes = item
+        if item.type == "soupe":
+            self.item_equipe_soupe = item
+        self.modifier_stat_monstre()
+
+    def retirer_item_monstre(self, item):
+        if item.type == "epee":
+            self.item_equipe_epee = 0
+        if item.type == "bouclier":
+            self.item_equipe_bouclier = 0
+        if item.type == "bottes":
+            self.item_equipe_bottes = 0
+        if item.type == "soupe":
+            self.item_equipe_soupe = 0
+        self.modifier_stat_monstre()
 
 class MonstreAttaque(Monstre):
     def define_stats(self):

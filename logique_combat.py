@@ -7,6 +7,7 @@ class LogiqueCombat:
         :param monstre1: Ce monstre doit obligatoirement etre celui du joueur
         :param monstre2: Ce monstre est celui de l'ordinateur
         """
+        self.joueur = joueur
         self.en_cours = True
         self.combattant1 = joueur.liste_monstre[0]
         self.combattant2 = monstre2
@@ -31,9 +32,11 @@ class LogiqueCombat:
     def check_etat(self):
         if self.combattant1.PV <= 0:
             self.combattant1.ko_mon()
+
             return 2
         if self.combattant2.PV <= 0:
             self.combattant2.ko_mon()
+            self.recompense()
             return 1
         return 0
 
@@ -79,3 +82,6 @@ class LogiqueCombat:
         # Ajout de la réduction des dégâts basée sur la défense, comme dans la méthode 'deal_damage'
         adjusted_damage = raw_damage - (0.3 * cible.DEF)
         return max(adjusted_damage, 0)
+
+    def recompense(self):
+        self.joueur.portefeuille.compteur += random.randint(250,1000)

@@ -1,6 +1,8 @@
 from pathlib import Path
 import os
 from argent import Compteur
+from monstre import *
+from item import *
 
 class Joueur:
 
@@ -33,9 +35,9 @@ class Joueur:
         return len(self.liste_soupe)
 
     def ajouter_item(self, item):
-        if item.type == "epee" and len(self.liste_epee) <= 3:
+        if item.type == "epee" and len(self.liste_epee) <= 1:
             self.liste_epee.append(item)
-        elif item.type == "epee" and len(self.liste_epee) > 3:
+        elif item.type == "epee" and len(self.liste_epee) > 1:
             print("trop d'epee")
         elif item.type == "bouclier":
             self.liste_bouclier.append(item)
@@ -114,6 +116,8 @@ class Joueur:
                 current.write("\n")
                 current.write(str(self.liste_monstre[i].VIT))
                 current.write("\n")
+                current.write(str(self.liste_monstre[i].chemin_image))
+                current.write("\n")
                 current.write("%\n")
 
     def sauvegarde_items(self, chemin_fichier_sauvegarde):
@@ -168,3 +172,85 @@ class Joueur:
                 current.write("\n")
 
             current.write("\n")
+
+    def charger_joueur(self, name):
+        chemin_fichier_sauvegarde = "fichiers de sauvegarde/" + name
+
+        # Charger l'argent
+        fichier_argent = chemin_fichier_sauvegarde + "/argent.txt"
+        with open(fichier_argent, 'r') as f:
+            compteur = int(f.readline())
+            mod = int(f.readline())
+            liste_mod = eval(f.readline())
+
+        # Charger les monstres
+        fichier_monstre = chemin_fichier_sauvegarde + "/monstre.txt"
+        liste_monstre = []
+        with open(fichier_monstre, 'r') as f:
+            lines = f.readlines()
+            i = 0
+            while i < len(lines):
+                nom = lines[i].strip()
+                rare = lines[i + 1].strip()
+                type = lines[i + 2].strip()
+                chemin_image = lines[i + 8].strip()
+                monstre = Monstre(nom=nom, rare=rare, type=type, chemin_image=chemin_image)
+                monstre.PV = int(lines[i + 3])
+                monstre.ATQ = int(lines[i + 4])
+                monstre.DEF = int(lines[i + 5])
+                monstre.VIT = int(lines[i + 6])
+                monstre.initial_max_PV = monstre.PV
+                liste_monstre.append(monstre)
+                i += 9
+
+        # Charger les items
+        fichier_items = chemin_fichier_sauvegarde + "/item.txt"
+        liste_epee = []
+        liste_bouclier = []
+        liste_bottes = []
+        liste_soupe = []
+        with open(fichier_items, 'r') as f:
+            lines = f.readlines()
+            item_type = None
+            for line in lines:
+                if "type =" in line:
+                    item_type = line.split('=')[1].strip()
+                elif "rarete =" in line:
+                    rarete = line.split('=')[1].strip()
+                elif "valeur =" in line:
+                    valeur = line.split('=')[1].strip()
+
+                    # Créer l'item approprié
+                    if item_type == "epee":
+                        item = Item(rare=rarete, type=item_type)
+                        item.valeur_atq = valeur
+                    elif item_type == "bouclier":
+                        item = Item(rare=rarete, type=item_type)
+                        item.valeur_def = valeur
+                    elif item_type == "bottes":
+                        item = Item(rare=rarete, type=item_type, )
+                        item.valeur_vit = valeur
+                    elif item_type == "soupe":
+                        item = Item(rare=rarete, type=item_type, )
+                        item.valeur_pv = valeur
+
+                    # Ajouter l'item à la liste appropriée
+                    if item_type == "epee":
+                        liste_epee.append(item)
+                    elif item_type == "bouclier":
+                        liste_bouclier.append(item)
+                    elif item_type == "bottes":
+                        liste_bottes.append(item)
+                    elif item_type == "soupe":
+                        liste_soupe.append(item)
+
+        self.portefeuille.compteur = compteur
+        self.portefeuille.mod = mod
+        self.liste_mod = liste_mod
+
+        self.liste_monstre = liste_monstre
+        self.liste_epee = liste_epee
+        self.liste_bouclier = liste_bouclier
+        self.liste_bottes = liste_bottes
+        self.liste_soupe = liste_soupe
+

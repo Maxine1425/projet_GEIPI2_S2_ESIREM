@@ -16,7 +16,7 @@ menu_principal = Menu(joueur)
 
 joueur.ajouter_monstre(monstre_joueur)
 
-while True :
+while True:
     # recuperation des valeurs initiales
     lancer_menu = menu_principal.doit_lancer_menu
     lancer_combat = menu_principal.doit_lancer_combat
