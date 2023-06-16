@@ -6,8 +6,8 @@ from joueur import Joueur
 
 
 # Creez les instances de Monster avec les parametres appropries
-monstre_joueur = Monstre("Monstre Joueur", 10, "Defense","images/Salameche.png")
-monstre_ordinateur = Monstre("Monstre Ordinateur", 10, "Attaque","images/Bulbizarre.png")
+monstre_joueur = Monstre("Monstre Joueur", 10, "Attaque","images/Salameche.png")
+monstre_ordinateur = Monstre("Monstre Ordinateur", 10, "Defense","images/Bulbizarre.png")
 
 
 # creation des objets

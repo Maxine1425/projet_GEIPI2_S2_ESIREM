@@ -8,6 +8,7 @@ class Monstre:
         self.type = type  # Type entre Attaque et Defense
         self.est_ko = False  # Est-ce que le monstre est KO
         self.chemin_image = chemin_image  # Chemin vers l'image du monstre
+        self.choice = 1
 
         if type == "Attaque":
             self.PV = random.randint(100, 600)
@@ -36,11 +37,12 @@ class Monstre:
         if self.PV < 0:
             self.PV = 0
 
-    def choix_attaque(self, choice, opponent):
-        if choice == 1:
+    def choix_attaque(self, opponent):
+        if self.choice == 1:
             self.attaque(opponent)
-        elif choice == 2:
+        elif self.choice == 2:
             self.soin()
+            print("SOIN OK")
 
     def attaque(self, target):
         target.deal_damage(self.ATQ * 1.5)
