@@ -7,8 +7,6 @@ from menu_accueil import Menu_accueil
 
 menu_acceuil = Menu_accueil()
 menu_acceuil.menu_acceuil(lance=1)
-
-
 # Creez les instances de Monster avec les parametres appropries
 monstre_joueur = Monstre("Monstre Joueur", 10, "Attaque","images/Salameche.png")
 monstre_ordinateur = Monstre("Monstre Ordinateur", 10, "Defense","images/Bulbizarre.png")
@@ -17,7 +15,6 @@ monstre_ordinateur = Monstre("Monstre Ordinateur", 10, "Defense","images/Bulbiza
 # creation des objets
 joueur = Joueur(menu_acceuil.pseudo, 5000, 1, 0, 0, 0)
 menu_principal = Menu(joueur)
-menu_acceuil = Menu_accueil()
 
 
 joueur.ajouter_monstre(monstre_joueur)

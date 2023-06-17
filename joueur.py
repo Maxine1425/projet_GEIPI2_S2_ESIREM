@@ -236,10 +236,10 @@ class Joueur:
 
         # Charger les items
         fichier_items = chemin_fichier_sauvegarde + "/item.txt"
-        liste_epee = []
-        liste_bouclier = []
-        liste_bottes = []
-        liste_soupe = []
+        liste_epee = 0
+        liste_bouclier = 0
+        liste_bottes = 0
+        liste_soupe = 0
         with open(fichier_items, 'r') as f:
             lines = f.readlines()
             item_type = None
@@ -267,13 +267,13 @@ class Joueur:
 
                     # Ajouter l'item à la liste appropriée
                     if item_type == "epee":
-                        liste_epee.append(item)
+                        liste_epee = item
                     elif item_type == "bouclier":
-                        liste_bouclier.append(item)
+                        liste_bouclier = item
                     elif item_type == "bottes":
-                        liste_bottes.append(item)
+                        liste_bottes = item
                     elif item_type == "soupe":
-                        liste_soupe.append(item)
+                        liste_soupe = item
 
         self.portefeuille.compteur = compteur
         self.portefeuille.mod = mod
