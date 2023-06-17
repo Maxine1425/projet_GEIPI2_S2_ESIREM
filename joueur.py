@@ -69,13 +69,17 @@ class Joueur:
 
     def supprimer_item(self, item):
         if item.type == "epee":
-            self.liste_epee = 0
+            self.liste_epee.rare = 0
+            self.liste_epee.valeur_atq = 0
         elif item.type == "bouclier":
-            self.liste_bouclier = 0
+            self.liste_bouclier.rare = 0
+            self.liste_bouclier.valeur_def = 0
         elif item.type == "bottes":
-            self.liste_bottes = 0
+            self.liste_bottes.rare = 0
+            self.liste_bottes.valeur_vit = 0
         elif item.type == "soupe":
-            self.liste_soupe = 0
+            self.liste_soupe.rare = 0
+            self.liste_soupe.valeur_pv = 0
 
     def get_items(self):
         return self.liste_soupe + self.liste_bottes + self.liste_epee + self.liste_bouclier
@@ -85,7 +89,7 @@ class Joueur:
             length = len(self.liste_monstre)
             if length == 0:
                 self.liste_monstre.append(monstre)
-            else:
+            elif length > 0 and length < 3:
                 self.liste_monstre.insert(length, monstre)
         except:
             print("Une erreur est survenue.")
@@ -156,54 +160,48 @@ class Joueur:
         nom_fichier = "item.txt"
         chemin_fichier_sauvegarde = "fichiers de sauvegarde/" + self.name
         fichier_a_ouvrir = chemin_fichier_sauvegarde + "/" + nom_fichier
-        longueur = len(self.liste_epee)
         with open(fichier_a_ouvrir, 'w') as current:
-            for i in range(longueur):
-                current.write("type = " + str(self.liste_epee[i].type))
+                current.write("type = " + str(self.liste_epee.type))
                 current.write("\n")
-                current.write("rarete = " + str(self.liste_epee[i].rare))
+                current.write("rarete = " + str(self.liste_epee.rare))
                 current.write("\n")
-                current.write("valeur = " + str(self.liste_epee[i].valeur_atq))
-                current.write("\n")
-                current.write("\n")
-
-            current.write("-------------------------------")
-            current.write("\n")
-            longueur = len(self.liste_bouclier)
-            for i in range(longueur):
-                current.write("type = " + str(self.liste_bouclier[i].type))
-                current.write("\n")
-                current.write("rarete = " + str(self.liste_bouclier[i].rare))
-                current.write("\n")
-                current.write("valeur = " + str(self.liste_bouclier[i].valeur_def))
+                current.write("valeur = " + str(self.liste_epee.valeur_atq))
                 current.write("\n")
                 current.write("\n")
 
-            current.write("-------------------------------")
-            current.write("\n")
-            longueur = len(self.liste_bottes)
-            for i in range(longueur):
-                current.write("type = " + str(self.liste_bottes[i].type))
+                current.write("-------------------------------")
                 current.write("\n")
-                current.write("rarete = " + str(self.liste_bottes[i].rare))
+                current.write("type = " + str(self.liste_bouclier.type))
                 current.write("\n")
-                current.write("valeur = " + str(self.liste_bottes[i].valeur_vit))
+                current.write("rarete = " + str(self.liste_bouclier.rare))
+                current.write("\n")
+                current.write("valeur = " + str(self.liste_bouclier.valeur_def))
                 current.write("\n")
                 current.write("\n")
 
-            current.write("-------------------------------")
-            current.write("\n")
-            longueur = len(self.liste_soupe)
-            for i in range(longueur):
-                current.write("type = " + str(self.liste_soupe[i].type))
+                current.write("-------------------------------")
                 current.write("\n")
-                current.write("rarete = " + str(self.liste_soupe[i].rare))
+
+                current.write("type = " + str(self.liste_bottes.type))
                 current.write("\n")
-                current.write("valeur = " + str(self.liste_soupe[i].valeur_pv))
+                current.write("rarete = " + str(self.liste_bottes.rare))
+                current.write("\n")
+                current.write("valeur = " + str(self.liste_bottes.valeur_vit))
                 current.write("\n")
                 current.write("\n")
 
-            current.write("\n")
+                current.write("-------------------------------")
+                current.write("\n")
+
+                current.write("type = " + str(self.liste_soupe.type))
+                current.write("\n")
+                current.write("rarete = " + str(self.liste_soupe.rare))
+                current.write("\n")
+                current.write("valeur = " + str(self.liste_soupe.valeur_pv))
+                current.write("\n")
+                current.write("\n")
+
+                current.write("\n")
 
     def charger_joueur(self, name):
         chemin_fichier_sauvegarde = "fichiers de sauvegarde/" + name
