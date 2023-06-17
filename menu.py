@@ -13,7 +13,7 @@ class Menu:
         self.joueur = joueur
         self.doit_lancer_menu = 1
         self.doit_lancer_combat = 0
-        self.temps_message = 0
+        #self.temps_message = 0
 
     def quitter(self):
         pygame.quit()
@@ -317,7 +317,7 @@ class Menu:
                         if self.joueur.check_argent(montant_epee):
                             if self.joueur.ajouter_item(epee) == 1 :
                                 afficher_epee = True
-                                nombre_epee += 1
+                                #self.nombre_epee += 1
                                 self.joueur.achat(montant_epee)
                                 valeur_aleatoir_rare = random.randint(1, 5)
                                 epee = item.Item(valeur_aleatoir_rare, "epee")
@@ -344,7 +344,7 @@ class Menu:
                                 bouclier = item.Item(valeur_aleatoir_rare, "bouclier")
                                 self.joueur.ajouter_item(bouclier)
                                 afficher_bouclier = True
-                                nombre_bouclier += 1
+                                #nombre_bouclier += 1
                             elif self.joueur.ajouter_item(bouclier) == 2 :
                                 afficher_deja_un = True
                         else:
@@ -365,7 +365,7 @@ class Menu:
                                 bottes = item.Item(valeur_aleatoir_rare, "bottes")
                                 self.joueur.ajouter_item(bottes)
                                 afficher_bottes = True
-                                nombre_bottes += 1
+                                #nombre_bottes += 1
                             elif self.joueur.ajouter_item(bottes) == 2 :
                                 afficher_deja_un = True
                         else:
@@ -386,7 +386,7 @@ class Menu:
                                 soupe = item.Item(valeur_aleatoir_rare, "soupe")
                                 self.joueur.ajouter_item(soupe)
                                 afficher_soupe = True
-                                nombre_soupe += 1
+                                #nombre_soupe += 1
                             elif self.joueur.ajouter_item(soupe) == 2 :
                                 afficher_deja_un = True
                         else:
@@ -433,7 +433,7 @@ class Menu:
                             doit_lancer_menu_inventaire = 0
 
                     #vente epee
-                    elif doit_lancer_menu_inventaire == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_vendre_epee.collidepoint(event.pos) and nombre_epee == 1:
+                    elif doit_lancer_menu_inventaire == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_vendre_epee.collidepoint(event.pos) and self.joueur.liste_epee.rare != 0:
                         print("epee vendu")
                         self.joueur.supprimer_item(epee)
                         self.joueur.vendre(montant_epee)
@@ -441,19 +441,19 @@ class Menu:
                         print(nombre_epee)
 
                     #vente bouclier
-                    elif doit_lancer_menu_inventaire == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_vendre_bouclier.collidepoint(event.pos) and nombre_bouclier == 1:
+                    elif doit_lancer_menu_inventaire == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_vendre_bouclier.collidepoint(event.pos) and self.joueur.liste_bouclier.rare != 0:
                         self.joueur.supprimer_item(bouclier)
                         self.joueur.vendre(montant_bouclier)
                         nombre_bouclier -= 1
 
                     #vente bottes
-                    elif doit_lancer_menu_inventaire == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_vendre_bottes.collidepoint(event.pos) and nombre_bottes == 1:
+                    elif doit_lancer_menu_inventaire == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_vendre_bottes.collidepoint(event.pos) and self.joueur.liste_bottes.rare != 0:
                         self.joueur.supprimer_item(bottes)
                         self.joueur.vendre(montant_bottes)
                         nombre_bottes -= 1
 
                     #vente soupe
-                    elif doit_lancer_menu_inventaire == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_vendre_soupe.collidepoint(event.pos) and nombre_soupe == 1:
+                    elif doit_lancer_menu_inventaire == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_vendre_soupe.collidepoint(event.pos) and self.joueur.liste_soupe.rare != 0:
                         self.joueur.supprimer_item(soupe)
                         self.joueur.vendre(montant_soupe)
                         nombre_soupe -= 1
