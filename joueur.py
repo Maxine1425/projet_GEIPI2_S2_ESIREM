@@ -15,48 +15,36 @@ class Joueur:
         self.liste_mod = [modp2, modp5, modp10]
         self.liste_monstre = []  # Liste contenant tout les monstres que le joueur possède
 
-        self.liste_epee = []
-        self.liste_bouclier = []
-        self.liste_bottes = []
-        self.liste_soupe = []
+        self.liste_epee = 0
+        self.liste_bouclier = 0
+        self.liste_bottes = 0
+        self.liste_soupe = 0
 
         self.portefeuille.demarrer()
 
-    def get_nombre_epee(self):
-        return len(self.liste_epee)
-
-    def get_nombre_bouclier(self):
-        return len(self.liste_bouclier)
-
-    def get_nombre_bottes(self):
-        return len(self.liste_bottes)
-
-    def get_nombre_soupe(self):
-        return len(self.liste_soupe)
-
     def ajouter_item(self, item):
-        if item.type == "epee" and len(self.liste_epee) == 0:
-            self.liste_epee.append(item)
+        if item.type == "epee" and self.liste_epee == 0:
+            self.liste_epee = item
             return 1
-        elif item.type == "epee" and len(self.liste_epee) > 0:
+        elif item.type == "epee" and self.liste_epee != 0:
             return 2
 
-        elif item.type == "bouclier" and len(self.liste_bouclier) == 0:
-            self.liste_bouclier.append(item)
+        elif item.type == "bouclier" and self.liste_bouclier == 0:
+            self.liste_bouclier = item
             return 1
-        elif item.type == "bouclier" and len(self.liste_bouclier) > 0:
+        elif item.type == "bouclier" and self.liste_bouclier != 0:
             return 2
 
-        elif item.type == "bottes" and len(self.liste_bottes) == 0:
-            self.liste_bottes.append(item)
+        elif item.type == "bottes" and self.liste_bottes == 0:
+            self.liste_bottes = item
             return 1
-        elif item.type == "bottes" and len(self.liste_bottes) > 0:
+        elif item.type == "bottes" and self.liste_bottes != 0:
             return 2
 
-        elif item.type == "soupe" and len(self.liste_soupe) == 0:
-            self.liste_soupe.append(item)
+        elif item.type == "soupe" and self.liste_soupe == 0:
+            self.liste_soupe = item
             return 1
-        elif item.type == "soupe" and len(self.liste_soupe) > 0:
+        elif item.type == "soupe" and self.liste_soupe != 0:
             return 2
 
         else:
