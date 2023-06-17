@@ -40,28 +40,28 @@ class Joueur:
         self.portefeuille.demarrer()
 
     def ajouter_item(self, item):
-        if item.type == "epee" and self.liste_epee == 0:
+        if item.type == "epee" and self.liste_epee.rare == 0:
             self.liste_epee = item
             return 1
-        elif item.type == "epee" and self.liste_epee != 0:
+        elif item.type == "epee" and self.liste_epee.rare != 0:
             return 2
 
-        elif item.type == "bouclier" and self.liste_bouclier == 0:
+        elif item.type == "bouclier" and self.liste_bouclier.rare == 0:
             self.liste_bouclier = item
             return 1
-        elif item.type == "bouclier" and self.liste_bouclier != 0:
+        elif item.type == "bouclier" and self.liste_bouclier.rare != 0:
             return 2
 
-        elif item.type == "bottes" and self.liste_bottes == 0:
+        elif item.type == "bottes" and self.liste_bottes.rare == 0:
             self.liste_bottes = item
             return 1
-        elif item.type == "bottes" and self.liste_bottes != 0:
+        elif item.type == "bottes" and self.liste_bottes.rare != 0:
             return 2
 
-        elif item.type == "soupe" and self.liste_soupe == 0:
+        elif item.type == "soupe" and self.liste_soupe.rare == 0:
             self.liste_soupe = item
             return 1
-        elif item.type == "soupe" and self.liste_soupe != 0:
+        elif item.type == "soupe" and self.liste_soupe.rare != 0:
             return 2
 
         else:
