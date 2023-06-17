@@ -4,7 +4,7 @@ from pygame.locals import *
 from datetime import datetime
 from datetime import date
 import item
-import time
+from menu_accueil import Menu_accueil
 
 
 class Menu:
@@ -20,8 +20,7 @@ class Menu:
 
     def menu(self, lance):
         pygame.init()
-
-        pygame.init()
+        menu = Menu_accueil()
 
         if lance == 1:
 
@@ -54,6 +53,7 @@ class Menu:
             nombre_bouclier = 0
             nombre_bottes = 0
             nombre_soupe = 0
+
 
             epee = item.Item(1, "epee")
             epee.rare = 0
@@ -113,6 +113,9 @@ class Menu:
             clickable_area_vendre_bouclier = pygame.Rect((780, 220), (157, 49))
             clickable_area_vendre_bottes = pygame.Rect((780, 300), (157, 49))
             clickable_area_vendre_soupe = pygame.Rect((780, 370), (157, 49))
+            clickable_area_charger = pygame.Rect((835, 570), (150, 49))
+            clickable_area_sauvegarde = pygame.Rect((645,570), (187, 49))
+
 
 
             # affichage des fonds et boutton de la fenetre principal (le menu sans rien d'ouvert)
@@ -456,6 +459,15 @@ class Menu:
                         self.joueur.vendre(montant_soupe)
                         nombre_soupe -= 1
 
+                    #charger
+                    elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_charger.collidepoint(
+                        event.pos):
+                        self.joueur.charger_joueur(menu.retourner_pseudo())
+
+                    #sauvergarder
+                    elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_sauvegarde.collidepoint(
+                        event.pos):
+                        self.joueur.tout_sauvegarder()
 
 
 
