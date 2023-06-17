@@ -46,9 +46,9 @@ class Menu:
             montant_bottes = 1000
             montant_soupe = 1000
 
-            nombre_de_x2 = 0
-            nombre_de_x5 = 0
-            nombre_de_x10 = 0
+            #nombre_de_x2 = 0
+            #nombre_de_x5 = 0
+            #nombre_de_x10 = 0
 
             nombre_epee = 0
             nombre_bouclier = 0
@@ -199,22 +199,22 @@ class Menu:
                     fenetre.blit(nombre_x10, (645, 60))
                     fenetre.blit(mod_x10, (690, 30))
 
-                    epee_inventaire = font.render("Rare : " + str(epee.rare) + " et " + str(epee.valeur_atq) + " d'attaque", True, (0, 0, 0))
+                    epee_inventaire = font.render("Rare : " + str(self.joueur.liste_epee.rare) + " et " + str(self.joueur.epee.valeur_atq) + " d'attaque", True, (0, 0, 0))
                     fenetre.blit(epee_inventaire, (500,160))
                     fenetre.blit(epee_image, (380,130))
                     fenetre.blit(button_vendre,(780,150) )
 
-                    bouclier_inventaire = font.render("Rare : " + str(bouclier.rare) + " et " + str(bouclier.valeur_def) + " de defense", True, (0, 0, 0))
+                    bouclier_inventaire = font.render("Rare : " + str(self.joueur.liste_bouclier.rare) + " et " + str(self.joueur.liste_bouclier.valeur_def) + " de defense", True, (0, 0, 0))
                     fenetre.blit(bouclier_inventaire, (500,240))
                     fenetre.blit(bouclier_image, (380,210))
                     fenetre.blit(button_vendre, (780, 220))
 
-                    bottes_inventaire = font.render("Rare : " + str(bottes.rare) + " et " + str(bottes.valeur_vit) + " de vitesse", True, (0, 0, 0))
+                    bottes_inventaire = font.render("Rare : " + str(self.joueur.liste_bottes.rare) + " et " + str(self.joueur.liste_bottes.valeur_vit) + " de vitesse", True, (0, 0, 0))
                     fenetre.blit(bottes_inventaire, (500,320))
                     fenetre.blit(bottes_image, (380,290))
                     fenetre.blit(button_vendre, (780, 300))
 
-                    soupe_inventaire = font.render("Rare : " + str(soupe.rare) + " et " + str(soupe.valeur_pv) + " de PV", True, (0, 0, 0))
+                    soupe_inventaire = font.render("Rare : " + str(self.joueur.liste_soupe.rare) + " et " + str(self.joueur.liste_soupe.valeur_pv) + " de PV", True, (0, 0, 0))
                     fenetre.blit(soupe_inventaire, (500,390))
                     fenetre.blit(soupe_image, (380,350))
                     fenetre.blit(button_vendre, (780, 370))
@@ -263,7 +263,7 @@ class Menu:
                         if self.joueur.check_argent(montant_x2):
                             self.joueur.achat(montant_x2)
                             argent.ajouter_mod(2)
-                            nombre_de_x2 = nombre_de_x2 + 1
+                            #nombre_de_x2 = nombre_de_x2 + 1
                             self.joueur.liste_mod[0] += 1
                         else:
                             afficher_pas_assez_argent = True
@@ -280,7 +280,7 @@ class Menu:
                         if self.joueur.check_argent(montant_x5):
                             self.joueur.achat(montant_x5)
                             argent.ajouter_mod(5)
-                            nombre_de_x5 = nombre_de_x5 + 1
+                            #nombre_de_x5 = nombre_de_x5 + 1
                             self.joueur.liste_mod[1] += 1
                         else:
                             afficher_pas_assez_argent = True
@@ -297,7 +297,7 @@ class Menu:
                         if self.joueur.check_argent(montant_x10):
                             self.joueur.achat(montant_x10)
                             argent.ajouter_mod(10)
-                            nombre_de_x10 = nombre_de_x10 +1
+                            #nombre_de_x10 = nombre_de_x10 +1
                             self.joueur.liste_mod[2] += 1
                         else:
                             afficher_pas_assez_argent = True
@@ -435,21 +435,23 @@ class Menu:
                         self.joueur.vendre(montant_epee)
                         nombre_epee -= 1
                         print(nombre_epee)
+
                     #vente bouclier
                     elif doit_lancer_menu_inventaire == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_vendre_bouclier.collidepoint(event.pos):
                         self.joueur.supprimer_item(bouclier)
                         self.joueur.vendre(montant_bouclier)
+                        nombre_bouclier -= 1
 
                     #vente bottes
                     elif doit_lancer_menu_inventaire == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_vendre_bottes.collidepoint(event.pos):
                         self.joueur.supprimer_item(bottes)
                         self.joueur.vendre(montant_bottes)
-
+                        nombre_bottes -= 1
                     #vente soupe
                     elif doit_lancer_menu_inventaire == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_vendre_soupe.collidepoint(event.pos):
                         self.joueur.supprimer_item(soupe)
                         self.joueur.vendre(montant_soupe)
-
+                        nombre_soupe -= 1
 
 
 
