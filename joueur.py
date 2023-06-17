@@ -15,10 +15,27 @@ class Joueur:
         self.liste_mod = [modp2, modp5, modp10]
         self.liste_monstre = []  # Liste contenant tout les monstres que le joueur possède
 
-        self.liste_epee = 0
-        self.liste_bouclier = 0
-        self.liste_bottes = 0
-        self.liste_soupe = 0
+        epee = Item(1, "epee")
+        bouclier = Item(1, "bouclier")
+        bottes = Item(1, "bottes")
+        soupe = Item(1, "soupe")
+
+        epee.rare = 0
+        epee.valeur_atq = 0
+
+        bouclier.rare = 0
+        bouclier.valeur_def = 0
+
+        bottes.rare = 0
+        bottes.valeur_vit = 0
+
+        soupe.rare = 0
+        soupe.valeur_pv = 0
+
+        self.liste_epee = epee
+        self.liste_bouclier = bouclier
+        self.liste_bottes = bottes
+        self.liste_soupe = soupe
 
         self.portefeuille.demarrer()
 
