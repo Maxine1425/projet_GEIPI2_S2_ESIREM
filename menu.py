@@ -20,7 +20,6 @@ class Menu:
 
     def menu(self, lance):
         pygame.init()
-        menu = Menu_accueil()
 
         if lance == 1:
 
@@ -462,7 +461,7 @@ class Menu:
                     #charger
                     elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_charger.collidepoint(
                         event.pos):
-                        self.joueur.charger_joueur(menu.retourner_pseudo())
+                        self.joueur.charger_joueur(self.joueur.name)
 
                     #sauvergarder
                     elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_sauvegarde.collidepoint(
