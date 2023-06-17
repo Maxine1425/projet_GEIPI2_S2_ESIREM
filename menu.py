@@ -28,7 +28,7 @@ class Menu:
             argent = self.joueur.portefeuille
 
             # creation de la fenetre principal
-            fenetre = pygame.display.set_mode((990, 660), )
+            fenetre = pygame.display.set_mode((990, 660))
 
             # nom du jeu apparait
             pygame.display.set_caption("Jeux de Louis et Maxine")
@@ -94,6 +94,8 @@ class Menu:
             button_lancer_combat = pygame.image.load("images/button_lancer_combat .png").convert_alpha()
             fond_donee = pygame.image.load("images/fond_donee.jpg").convert()
             button_vendre = pygame.image.load("images/button_vendre.png").convert_alpha()
+            button_sauvergarde = pygame.image.load("images/button_sauvegarder.png").convert_alpha()
+            button_charger = pygame.image.load("images/button_charger.png").convert_alpha()
 
             # creation des zones de click
             clickable_area_boutique = pygame.Rect((30, 570), (160, 49)) # (position)(taille)
@@ -199,7 +201,7 @@ class Menu:
                     fenetre.blit(nombre_x10, (645, 60))
                     fenetre.blit(mod_x10, (690, 30))
 
-                    epee_inventaire = font.render("Rare : " + str(self.joueur.liste_epee.rare) + " et " + str(self.joueur.epee.valeur_atq) + " d'attaque", True, (0, 0, 0))
+                    epee_inventaire = font.render("Rare : " + str(self.joueur.liste_epee.rare) + " et " + str(self.joueur.liste_epee.valeur_atq) + " d'attaque", True, (0, 0, 0))
                     fenetre.blit(epee_inventaire, (500,160))
                     fenetre.blit(epee_image, (380,130))
                     fenetre.blit(button_vendre,(780,150) )
@@ -336,9 +338,9 @@ class Menu:
                         if self.joueur.check_argent(montant_bouclier):
                             if self.joueur.ajouter_item(bouclier) == 1 :
                                 self.joueur.achat(montant_bouclier)
-                                self.joueur.ajouter_item(bouclier)
                                 valeur_aleatoir_rare = random.randint(1, 5)
                                 bouclier = item.Item(valeur_aleatoir_rare, "bouclier")
+                                self.joueur.ajouter_item(bouclier)
                                 afficher_bouclier = True
                                 nombre_bouclier += 1
                             elif self.joueur.ajouter_item(bouclier) == 2 :
@@ -357,9 +359,9 @@ class Menu:
                         if self.joueur.check_argent(montant_bottes):
                             if self.joueur.ajouter_item(bottes) == 1 :
                                 self.joueur.achat(montant_bottes)
-                                self.joueur.ajouter_item(bottes)
                                 valeur_aleatoir_rare = random.randint(1, 5)
                                 bottes = item.Item(valeur_aleatoir_rare, "bottes")
+                                self.joueur.ajouter_item(bottes)
                                 afficher_bottes = True
                                 nombre_bottes += 1
                             elif self.joueur.ajouter_item(bottes) == 2 :
@@ -378,9 +380,9 @@ class Menu:
                         if self.joueur.check_argent(montant_soupe):
                             if self.joueur.ajouter_item(soupe) == 1 :
                                 self.joueur.achat(montant_soupe)
-                                self.joueur.ajouter_item(soupe)
                                 valeur_aleatoir_rare = random.randint(1, 5)
                                 soupe = item.Item(valeur_aleatoir_rare, "soupe")
+                                self.joueur.ajouter_item(soupe)
                                 afficher_soupe = True
                                 nombre_soupe += 1
                             elif self.joueur.ajouter_item(soupe) == 2 :
@@ -437,18 +439,19 @@ class Menu:
                         print(nombre_epee)
 
                     #vente bouclier
-                    elif doit_lancer_menu_inventaire == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_vendre_bouclier.collidepoint(event.pos):
+                    elif doit_lancer_menu_inventaire == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_vendre_bouclier.collidepoint(event.pos) and nombre_bouclier == 1:
                         self.joueur.supprimer_item(bouclier)
                         self.joueur.vendre(montant_bouclier)
                         nombre_bouclier -= 1
 
                     #vente bottes
-                    elif doit_lancer_menu_inventaire == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_vendre_bottes.collidepoint(event.pos):
+                    elif doit_lancer_menu_inventaire == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_vendre_bottes.collidepoint(event.pos) and nombre_bottes == 1:
                         self.joueur.supprimer_item(bottes)
                         self.joueur.vendre(montant_bottes)
                         nombre_bottes -= 1
+
                     #vente soupe
-                    elif doit_lancer_menu_inventaire == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_vendre_soupe.collidepoint(event.pos):
+                    elif doit_lancer_menu_inventaire == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_vendre_soupe.collidepoint(event.pos) and nombre_soupe == 1:
                         self.joueur.supprimer_item(soupe)
                         self.joueur.vendre(montant_soupe)
                         nombre_soupe -= 1
@@ -463,6 +466,8 @@ class Menu:
                 fenetre.blit(button_boutique, (30, 570))
                 fenetre.blit(button_menu_monstre, (220, 570))
                 fenetre.blit(button_inventaire, (460, 570))
+                fenetre.blit(button_sauvergarde, (645,570))
+                fenetre.blit(button_charger, (835, 570))
 
                 afficher_menu_boutique(doit_lancer_menu_boutique, fenetre)
                 afficher_menu_monstre(doit_lancer_menu_monstre, fenetre)

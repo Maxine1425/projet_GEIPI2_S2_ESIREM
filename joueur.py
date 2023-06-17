@@ -1,3 +1,4 @@
+from item import *
 from pathlib import Path
 import os
 from argent import Compteur
@@ -69,13 +70,17 @@ class Joueur:
 
     def supprimer_item(self, item):
         if item.type == "epee":
-            self.liste_epee = 0
+            self.liste_epee.rare = 0
+            self.liste_epee.valeur_atq = 0
         elif item.type == "bouclier":
-            self.liste_bouclier = 0
+            self.liste_bouclier.rare = 0
+            self.liste_bouclier.valeur_def = 0
         elif item.type == "bottes":
-            self.liste_bottes = 0
+            self.liste_bottes.rare = 0
+            self.liste_bottes.valeur_vit = 0
         elif item.type == "soupe":
-            self.liste_soupe = 0
+            self.liste_soupe.rare = 0
+            self.liste_soupe.valeur_pv = 0
 
     def get_items(self):
         return self.liste_soupe + self.liste_bottes + self.liste_epee + self.liste_bouclier
@@ -285,4 +290,3 @@ class Joueur:
         self.liste_bouclier = liste_bouclier
         self.liste_bottes = liste_bottes
         self.liste_soupe = liste_soupe
-
