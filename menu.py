@@ -4,6 +4,7 @@ from pygame.locals import *
 from datetime import datetime
 from datetime import date
 import item
+from monstre import Monstre
 from menu_accueil import Menu_accueil
 
 
@@ -43,6 +44,7 @@ class Menu:
             montant_bouclier = 1000
             montant_bottes = 1000
             montant_soupe = 1000
+            montant_monstre = 1000
 
             #nombre_de_x2 = 0
             #nombre_de_x5 = 0
@@ -76,6 +78,7 @@ class Menu:
             afficher_bottes = False
             afficher_soupe = False
             afficher_deja_un = False
+            afficher_trop_de_monstre = False
 
             #chargement des images
             fond = pygame.image.load("images/fond_menu.png").convert()
@@ -95,6 +98,12 @@ class Menu:
             button_vendre = pygame.image.load("images/button_vendre.png").convert_alpha()
             button_sauvergarde = pygame.image.load("images/button_sauvegarder.png").convert_alpha()
             button_charger = pygame.image.load("images/button_charger.png").convert_alpha()
+            button_acheter_un_monstre = pygame.image.load("images/button_acheter_un_monstre.png").convert_alpha()
+            #monstre1 = pygame.image.load("images/.png").convert_alpha()
+            #monstre2 = pygame.image.load("images/.png").convert_alpha()
+            #monstre3 = pygame.image.load("images/.png").convert_alpha()
+            #monstre4= pygame.image.load("images/.png").convert_alpha()
+            #monstre5 = pygame.image.load("images/.png").convert_alpha()
 
             # creation des zones de click
             clickable_area_boutique = pygame.Rect((30, 570), (160, 49)) # (position)(taille)
@@ -114,8 +123,7 @@ class Menu:
             clickable_area_vendre_soupe = pygame.Rect((780, 370), (157, 49))
             clickable_area_charger = pygame.Rect((835, 570), (150, 49))
             clickable_area_sauvegarde = pygame.Rect((645,570), (187, 49))
-
-
+            clickable_area_achat_monstre = pygame.Rect((500,330), (298, 60))
 
             # affichage des fonds et boutton de la fenetre principal (le menu sans rien d'ouvert)
             fenetre.blit(fond, (0, 0))  # on colle sur la fenetre l'image fond et l'angle haut gauche de cette image sera en (0;0)
@@ -161,6 +169,7 @@ class Menu:
                     fenetre.blit(prix_bottes, (615, 250))
                     prix_soupe = font.render(str(montant_soupe) + " po", True, (0, 0, 0))
                     fenetre.blit(prix_soupe, (715, 250))
+                    fenetre.blit(button_acheter_un_monstre,(500,330))
                     if afficher_pas_assez_argent:
                         pas_assez_argent = font.render("Pas assez d'argent !", True, (255, 255, 255))
                         fenetre.blit(pas_assez_argent, (400, 450))
@@ -179,6 +188,9 @@ class Menu:
                     if afficher_deja_un:
                         deja_un = font.render("Tu en as deja un !", True, (255, 255, 255))
                         fenetre.blit(deja_un, (400, 450))
+                    if afficher_trop_de_monstre:
+                        trop_de_monstre = font.render("Tu as trop de monstre dans ton inventaire !", True, (255, 255, 255))
+                        fenetre.blit(trop_de_monstre, (300, 450))
 
             #definition de la fonction afficher_menu_monstre
             def afficher_menu_monstre(lance, fenetre):
@@ -247,6 +259,7 @@ class Menu:
                         afficher_bottes = False
                         afficher_soupe = False
                         afficher_deja_un = False
+                        afficher_trop_de_monstre = False
                         if doit_lancer_menu_boutique == 0:
                             doit_lancer_menu_boutique = 1
                             doit_lancer_menu_monstre = 0
@@ -264,6 +277,7 @@ class Menu:
                         afficher_bottes = False
                         afficher_soupe = False
                         afficher_deja_un = False
+                        afficher_trop_de_monstre = False
                         if self.joueur.check_argent(montant_x2):
                             self.joueur.achat(montant_x2)
                             argent.ajouter_mod(2)
@@ -281,6 +295,7 @@ class Menu:
                         afficher_bottes = False
                         afficher_soupe = False
                         afficher_deja_un = False
+                        afficher_trop_de_monstre = False
                         if self.joueur.check_argent(montant_x5):
                             self.joueur.achat(montant_x5)
                             argent.ajouter_mod(5)
@@ -298,6 +313,7 @@ class Menu:
                         afficher_bottes = False
                         afficher_soupe = False
                         afficher_deja_un = False
+                        afficher_trop_de_monstre = False
                         if self.joueur.check_argent(montant_x10):
                             self.joueur.achat(montant_x10)
                             argent.ajouter_mod(10)
@@ -314,6 +330,7 @@ class Menu:
                         afficher_bottes = False
                         afficher_soupe = False
                         afficher_deja_un = False
+                        afficher_trop_de_monstre = False
                         if self.joueur.check_argent(montant_epee):
                             if self.joueur.ajouter_item(epee) == 1 :
                                 afficher_epee = True
@@ -337,6 +354,7 @@ class Menu:
                         afficher_bottes = False
                         afficher_soupe = False
                         afficher_deja_un = False
+                        afficher_trop_de_monstre = False
                         if self.joueur.check_argent(montant_bouclier):
                             if self.joueur.ajouter_item(bouclier) == 1 :
                                 self.joueur.achat(montant_bouclier)
@@ -358,6 +376,7 @@ class Menu:
                         afficher_bottes = False
                         afficher_soupe = False
                         afficher_deja_un = False
+                        afficher_trop_de_monstre = False
                         if self.joueur.check_argent(montant_bottes):
                             if self.joueur.ajouter_item(bottes) == 1 :
                                 self.joueur.achat(montant_bottes)
@@ -379,6 +398,7 @@ class Menu:
                         afficher_bottes = False
                         afficher_soupe = False
                         afficher_deja_un = False
+                        afficher_trop_de_monstre = False
                         if self.joueur.check_argent(montant_soupe):
                             if self.joueur.ajouter_item(soupe) == 1 :
                                 self.joueur.achat(montant_soupe)
@@ -392,6 +412,28 @@ class Menu:
                         else:
                             afficher_pas_assez_argent = True
 
+                    #achat monstre
+                    elif doit_lancer_menu_boutique == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_achat_monstre.collidepoint(
+                            event.pos):
+                        afficher_pas_assez_argent = False
+                        afficher_epee = False
+                        afficher_bouclier = False
+                        afficher_bottes = False
+                        afficher_soupe = False
+                        afficher_deja_un = False
+                        afficher_trop_de_monstre = False
+                        if self.joueur.check_argent(montant_monstre):
+                            print("assez d'argent pour achat monstre")
+                            #if self.joueur.ajouter_monstre(mostre) == :
+                            self.joueur.achat(montant_monstre)
+                            #voir comment chercher aléatoirement le truc
+                            monstre = Monstre("Monstre Joueur", 10, "Attaque","images/Salameche.png")
+                            self.joueur.ajouter_monstre(monstre)
+                            #elif self.joueur.ajouter_monstre(monstre) == :
+                                #afficher_trop_de_monstre = True
+                        else:
+                            afficher_pas_assez_argent = True
+
                     #menu monstre
                     elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_menu_monstre.collidepoint(event.pos):
                         afficher_pas_assez_argent = False
@@ -399,6 +441,8 @@ class Menu:
                         afficher_bouclier = False
                         afficher_bottes = False
                         afficher_soupe = False
+                        afficher_deja_un = False
+                        afficher_trop_de_monstre = False
                         if doit_lancer_menu_monstre == 0:
                             doit_lancer_menu_monstre = 1
                             doit_lancer_menu_boutique = 0
@@ -412,6 +456,9 @@ class Menu:
                         afficher_bouclier = False
                         afficher_bottes = False
                         afficher_soupe = False
+                        afficher_trop_de_monstre = False
+                        afficher_deja_un = False
+                        afficher_trop_de_monstre = False
                         self.doit_lancer_combat = 1
                         self.doit_lancer_menu = 0
                         continuer = 0
@@ -424,6 +471,8 @@ class Menu:
                         afficher_bouclier = False
                         afficher_bottes = False
                         afficher_soupe = False
+                        afficher_deja_un = False
+                        afficher_trop_de_monstre = False
                         if doit_lancer_menu_inventaire == 0:
                             doit_lancer_menu_inventaire = 1
                             doit_lancer_menu_boutique = 0
