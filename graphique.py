@@ -1,4 +1,5 @@
 from menu import Menu
+from logique_combat import LogiqueCombat
 from graphique_combat import ecran_combat
 from monstre import Monstre
 from joueur import Joueur
@@ -6,7 +7,7 @@ from menu_accueil import Menu_accueil
 
 
 # Creez les instances de Monster avec les parametres appropries
-monstre_joueur = Monstre("Monstre Joueur", 10, "Attaque", "images/Salameche.png")
+monstre_joueur = Monstre("Monstre Joueur", 10, "Attaque","images/Salameche.png")
 monstre_ordinateur = Monstre("Monstre Ordinateur", 10, "Defense","images/Bulbizarre.png")
 
 

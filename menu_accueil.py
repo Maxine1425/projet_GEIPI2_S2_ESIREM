@@ -37,7 +37,7 @@ class Menu_accueil:
 
                         elif event.key == K_RETURN:
                             print(self.pseudo)
-                            self.doit_lancer_menu_acceuil = 0
+                            self.doit_lancer_menu_accueil = 0
                             self.doit_lancer_menu = 1
                             continuer = False
 
@@ -48,7 +48,7 @@ class Menu_accueil:
                     elif event.type == MOUSEBUTTONDOWN:
                         if event.button == 1 and bouton_rect.collidepoint(event.pos):
                             print(self.pseudo)
-                            self.doit_lancer_menu_acceuil = 0
+                            self.doit_lancer_menu_accueil = 0
                             self.doit_lancer_menu = 1
 
                             continuer = False

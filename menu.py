@@ -511,6 +511,12 @@ class Menu:
                 argent_a_afficher = font.render("Votre argent : " + str(argent.compteur) + " po", True, (0, 0, 0))
                 fenetre.blit(argent_a_afficher, (35, 100))
 
+                #afficher le pseudo
+                taille_police = 32
+                police = pygame.font.Font(None, taille_police)
+                afficher_pseudo = police.render(str(self.joueur.name),True,(0, 0, 0))
+                fenetre.blit(afficher_pseudo,( 35, 160))
+
                 #gere l'actualisation de l'heure
                 pygame.display.flip()
                 horloge.tick(60)
