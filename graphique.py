@@ -7,8 +7,7 @@ from menu_accueil import Menu_accueil
 
 
 # Creez les instances de Monster avec les parametres appropries
-monstre_joueur = Monstre()
-monstre_ordinateur = Monstre()
+
 
 
 # creation des objets
@@ -18,7 +17,6 @@ print("pseudo = " + menu_accueil.pseudo)
 joueur = Joueur(menu_accueil.pseudo, 5000, 1, 0, 0, 0)
 menu_principal = Menu(joueur)
 
-joueur.ajouter_monstre(monstre_joueur)
 
 while True:
     #recuperation des valeurs initiales
