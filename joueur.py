@@ -86,12 +86,12 @@ class Joueur:
         return self.liste_soupe + self.liste_bottes + self.liste_epee + self.liste_bouclier
 
     def ajouter_monstre(self, monstre):  # Ajoute un monstre à l'inventaire de monstres du joueur
-        try:
             length = len(self.liste_monstre)
             if length < 4:
                 self.liste_monstre.append(monstre)
-        except:
-            print("Une erreur est survenue.")
+                return 1
+            if length >=4:
+                return 2
 
     def check_argent(self, montant):
         if self.portefeuille.compteur-montant >= 0:
