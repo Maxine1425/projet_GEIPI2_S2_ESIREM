@@ -14,7 +14,6 @@ class Menu:
         self.joueur = joueur
         self.doit_lancer_menu = 1
         self.doit_lancer_combat = 0
-        #self.temps_message = 0
 
     def quitter(self):
         pygame.quit()
@@ -469,11 +468,14 @@ class Menu:
                             pygame.display.flip()
                         elif doit_lancer_menu_monstre == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_menu_monstre.collidepoint(event.pos):
                             doit_lancer_menu_monstre = 0
+
+                    #lancer un combat
                     elif doit_lancer_menu_monstre == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_lancer_combat.collidepoint(event.pos):
-                        self.doit_lancer_combat = 1
-                        self.doit_lancer_menu = 0
-                        continuer = 0
-                        pygame.display.flip()
+                        if self.joueur.liste_monstre[0].rare != 0 or self.joueur.liste_monstre[1].rare != 0 or self.joueur.liste_monstre[2].rare != 0:
+                            self.doit_lancer_combat = 1
+                            self.doit_lancer_menu = 0
+                            continuer = 0
+                            pygame.display.flip()
 
                     #menu inventaire
                     elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_inventaire.collidepoint(event.pos):
