@@ -14,7 +14,20 @@ class Joueur:
             self.portefeuille.compteur = balance
         self.portefeuille.mod = mod
         self.liste_mod = [modp2, modp5, modp10]
-        self.liste_monstre = []  # Liste contenant tout les monstres que le joueur possède
+
+        monstre1 = Monstre()
+        monstre2 = Monstre()
+        monstre3 = Monstre()
+
+        monstre1.rare = 0
+        monstre2.rare = 0
+        monstre3.rare = 0
+
+        monstre1.chemin_image = "images/pas_de_monstre.png"
+        monstre2.chemin_image = "images/pas_de_monstre.png"
+        monstre3.chemin_image = "images/pas_de_monstre.png"
+
+        self.liste_monstre = [ monstre1, monstre2, monstre3]  # Liste contenant tout les monstres que le joueur possède
 
         epee = Item(1, "epee")
         bouclier = Item(1, "bouclier")
@@ -86,12 +99,23 @@ class Joueur:
         return self.liste_soupe + self.liste_bottes + self.liste_epee + self.liste_bouclier
 
     def ajouter_monstre(self, monstre):  # Ajoute un monstre à l'inventaire de monstres du joueur
-            length = len(self.liste_monstre)
-            if length < 4:
-                self.liste_monstre.append(monstre)
+            if self.liste_monstre[0].rare == 0:
+                self.liste_monstre[0] = monstre
                 return 1
-            if length >= 4:
+            elif self.liste_monstre[1].rare == 0:
+                self.liste_monstre[1] = monstre
+                return 1
+            elif self.liste_monstre[2].rare == 0:
+                self.liste_monstre[2] = monstre
+                return 1
+            else:
                 return 2
+
+
+    def retirer_monstre(self, emplacement):
+        self.liste_monstre[emplacement].chemin_image = "images/pas_de_monstre.png"
+        self.liste_monstre[emplacement].rare = 0
+
 
     def check_argent(self, montant):
         if self.portefeuille.compteur-montant >= 0:

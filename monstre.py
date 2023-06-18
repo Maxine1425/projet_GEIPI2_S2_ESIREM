@@ -3,7 +3,7 @@ from item import *
 
 class Monstre:
     def __init__(self):
-        liste_nom = [ "Crolite", "Wallatric", "Panthoal" , "Crocodithe", "Whirlling", "Skeleroach", "Demeton", "Silverilla", "Pyrose", "Vaporc" ]
+        liste_nom = [ "Crolite", "Wallabic", "Panthoal", "Crocodithe", "Whirlling", "Skeleroach", "Demeton", "Silverilla", "Pyrose", "Vaporc" ]
         self.nom = random.choice(liste_nom)
         if self.nom == "Crolite":
             self.rare = 1  # Niveau de rarete de 1 à 5
