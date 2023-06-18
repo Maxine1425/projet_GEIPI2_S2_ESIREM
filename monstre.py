@@ -10,10 +10,10 @@ class Monstre:
             self.type = "Attaque"  # Type entre Attaque et Defense
             self.chemin_image = "images/Crolite.png"  # Chemin vers l'image du monstre
 
-        elif self.nom == "Wallatric":
+        elif self.nom == "Wallabic":
             self.rare = 2  # Niveau de rarete de 1 à 5
             self.type = "Attaque"  # Type entre Attaque et Defense
-            self.chemin_image = "images/Wallatric.png"  # Chemin vers l'image du monstre
+            self.chemin_image = "images/Wallabic.png"  # Chemin vers l'image du monstre
 
         elif self.nom == "Panthoal":
             self.rare = 3  # Niveau de rarete de 1 à 5
@@ -32,27 +32,27 @@ class Monstre:
 
         elif self.nom == "Skeleroach":
             self.rare = 1  # Niveau de rarete de 1 à 5
-            self.type = "Défense"  # Type entre Attaque et Defense
+            self.type = "Defense"  # Type entre Attaque et Defense
             self.chemin_image = "images/Skeleroach.png"  # Chemin vers l'image du monstre
 
         elif self.nom == "Demeton":
             self.rare = 2  # Niveau de rarete de 1 à 5
-            self.type = "Défense"  # Type entre Attaque et Defense
+            self.type = "Defense"  # Type entre Attaque et Defense
             self.chemin_image = "images/Demeton.png"  # Chemin vers l'image du monstre
 
         elif self.nom == "Silverilla":
             self.rare = 3  # Niveau de rarete de 1 à 5
-            self.type = "Défense"  # Type entre Attaque et Defense
+            self.type = "Defense"  # Type entre Attaque et Defense
             self.chemin_image = "images/Silverilla.png"  # Chemin vers l'image du monstre
 
         elif self.nom == "Pyrose":
             self.rare = 4  # Niveau de rarete de 1 à 5
-            self.type = "Défense"  # Type entre Attaque et Defense
+            self.type = "Defense"  # Type entre Attaque et Defense
             self.chemin_image = "images/Pyrose.png"  # Chemin vers l'image du monstre
 
         elif self.nom == "Vaporc":
             self.rare = 5  # Niveau de rarete de 1 à 5
-            self.type = "Défense"  # Type entre Attaque et Defense
+            self.type = "Defense"  # Type entre Attaque et Defense
             self.chemin_image = "images/Vaporc.png"  # Chemin vers l'image du monstre
 
         self.est_ko = False  # Est-ce que le monstre est KO

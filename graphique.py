@@ -7,8 +7,8 @@ from menu_accueil import Menu_accueil
 
 
 # Creez les instances de Monster avec les parametres appropries
-monstre_joueur = Monstre("Monstre Joueur", 10, "Attaque","images/Salameche.png")
-monstre_ordinateur = Monstre("Monstre Ordinateur", 10, "Defense","images/Bulbizarre.png")
+monstre_joueur = Monstre()
+monstre_ordinateur = Monstre()
 
 
 # creation des objets

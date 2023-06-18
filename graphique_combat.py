@@ -121,35 +121,35 @@ def ecran_combat(joueur, opponent2):
         # Dessin des HP bar
 
         if opponent1.PV == opponent1.initial_max_PV:
-            screen.blit(hp_images['FULL'], (70, 300))  # Salameche HP
+            screen.blit(hp_images['FULL'], (70, 200))  # Salameche HP
         elif opponent1.PV < opponent1.initial_max_PV and opponent1.PV >= opponent1.initial_max_PV*(4/5):
-            screen.blit(hp_images['QC'], (70, 300))
+            screen.blit(hp_images['QC'], (70, 200))
         elif opponent1.PV < opponent1.initial_max_PV*(4/5) and opponent1.PV >= opponent1.initial_max_PV * (3 / 5):
-            screen.blit(hp_images['TC'], (70, 300))
+            screen.blit(hp_images['TC'], (70, 200))
         elif opponent1.PV < opponent1.initial_max_PV * (3 / 5) and opponent1.PV >= opponent1.initial_max_PV * (2 / 5):
-            screen.blit(hp_images['DC'], (70, 300))
+            screen.blit(hp_images['DC'], (70, 200))
         elif opponent1.PV < opponent1.initial_max_PV * (2 / 5) and opponent1.PV >= opponent1.initial_max_PV * (1 / 5):
-            screen.blit(hp_images['DC'], (70, 300))
+            screen.blit(hp_images['DC'], (70, 200))
         elif opponent1.PV < opponent1.initial_max_PV * (1 / 5) and opponent1.PV > 0:
-            screen.blit(hp_images['UC'], (70, 300))
+            screen.blit(hp_images['UC'], (70, 200))
         elif opponent1.PV == 0:
-            screen.blit(hp_images['EMPTY'], (70, 300))
+            screen.blit(hp_images['EMPTY'], (70, 200))
 
 
         if opponent2.PV == opponent2.initial_max_PV: #Bulbizarre HP
-            screen.blit(hp_images['FULL'], (620, 200))
+            screen.blit(hp_images['FULL'], (620, 100))
         elif opponent2.PV < opponent2.initial_max_PV and opponent2.PV >= opponent2.initial_max_PV * (4 / 5):
-            screen.blit(hp_images['QC'], (620, 200))
+            screen.blit(hp_images['QC'], (620, 100))
         elif opponent2.PV < opponent2.initial_max_PV * (4 / 5) and opponent2.PV >= opponent2.initial_max_PV * (3 / 5):
-            screen.blit(hp_images['TC'], (620, 200))
+            screen.blit(hp_images['TC'], (620, 100))
         elif opponent2.PV < opponent2.initial_max_PV * (3 / 5) and opponent2.PV >= opponent2.initial_max_PV * (2 / 5):
-            screen.blit(hp_images['DC'], (620, 200))
+            screen.blit(hp_images['DC'], (620, 100))
         elif opponent2.PV < opponent2.initial_max_PV * (2 / 5) and opponent2.PV >= opponent2.initial_max_PV * (1 / 5):
-            screen.blit(hp_images['DC'], (620, 200))
+            screen.blit(hp_images['DC'], (620, 100))
         elif opponent2.PV < opponent2.initial_max_PV * (1 / 5) and opponent2.PV > 0:
-            screen.blit(hp_images['UC'], (620, 200))
+            screen.blit(hp_images['UC'], (620, 100))
         elif opponent2.PV == 0:
-            screen.blit(hp_images['EMPTY'], (620, 200))
+            screen.blit(hp_images['EMPTY'], (620, 100))
 
         # Dessin des PV:
         pv1_text = f"{round(opponent1.PV)}/{opponent1.initial_max_PV} PV"
