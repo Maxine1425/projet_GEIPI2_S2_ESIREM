@@ -1,6 +1,7 @@
 import pygame
 from pygame.locals import *
 
+
 class Menu_accueil:
 
     def __init__(self):
@@ -33,8 +34,17 @@ class Menu_accueil:
                     elif event.type == KEYDOWN:
                         if event.key == K_BACKSPACE:
                             self.pseudo = self.pseudo[:-1]
+
+                        elif event.key == K_RETURN:
+                            print(self.pseudo)
+                            self.doit_lancer_menu_acceuil = 0
+                            self.doit_lancer_menu = 1
+                            continuer = False
+
                         else:
                             self.pseudo += event.unicode
+
+
                     elif event.type == MOUSEBUTTONDOWN:
                         if event.button == 1 and bouton_rect.collidepoint(event.pos):
                             print(self.pseudo)
@@ -59,7 +69,6 @@ class Menu_accueil:
 
             pygame.quit()
 
-        def retourner_pseudo(self):
-            return self.pseudo
+
 
 
