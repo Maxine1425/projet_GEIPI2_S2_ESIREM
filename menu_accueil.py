@@ -4,11 +4,11 @@ from pygame.locals import *
 class Menu_accueil:
 
     def __init__(self):
-        self.doit_lancer_menu_acceuil = 1
+        self.doit_lancer_menu_accueil = 1
         self.doit_lancer_menu = 0
         self.pseudo = ""
 
-    def menu_acceuil(self, lance):
+    def menu_accueil(self, lance):
 
         if lance == 1:
 

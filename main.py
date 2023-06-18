@@ -1,9 +1,9 @@
 from menu_accueil import Menu_accueil
 from joueur import *
 from menu import *
+from monstre import *
 
-menu = Menu_accueil()
-menu.menu_acceuil(lance=1)
+joueur = Joueur("Antonin", 0, 1, 0, 0, 0)
 
-joueur_test = Joueur
 
+joueur.tout_sauvegarder()

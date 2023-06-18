@@ -461,11 +461,16 @@ class Menu:
                     #charger
                     elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_charger.collidepoint(
                         event.pos):
-                        self.joueur.charger_joueur(self.joueur.name)
+                        self.joueur.charger_joueur()
+                        print(str(self.joueur.liste_epee.rare))
+                        print(str(self.joueur.liste_bouclier.rare))
+                        print(str(self.joueur.liste_bottes.rare))
+                        print(str(self.joueur.liste_soupe.rare))
 
                     #sauvergarder
                     elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_sauvegarde.collidepoint(
                         event.pos):
+                        print("sauvegarde")
                         self.joueur.tout_sauvegarder()
 
 

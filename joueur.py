@@ -88,10 +88,8 @@ class Joueur:
     def ajouter_monstre(self, monstre):  # Ajoute un monstre à l'inventaire de monstres du joueur
         try:
             length = len(self.liste_monstre)
-            if length == 0:
+            if length < 4:
                 self.liste_monstre.append(monstre)
-            elif length > 0 and length < 3:
-                self.liste_monstre.insert(length, monstre)
         except:
             print("Une erreur est survenue.")
 
@@ -115,27 +113,42 @@ class Joueur:
         for i in range(length):
             print(self.liste_monstre[i].name)
 
-    import os
-
     def tout_sauvegarder(self):
-        chemin_fichier_sauvegarde = "fichiers de sauvegarde/" + self.name
-        os.makedirs(chemin_fichier_sauvegarde, exist_ok=True)
-        self.sauvegarde_monstre(chemin_fichier_sauvegarde)
-        self.sauvegarde_argent(chemin_fichier_sauvegarde)
-        self.sauvegarde_items(chemin_fichier_sauvegarde)
+        try:
+            print("Debut de tout_sauvegarder")  # Debug
+            chemin_base = "fichiers de sauvegarde"
+            chemin_fichier_sauvegarde = os.path.join(chemin_base, self.name)
 
-    def sauvegarde_argent(self, chemin_fichier_sauvegarde):  # Sauvegarde l'argent et les mod du joueur dans un fichier nomdujoueur_money.txt
+            print("Chemin de sauvegarde:", chemin_fichier_sauvegarde)  # Debug
+
+            if not os.path.exists(chemin_fichier_sauvegarde):
+                os.makedirs(chemin_fichier_sauvegarde, exist_ok=True)
+
+            print("Appel de sauvegarde_monstre")  # Debug
+            self.sauvegarde_monstre(chemin_fichier_sauvegarde)
+
+            print("Appel de sauvegarde_argent")  # Debug
+            self.sauvegarde_argent(chemin_fichier_sauvegarde)
+
+            print("Appel de sauvegarde_items")  # Debug
+            self.sauvegarde_items(chemin_fichier_sauvegarde)
+
+            print("Fin de tout_sauvegarder")  # Debug
+
+        except Exception as e:
+            print("Une exception a ete levee:", e)
+
+    def sauvegarde_argent(self, chemin_fichier_sauvegarde):
         nom_fichier = "argent.txt"
-        chemin_fichier_sauvegarde = "fichiers de sauvegarde/" + self.name
-        fichier_a_ouvrir = chemin_fichier_sauvegarde + "/" + nom_fichier
+        fichier_a_ouvrir = os.path.join(chemin_fichier_sauvegarde, nom_fichier)
         donnee_argent = str(self.portefeuille.compteur) + "\n" + str(self.portefeuille.mod) + "\n" + str(self.liste_mod)
         with open(fichier_a_ouvrir, 'w') as current:
             current.write(donnee_argent)
+        pass
 
     def sauvegarde_monstre(self, chemin_fichier_sauvegarde):  # Sauvegarde les monstres du joueur dans un fichier nomdujoueur_monster.txt
         nom_fichier = "monstre.txt"
-        chemin_fichier_sauvegarde = "fichiers de sauvegarde/" + self.name
-        fichier_a_ouvrir = chemin_fichier_sauvegarde + "/" + nom_fichier
+        fichier_a_ouvrir = os.path.join(chemin_fichier_sauvegarde, nom_fichier)
         longueur = len(self.liste_monstre)
         with open(fichier_a_ouvrir, 'w') as current:
             for i in range(longueur):
@@ -145,7 +158,7 @@ class Joueur:
                 current.write("\n")
                 current.write(str(self.liste_monstre[i].type))
                 current.write("\n")
-                current.write(str(self.liste_monstre[i].PV))
+                current.write(str(round(self.liste_monstre[i].PV, 2)))
                 current.write("\n")
                 current.write(str(self.liste_monstre[i].ATQ))
                 current.write("\n")
@@ -156,11 +169,11 @@ class Joueur:
                 current.write(str(self.liste_monstre[i].chemin_image))
                 current.write("\n")
                 current.write("%\n")
+        pass
 
     def sauvegarde_items(self, chemin_fichier_sauvegarde):
         nom_fichier = "item.txt"
-        chemin_fichier_sauvegarde = "fichiers de sauvegarde/" + self.name
-        fichier_a_ouvrir = chemin_fichier_sauvegarde + "/" + nom_fichier
+        fichier_a_ouvrir = os.path.join(chemin_fichier_sauvegarde, nom_fichier)
         with open(fichier_a_ouvrir, 'w') as current:
                 current.write("type = " + str(self.liste_epee.type))
                 current.write("\n")
@@ -203,9 +216,10 @@ class Joueur:
                 current.write("\n")
 
                 current.write("\n")
+        pass
 
-    def charger_joueur(self, name):
-        chemin_fichier_sauvegarde = "fichiers de sauvegarde/" + name
+    def charger_joueur(self):
+        chemin_fichier_sauvegarde = "fichiers de sauvegarde/" + self.name
 
         # Charger l'argent
         fichier_argent = chemin_fichier_sauvegarde + "/argent.txt"
@@ -224,7 +238,7 @@ class Joueur:
                 nom = lines[i].strip()
                 rare = lines[i + 1].strip()
                 type = lines[i + 2].strip()
-                chemin_image = lines[i + 8].strip()
+                chemin_image = lines[i + 7].strip()
                 monstre = Monstre(nom=nom, rare=rare, type=type, chemin_image=chemin_image)
                 monstre.PV = int(lines[i + 3])
                 monstre.ATQ = int(lines[i + 4])
@@ -247,9 +261,9 @@ class Joueur:
                 if "type =" in line:
                     item_type = line.split('=')[1].strip()
                 elif "rarete =" in line:
-                    rarete = line.split('=')[1].strip()
+                    rarete = int(line.split('=')[1].strip())
                 elif "valeur =" in line:
-                    valeur = line.split('=')[1].strip()
+                    valeur = int(line.split('=')[1].strip())
 
                     # Créer l'item approprié
                     if item_type == "epee":
