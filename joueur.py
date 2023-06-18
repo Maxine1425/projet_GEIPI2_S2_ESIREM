@@ -90,7 +90,7 @@ class Joueur:
             if length < 4:
                 self.liste_monstre.append(monstre)
                 return 1
-            if length >=4:
+            if length >= 4:
                 return 2
 
     def check_argent(self, montant):

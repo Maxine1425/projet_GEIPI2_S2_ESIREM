@@ -2,28 +2,125 @@ import random
 from item import *
 
 class Monstre:
-    def __init__(self, nom, rare, type, chemin_image):
-        self.nom = nom
-        self.rare = rare  # Niveau de rarete de 1 à 10
-        self.type = type  # Type entre Attaque et Defense
+    def __init__(self):
+        liste_nom = [ "Crolite", "Wallatric", "Panthoal" , "Crocodithe", "Whirlling", "Skeleroach", "Demeton", "Silverilla", "Pyrose", "Vaporc" ]
+        self.nom = random.choice(liste_nom)
+        if self.nom == "Crolite":
+            self.rare = 1  # Niveau de rarete de 1 à 5
+            self.type = "Attaque"  # Type entre Attaque et Defense
+            self.chemin_image = "images/Crolite.png"  # Chemin vers l'image du monstre
+
+        elif self.nom == "Wallatric":
+            self.rare = 2  # Niveau de rarete de 1 à 5
+            self.type = "Attaque"  # Type entre Attaque et Defense
+            self.chemin_image = "images/Wallatric.png"  # Chemin vers l'image du monstre
+
+        elif self.nom == "Panthoal":
+            self.rare = 3  # Niveau de rarete de 1 à 5
+            self.type = "Attaque"  # Type entre Attaque et Defense
+            self.chemin_image = "images/Panthoal.png"  # Chemin vers l'image du monstre
+
+        elif self.nom == "Crocodithe":
+            self.rare = 4  # Niveau de rarete de 1 à 5
+            self.type = "Attaque"  # Type entre Attaque et Defense
+            self.chemin_image = "images/Crocodithe.png"  # Chemin vers l'image du monstre
+
+        elif self.nom == "Whirlling":
+            self.rare = 5  # Niveau de rarete de 1 à 5
+            self.type = "Attaque"  # Type entre Attaque et Defense
+            self.chemin_image = "images/Whirlling.png"  # Chemin vers l'image du monstre
+
+        elif self.nom == "Skeleroach":
+            self.rare = 1  # Niveau de rarete de 1 à 5
+            self.type = "Défense"  # Type entre Attaque et Defense
+            self.chemin_image = "images/Skeleroach.png"  # Chemin vers l'image du monstre
+
+        elif self.nom == "Demeton":
+            self.rare = 2  # Niveau de rarete de 1 à 5
+            self.type = "Défense"  # Type entre Attaque et Defense
+            self.chemin_image = "images/Demeton.png"  # Chemin vers l'image du monstre
+
+        elif self.nom == "Silverilla":
+            self.rare = 3  # Niveau de rarete de 1 à 5
+            self.type = "Défense"  # Type entre Attaque et Defense
+            self.chemin_image = "images/Silverilla.png"  # Chemin vers l'image du monstre
+
+        elif self.nom == "Pyrose":
+            self.rare = 4  # Niveau de rarete de 1 à 5
+            self.type = "Défense"  # Type entre Attaque et Defense
+            self.chemin_image = "images/Pyrose.png"  # Chemin vers l'image du monstre
+
+        elif self.nom == "Vaporc":
+            self.rare = 5  # Niveau de rarete de 1 à 5
+            self.type = "Défense"  # Type entre Attaque et Defense
+            self.chemin_image = "images/Vaporc.png"  # Chemin vers l'image du monstre
+
         self.est_ko = False  # Est-ce que le monstre est KO
-        self.chemin_image = chemin_image  # Chemin vers l'image du monstre
         self.choice = 1
         self.item_equipe_epee = 0
         self.item_equipe_bouclier = 0
         self.item_equipe_bottes = 0
         self.item_equipe_soupe = 0
 
-        if type == "Attaque":
-            self.PV = random.randint(100, 600)
-            self.ATQ = random.randint(100, 160)
-            self.DEF = random.randint(1, 15)
-            self.VIT = random.randint(1, 15)
-        elif type == "Defense":
-            self.PV = random.randint(500, 1000)
-            self.ATQ = random.randint(4, 60)
-            self.DEF = random.randint(15, 30)
-            self.VIT = random.randint(1, 15)
+        if self.rare == 1:
+            if self.type == "Attaque":
+                self.PV = random.randint(100, 200)
+                self.ATQ = random.randint(50, 150)
+                self.DEF = random.randint(1, 15)
+                self.VIT = random.randint(1, 15)
+            elif self.type == "Defense":
+                self.PV = random.randint(250, 400)
+                self.ATQ = random.randint(1, 50)
+                self.DEF = random.randint(20, 50)
+                self.VIT = random.randint(1, 10)
+
+        if self.rare == 2:
+            if self.type == "Attaque":
+                self.PV = random.randint(200, 400)
+                self.ATQ = random.randint(100, 300)
+                self.DEF = random.randint(2, 30)
+                self.VIT = random.randint(1, 15)
+            elif self.type == "Defense":
+                self.PV = random.randint(500, 800)
+                self.ATQ = random.randint(2, 100)
+                self.DEF = random.randint(40, 100)
+                self.VIT = random.randint(1, 10)
+
+        if self.rare == 3:
+            if self.type == "Attaque":
+                self.PV = random.randint(300, 600)
+                self.ATQ = random.randint(150, 450)
+                self.DEF = random.randint(3, 45)
+                self.VIT = random.randint(1, 15)
+            elif self.type == "Defense":
+                self.PV = random.randint(750, 1200)
+                self.ATQ = random.randint(3, 150)
+                self.DEF = random.randint(60, 150)
+                self.VIT = random.randint(1, 10)
+
+        if self.rare == 4:
+            if self.type == "Attaque":
+                self.PV = random.randint(400, 800)
+                self.ATQ = random.randint(200, 600)
+                self.DEF = random.randint(4, 60)
+                self.VIT = random.randint(1, 15)
+            elif self.type == "Defense":
+                self.PV = random.randint(1000, 1600)
+                self.ATQ = random.randint(4, 60)
+                self.DEF = random.randint(80, 200)
+                self.VIT = random.randint(1, 10)
+
+        if self.rare == 5:
+            if self.type == "Attaque":
+                self.PV = random.randint(500, 1000)
+                self.ATQ = random.randint(250, 750)
+                self.DEF = random.randint(5, 75)
+                self.VIT = random.randint(1, 15)
+            elif self.type == "Defense":
+                self.PV = random.randint(1250, 2000)
+                self.ATQ = random.randint(5, 250)
+                self.DEF = random.randint(100, 220)
+                self.VIT = random.randint(1, 10)
 
         self.initial_max_PV = self.PV
 
