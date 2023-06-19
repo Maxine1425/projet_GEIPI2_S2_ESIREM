@@ -27,7 +27,7 @@ class Joueur:
         monstre2.chemin_image = "images/pas_de_monstre.png"
         monstre3.chemin_image = "images/pas_de_monstre.png"
 
-        self.liste_monstre = [ monstre1, monstre2, monstre3]  # Liste contenant tout les monstres que le joueur possède
+        self.liste_monstre = [monstre1, monstre2, monstre3]  # Liste contenant tout les monstres que le joueur possède
 
         epee = Item(1, "epee")
         bouclier = Item(1, "bouclier")
@@ -115,6 +115,8 @@ class Joueur:
     def retirer_monstre(self, emplacement):
         self.liste_monstre[emplacement].chemin_image = "images/pas_de_monstre.png"
         self.liste_monstre[emplacement].rare = 0
+        self.liste_monstre[emplacement].nom = ""
+        self.liste_monstre[emplacement].type = ""
 
 
     def check_argent(self, montant):
@@ -135,7 +137,7 @@ class Joueur:
     def print_nom_monstre(self):  # Affiche sur le terminal le nom de tout les monstres du joueur
         length = len(self.liste_monstre)
         for i in range(length):
-            print(self.liste_monstre[i].name)
+            print(self.liste_monstre[i].nom)
 
     def tout_sauvegarder(self):
         try:
@@ -259,15 +261,15 @@ class Joueur:
             lines = f.readlines()
             i = 0
             while i < len(lines):
-                nom = lines[i].strip()
-                rare = lines[i + 1].strip()
-                type = lines[i + 2].strip()
-                chemin_image = lines[i + 7].strip()
-                monstre = Monstre(nom=nom, rare=rare, type=type, chemin_image=chemin_image)
+                monstre = Monstre()
+                monstre.nom = lines[i].strip()
+                monstre.rare = lines[i + 1].strip()
+                monstre.type = lines[i + 2].strip()
                 monstre.PV = int(lines[i + 3])
                 monstre.ATQ = int(lines[i + 4])
                 monstre.DEF = int(lines[i + 5])
                 monstre.VIT = int(lines[i + 6])
+                monstre.chemin_image = lines[i + 7].strip()
                 monstre.initial_max_PV = monstre.PV
                 liste_monstre.append(monstre)
                 i += 9

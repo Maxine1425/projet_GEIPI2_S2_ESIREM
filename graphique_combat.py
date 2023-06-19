@@ -8,6 +8,7 @@ pygame.init()
 
 pygame.font.init()
 
+
 def afficher_texte(screen, text, font, color, x, y):
     text_surface = font.render(text, True, color)
     text_rect = text_surface.get_rect()
@@ -45,8 +46,8 @@ def ecran_victoire(vainqueur):
     # Enregistrer le temps de début
     start_time = time.time()
 
-    # Boucle pour afficher l'image pendant 5 secondes
-    while time.time() - start_time < 5:
+    # Boucle pour afficher l'image pendant 2 secondes
+    while time.time() - start_time < 2:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 pygame.quit()
@@ -57,6 +58,7 @@ def ecran_victoire(vainqueur):
         screen.blit(text, text_rect.topleft)  # Affichage du texte
         pygame.display.flip()
         pygame.time.wait(50)  # Attendre un peu pour réduire l'utilisation du CPU
+
 
 
 def ecran_combat(joueur, opponent2):
@@ -79,8 +81,8 @@ def ecran_combat(joueur, opponent2):
     # Chargement des images
     floor1 = pygame.image.load("images/battlefloor.png")
     floor2 = pygame.image.load("images/battlefloor.png")
-    salameche_image = pygame.image.load(opponent1.chemin_image)
-    bulbizarre_image = pygame.image.load(opponent2.chemin_image)
+    opponent1_image = pygame.image.load(opponent1.chemin_image)
+    opponent2_image = pygame.image.load(opponent2.chemin_image)
     hp_images = {
         'FULL': pygame.image.load('images/VIE_FULL.png'),
         'QC': pygame.image.load('images/VIEQC.png'),
@@ -95,7 +97,9 @@ def ecran_combat(joueur, opponent2):
     # Creation des boutons
     attaque_button = Button(bouton_attaque, 800, SCREEN_HEIGHT - 140)
     soin_button = Button(bouton_soin, 815, SCREEN_HEIGHT - 80)
-    # On check quel monstre est le plus rapide
+
+    opponent1_image = pygame.transform.scale_by(opponent1_image, 1.66)
+    opponent2_image = pygame.transform.scale_by(opponent2_image, 1.66)
 
     hp_images['FULL'] = pygame.transform.scale_by(hp_images['FULL'], 0.25)
     hp_images['QC'] = pygame.transform.scale_by(hp_images['QC'], 0.25)
@@ -105,8 +109,6 @@ def ecran_combat(joueur, opponent2):
     hp_images['EMPTY'] = pygame.transform.scale_by(hp_images['EMPTY'], 0.25)
 
     running = True
-    clock = pygame.time.Clock()
-
     action_text = ""
 
     while running:
@@ -115,38 +117,37 @@ def ecran_combat(joueur, opponent2):
         # Dessin des monstres
         screen.blit(floor1, (600, 150))
         screen.blit(floor2, (30, 250))
-        screen.blit(bulbizarre_image, (620, 100))
-        screen.blit(salameche_image, (50, 200))
+        screen.blit(opponent2_image, (620, 100))
+        screen.blit(opponent1_image, (50, 200))
 
         # Dessin des HP bar
 
         if opponent1.PV == opponent1.initial_max_PV:
             screen.blit(hp_images['FULL'], (70, 200))  # Salameche HP
-        elif opponent1.PV < opponent1.initial_max_PV and opponent1.PV >= opponent1.initial_max_PV*(4/5):
+        elif opponent1.initial_max_PV > opponent1.PV >= opponent1.initial_max_PV * (4 / 5):
             screen.blit(hp_images['QC'], (70, 200))
-        elif opponent1.PV < opponent1.initial_max_PV*(4/5) and opponent1.PV >= opponent1.initial_max_PV * (3 / 5):
+        elif opponent1.initial_max_PV * (4 / 5) > opponent1.PV >= opponent1.initial_max_PV * (3 / 5):
             screen.blit(hp_images['TC'], (70, 200))
-        elif opponent1.PV < opponent1.initial_max_PV * (3 / 5) and opponent1.PV >= opponent1.initial_max_PV * (2 / 5):
+        elif opponent1.initial_max_PV * (3 / 5) > opponent1.PV >= opponent1.initial_max_PV * (2 / 5):
             screen.blit(hp_images['DC'], (70, 200))
-        elif opponent1.PV < opponent1.initial_max_PV * (2 / 5) and opponent1.PV >= opponent1.initial_max_PV * (1 / 5):
+        elif opponent1.initial_max_PV * (2 / 5) > opponent1.PV >= opponent1.initial_max_PV * (1 / 5):
             screen.blit(hp_images['DC'], (70, 200))
-        elif opponent1.PV < opponent1.initial_max_PV * (1 / 5) and opponent1.PV > 0:
+        elif opponent1.initial_max_PV * (1 / 5) > opponent1.PV > 0:
             screen.blit(hp_images['UC'], (70, 200))
         elif opponent1.PV == 0:
             screen.blit(hp_images['EMPTY'], (70, 200))
 
-
-        if opponent2.PV == opponent2.initial_max_PV: #Bulbizarre HP
+        if opponent2.PV == opponent2.initial_max_PV:  # Bulbizarre HP
             screen.blit(hp_images['FULL'], (620, 100))
-        elif opponent2.PV < opponent2.initial_max_PV and opponent2.PV >= opponent2.initial_max_PV * (4 / 5):
+        elif opponent2.initial_max_PV > opponent2.PV >= opponent2.initial_max_PV * (4 / 5):
             screen.blit(hp_images['QC'], (620, 100))
-        elif opponent2.PV < opponent2.initial_max_PV * (4 / 5) and opponent2.PV >= opponent2.initial_max_PV * (3 / 5):
+        elif opponent2.initial_max_PV * (4 / 5) > opponent2.PV >= opponent2.initial_max_PV * (3 / 5):
             screen.blit(hp_images['TC'], (620, 100))
-        elif opponent2.PV < opponent2.initial_max_PV * (3 / 5) and opponent2.PV >= opponent2.initial_max_PV * (2 / 5):
+        elif opponent2.initial_max_PV * (3 / 5) > opponent2.PV >= opponent2.initial_max_PV * (2 / 5):
             screen.blit(hp_images['DC'], (620, 100))
-        elif opponent2.PV < opponent2.initial_max_PV * (2 / 5) and opponent2.PV >= opponent2.initial_max_PV * (1 / 5):
+        elif opponent2.initial_max_PV * (2 / 5) > opponent2.PV >= opponent2.initial_max_PV * (1 / 5):
             screen.blit(hp_images['DC'], (620, 100))
-        elif opponent2.PV < opponent2.initial_max_PV * (1 / 5) and opponent2.PV > 0:
+        elif opponent2.initial_max_PV * (1 / 5) > opponent2.PV > 0:
             screen.blit(hp_images['UC'], (620, 100))
         elif opponent2.PV == 0:
             screen.blit(hp_images['EMPTY'], (620, 100))
@@ -165,10 +166,6 @@ def ecran_combat(joueur, opponent2):
         pygame.display.flip()
         time.sleep(1)
 
-        text_to_show = f"{opponent1.nom} a {opponent1.PV}PV !\n{opponent2.nom} a {opponent2.PV}PV !"
-        combat_text_surface = text_font.render(text_to_show, True, BLACK)
-        screen.blit(combat_text_surface, (220, 150))
-
         # Gestion des evenements
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
@@ -179,24 +176,20 @@ def ecran_combat(joueur, opponent2):
                 combat.choix_ordinateur()
                 combat.tour(1)
 
+
             if soin_button.est_clique(event):
                 action_text = "SOIN"
                 combat.choix_ordinateur()
                 combat.tour(2)
 
+
             if combat.check_etat() == 1:
                 ecran_victoire(opponent1)
-                running = False
+                return
             elif combat.check_etat() == 2:
                 ecran_victoire(opponent2)
-                running = False
+                return
 
-
-
-            afficher_texte(screen, action_text, text_font, BLACK, SCREEN_WIDTH // 2, SCREEN_HEIGHT - 40)
-
+        afficher_texte(screen, action_text, text_font, BLACK, SCREEN_WIDTH // 2, SCREEN_HEIGHT - 40)
         pygame.display.flip()
-
-        clock.tick(60)
-    pygame.quit()
-
+        pygame.time.wait(50)

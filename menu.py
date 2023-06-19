@@ -237,7 +237,7 @@ class Menu:
 
                     soupe_inventaire = font.render("Rare : " + str(self.joueur.liste_soupe.rare) + " et " + str(self.joueur.liste_soupe.valeur_pv) + " de PV", True, (0, 0, 0))
                     fenetre.blit(soupe_inventaire, (500,390))
-                    fenetre.blit(soupe_image, (380,350))
+                    fenetre.blit(soupe_image, (380, 350))
                     fenetre.blit(button_vendre, (780, 370))
 
             #creation de l'orloge pour afficher l'heure
