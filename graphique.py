@@ -5,11 +5,6 @@ from monstre import Monstre
 from joueur import Joueur
 from menu_accueil import Menu_accueil
 
-
-# Creez les instances de Monster avec les parametres appropries
-
-
-
 # creation des objets
 menu_accueil = Menu_accueil()
 menu_accueil.menu_accueil(lance=1)
