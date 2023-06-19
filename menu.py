@@ -102,6 +102,7 @@ class Menu:
             monstre_joueur_image_1 = pygame.image.load(self.joueur.liste_monstre[0].chemin_image)
             monstre_joueur_image_2 = pygame.image.load(self.joueur.liste_monstre[1].chemin_image)
             monstre_joueur_image_3 = pygame.image.load(self.joueur.liste_monstre[2].chemin_image)
+            button_supprimer = pygame.image.load("images/button_supprimer.png").convert_alpha()
 
             # creation des zones de click
             clickable_area_boutique = pygame.Rect((30, 570), (160, 49)) # (position)(taille)
@@ -122,6 +123,9 @@ class Menu:
             clickable_area_charger = pygame.Rect((835, 570), (150, 49))
             clickable_area_sauvegarde = pygame.Rect((645,570), (187, 49))
             clickable_area_achat_monstre = pygame.Rect((500,330), (298, 60))
+            clickable_area_suprimer_monstre1 = pygame.Rect((370,200), (173, 49))
+            clickable_area_suprimer_monstre2 = pygame.Rect((570, 200), (173, 49))
+            clickable_area_suprimer_monstre3 = pygame.Rect((770, 200), (173, 49))
 
             # affichage des fonds et boutton de la fenetre principal (le menu sans rien d'ouvert)
             fenetre.blit(fond, (0, 0))  # on colle sur la fenetre l'image fond et l'angle haut gauche de cette image sera en (0;0)
@@ -202,6 +206,9 @@ class Menu:
                     fenetre.blit(monstre_joueur_image_1, (370, 50))
                     fenetre.blit(monstre_joueur_image_2, (570, 50))
                     fenetre.blit(monstre_joueur_image_3, (770, 50))
+                    fenetre.blit(button_supprimer, (370,200))
+                    fenetre.blit(button_supprimer, (570, 200))
+                    fenetre.blit(button_supprimer, (770, 200))
 
             #definition de la fonnction afficher_menu_inventaire
             def afficher_menu_inventaire(lance, fenetre):
@@ -476,6 +483,19 @@ class Menu:
                             self.doit_lancer_menu = 0
                             continuer = 0
                             pygame.display.flip()
+
+                    #supprimer monstre
+                    elif doit_lancer_menu_monstre == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_suprimer_monstre1.collidepoint(event.pos):
+                        if self.joueur.liste_monstre[0].rare != 0 :
+                            self.joueur.retirer_monstre(0)
+
+                    elif doit_lancer_menu_monstre == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_suprimer_monstre2.collidepoint(event.pos):
+                        if self.joueur.liste_monstre[1].rare != 0 :
+                            self.joueur.retirer_monstre(1)
+
+                    elif doit_lancer_menu_monstre == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_suprimer_monstre3.collidepoint(event.pos):
+                        if self.joueur.liste_monstre[2].rare != 0 :
+                            self.joueur.retirer_monstre(2)
 
                     #menu inventaire
                     elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_inventaire.collidepoint(event.pos):
