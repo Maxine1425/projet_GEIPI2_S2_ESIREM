@@ -173,7 +173,6 @@ class Joueur:
         self.liste_monstre[emplacement].nom = ""
         self.liste_monstre[emplacement].type = ""
 
-
     def check_argent(self, montant):
         if self.portefeuille.compteur-montant >= 0:
             return True
