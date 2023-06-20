@@ -26,7 +26,7 @@ class Menu:
             fenetre = pygame.display.set_mode((990, 660))
 
             # nom du jeu apparait
-            pygame.display.set_caption(" Cash & Clash !")
+            pygame.display.set_caption("Jeux de Louis et Maxine")
 
             # initialisation des varriables et d'objets et de police ecriture
             lancer_menu = 1
@@ -322,6 +322,19 @@ class Menu:
                 monstre_joueur_image_1 = pygame.image.load(self.joueur.liste_monstre[0].chemin_image)
                 monstre_joueur_image_2 = pygame.image.load(self.joueur.liste_monstre[1].chemin_image)
                 monstre_joueur_image_3 = pygame.image.load(self.joueur.liste_monstre[2].chemin_image)
+
+                if self.joueur.liste_monstre[0].chemin_image == "images/pas_de_monstre.png":
+                    afficher_info_monstre1_nom = False
+                    afficher_info_monstre1_type = False
+                    afficher_info_monstre1_rare = False
+                if self.joueur.liste_monstre[1].chemin_image == "images/pas_de_monstre.png":
+                    afficher_info_monstre2_nom = False
+                    afficher_info_monstre2_type = False
+                    afficher_info_monstre2_rare = False
+                if self.joueur.liste_monstre[2].chemin_image == "images/pas_de_monstre.png":
+                    afficher_info_monstre3_nom = False
+                    afficher_info_monstre3_type = False
+                    afficher_info_monstre3_rare = False
 
                 pygame.display.flip()
 
@@ -621,37 +634,37 @@ class Menu:
                             doit_lancer_menu_monstre = 0
 
                         # affichage des info des monstres possede
-                        if self.joueur.liste_monstre[0].chemin_image != "images/pas_de_monstre.png":
+                        if self.joueur.liste_monstre[0].rare != 0:
 
                             afficher_info_monstre1_nom = True
                             afficher_info_monstre1_type = True
                             afficher_info_monstre1_rare = True
 
-                        elif self.joueur.liste_monstre[0].chemin_image == "images/pas_de_monstre.png":
+                        elif self.joueur.liste_monstre[0].rare == 0:
 
                             afficher_info_monstre1_nom = False
                             afficher_info_monstre1_type = False
                             afficher_info_monstre1_rare = False
 
-                        if self.joueur.liste_monstre[1].chemin_image != "images/pas_de_monstre.png":
+                        if self.joueur.liste_monstre[1].rare != 0:
 
                             afficher_info_monstre2_nom = True
                             afficher_info_monstre2_type = True
                             afficher_info_monstre2_rare = True
 
-                        elif self.joueur.liste_monstre[1].chemin_image == "images/pas_de_monstre.png":
+                        elif self.joueur.liste_monstre[1].rare == 0:
 
                             afficher_info_monstre2_nom = False
                             afficher_info_monstre2_type = False
                             afficher_info_monstre2_rare = False
 
-                        if self.joueur.liste_monstre[2].chemin_image != "images/pas_de_monstre.png":
+                        if self.joueur.liste_monstre[2].rare != 0:
 
                             afficher_info_monstre3_nom = True
                             afficher_info_monstre3_type = True
                             afficher_info_monstre3_rare = True
 
-                        elif self.joueur.liste_monstre[2].chemin_image == "images/pas_de_monstre.png":
+                        elif self.joueur.liste_monstre[2].rare == 0:
 
                             afficher_info_monstre3_nom = False
                             afficher_info_monstre3_type = False
@@ -660,16 +673,16 @@ class Menu:
                     # choix du monstre pour le combat, le monstre pour le combat est le monstre le plus a gauche
                     elif doit_lancer_menu_monstre == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_monstre2.collidepoint(event.pos):
 
-                        if self.joueur.liste_monstre[1].chemin_image != "images/pas_de_monstres.png" and afficher_info_monstre1_nom:
+                        if self.joueur.liste_monstre[1].rare != 0:
 
                             afficher_info_monstre1_nom = True
                             afficher_info_monstre1_type = True
                             afficher_info_monstre1_rare = True
-                            if self.joueur.liste_monstre[0].chemin_image != "images/pas_de_monstres.png":
+                            if self.joueur.liste_monstre[0].rare != 0:
                                 afficher_info_monstre2_nom = True
                                 afficher_info_monstre2_type = True
                                 afficher_info_monstre2_rare = True
-                            elif self.joueur.liste_monstre[0].chemin_image == "images/pas_de_monstres.png":
+                            elif self.joueur.liste_monstre[0].rare == 0:
                                 afficher_info_monstre2_nom = False
                                 afficher_info_monstre2_type = False
                                 afficher_info_monstre2_rare = False
@@ -677,16 +690,16 @@ class Menu:
 
                     elif doit_lancer_menu_monstre == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_monstre3.collidepoint(event.pos):
 
-                        if self.joueur.liste_monstre[2].chemin_image != "images/pas_de_monstres.png" and afficher_info_monstre2_nom:
+                        if self.joueur.liste_monstre[2].rare != 0:
 
                             afficher_info_monstre1_nom = True
                             afficher_info_monstre1_type = True
                             afficher_info_monstre1_rare = True
-                            if self.joueur.liste_monstre[0].chemin_image != "images/pas_de_monstres.png":
+                            if self.joueur.liste_monstre[0].rare != 0:
                                 afficher_info_monstre3_nom = True
                                 afficher_info_monstre3_type = True
                                 afficher_info_monstre3_rare = True
-                            elif self.joueur.liste_monstre[0].chemin_image == "images/pas_de_monstres.png":
+                            elif self.joueur.liste_monstre[0].rare == 0:
                                 afficher_info_monstre3_nom = False
                                 afficher_info_monstre3_type = False
                                 afficher_info_monstre3_rare = False
@@ -695,7 +708,7 @@ class Menu:
                     # lancer un combat
                     elif doit_lancer_menu_monstre == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_lancer_combat.collidepoint(event.pos):
 
-                        if self.joueur.liste_monstre[0].chemin_image != "images/pas_de_monstres.png" or self.joueur.liste_monstre[1].chemin_image != "images/pas_de_monstres.png" or self.joueur.liste_monstre[2].chemin_image != "images/pas_de_monstres.png":
+                        if self.joueur.liste_monstre[0].chemin_image != "images/pas_de_monstre.png" :
 
                             self.doit_lancer_combat = 1
                             self.doit_lancer_menu = 0
@@ -705,7 +718,7 @@ class Menu:
                     # supprimer monstre
                     elif doit_lancer_menu_monstre == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_suprimer_monstre1.collidepoint(event.pos):
 
-                        if self.joueur.liste_monstre[0].chemin_image != "images/pas_de_monstres.png":
+                        if self.joueur.liste_monstre[0].rare != 0:
 
                             afficher_info_monstre1_nom = False
                             afficher_info_monstre1_type = False
@@ -715,7 +728,7 @@ class Menu:
 
                     elif doit_lancer_menu_monstre == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_suprimer_monstre2.collidepoint(event.pos):
 
-                        if self.joueur.liste_monstre[1].chemin_image != "images/pas_de_monstres.png":
+                        if self.joueur.liste_monstre[1].rare != 0:
 
                             afficher_info_monstre2_nom = False
                             afficher_info_monstre2_type = False
@@ -725,7 +738,7 @@ class Menu:
 
                     elif doit_lancer_menu_monstre == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_suprimer_monstre3.collidepoint(event.pos):
 
-                        if self.joueur.liste_monstre[2].chemin_image != "images/pas_de_monstres.png":
+                        if self.joueur.liste_monstre[2].rare != 0:
 
                             afficher_info_monstre3_nom = False
                             afficher_info_monstre3_type = False
@@ -792,21 +805,16 @@ class Menu:
                         doit_lancer_menu_boutique = 0
                         doit_lancer_menu_inventaire = 0
                         doit_lancer_menu_monstre = 0
-
                         self.joueur.charger_joueur()
-
                         if self.joueur.liste_monstre[0].chemin_image == "images/pas_de_monstre.png":
-                            print("BOUCLE1")
                             afficher_info_monstre1_nom = False
                             afficher_info_monstre1_type = False
                             afficher_info_monstre1_rare = False
                         if self.joueur.liste_monstre[1].chemin_image == "images/pas_de_monstre.png":
-                            print("BOUCLE2")
                             afficher_info_monstre2_nom = False
                             afficher_info_monstre2_type = False
                             afficher_info_monstre2_rare = False
                         if self.joueur.liste_monstre[2].chemin_image == "images/pas_de_monstre.png":
-                            print("BOUCLE3")
                             afficher_info_monstre3_nom = False
                             afficher_info_monstre3_type = False
                             afficher_info_monstre3_rare = False
@@ -867,4 +875,3 @@ class Menu:
                 # gere l'actualisation de l'heure
                 pygame.display.flip()
                 horloge.tick(60)
-
