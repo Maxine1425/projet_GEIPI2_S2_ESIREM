@@ -1,7 +1,7 @@
 import random
 
 
-class Item :
+class Item:
     def __init__(self, rare, type):
         self.type = type
         self.rare = rare
