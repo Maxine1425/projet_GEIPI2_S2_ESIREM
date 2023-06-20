@@ -77,6 +77,12 @@ class LogiqueCombat:
         else:
             self.combattant2.choice = 1
 
+    def calcul_soin(self, utilisateur):
+        if utilisateur.PV + (utilisateur.initial_max_PV * 0.5) <= utilisateur.initial_max_PV:
+            return utilisateur.PV + (utilisateur.initial_max_PV * 0.5)
+        elif utilisateur.PV + (utilisateur.initial_max_PV * 0.5) > utilisateur.initial_max_PV:
+            return utilisateur.initial_max_PV - utilisateur.PV
+
     def calcul_degats(self, attaquant, cible):
         raw_damage = attaquant.ATQ * 1.5
         # Ajout de la réduction des dégâts basée sur la défense, comme dans la méthode 'deal_damage'
