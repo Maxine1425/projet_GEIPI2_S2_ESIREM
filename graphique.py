@@ -27,6 +27,8 @@ while True:
 
     elif lancer_menu == 0:
 
+        monstre_ordinateur = Monstre()
+
         # appel de la methode ecran_combat()
         ecran_combat(joueur, monstre_ordinateur)
         menu_principal.doit_lancer_menu = 1

@@ -78,6 +78,8 @@ class Menu:
             afficher_info_monstre3_nom = False
             afficher_info_monstre3_type = False
             afficher_info_monstre3_rare = False
+            afficher_colection = False
+            afficher_regle_ulisisation_monstre = False
 
             # chargement des images
             fond = pygame.image.load("images/fond_menu.png").convert()
@@ -260,6 +262,10 @@ class Menu:
                         texte_info_monstre3_rare = font.render("Rare : " + str(self.joueur.liste_monstre[2].rare), True, (0, 0, 0))
                         fenetre.blit(texte_info_monstre3_rare, (770, 260))
 
+                    if afficher_regle_ulisisation_monstre:
+                        texte_regle_ulisisation_monstre = police.render("Vous devez cliquer sur le monstre pour le selectionner.", True, (0, 0, 0))
+                        fenetre.blit(texte_regle_ulisisation_monstre, (358, 20))
+
             # definition de la fonnction afficher_menu_inventaire
             def afficher_menu_inventaire(lance, fenetre):
 
@@ -337,6 +343,7 @@ class Menu:
                         afficher_deja_un = False
                         afficher_trop_de_monstre = False
                         afficher_monstre = False
+                        afficher_regle_ulisisation_monstre = False
 
                         # gestion de fermeture et d'ouverture des differents menu secondaire
                         if doit_lancer_menu_boutique == 0:
@@ -443,6 +450,7 @@ class Menu:
 
                                 afficher_epee = True
                                 self.joueur.achat(montant_epee)
+                                self.joueur.liste_monstre[0].modifier_item_monstre(epee)
 
                             elif self.joueur.ajouter_item(epee) == 2:
 
@@ -474,6 +482,7 @@ class Menu:
 
                                 self.joueur.achat(montant_bouclier)
                                 afficher_bouclier = True
+                                self.joueur.liste_monstre[0].modifier_item_monstre(bouclier)
 
                             elif self.joueur.ajouter_item(bouclier) == 2:
 
@@ -505,6 +514,7 @@ class Menu:
 
                                 self.joueur.achat(montant_bottes)
                                 afficher_bottes = True
+                                self.joueur.liste_monstre[0].modifier_item_monstre(bottes)
 
                             elif self.joueur.ajouter_item(bottes) == 2:
 
@@ -588,9 +598,11 @@ class Menu:
                         afficher_deja_un = False
                         afficher_trop_de_monstre = False
                         afficher_monstre = False
+                        afficher_regle_ulisisation_monstre = False
 
                         if doit_lancer_menu_monstre == 0:
 
+                            afficher_regle_ulisisation_monstre = True
                             doit_lancer_menu_monstre = 1
                             doit_lancer_menu_boutique = 0
                             doit_lancer_menu_inventaire = 0
@@ -624,17 +636,13 @@ class Menu:
 
                         if self.joueur.liste_monstre[1].rare != 0:
 
-                            temp = self.joueur.liste_monstre[0]
-                            self.joueur.liste_monstre[0] = self.joueur.liste_monstre[1]
-                            self.joueur.liste_monstre[1] = temp
+                            self.joueur.bouger_monstre(1)
 
                     elif doit_lancer_menu_monstre == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_monstre3.collidepoint(event.pos):
 
                         if self.joueur.liste_monstre[2].rare != 0:
 
-                            temp2 = self.joueur.liste_monstre[0]
-                            self.joueur.liste_monstre[0] = self.joueur.liste_monstre[2]
-                            self.joueur.liste_monstre[2] = temp2
+                            self.joueur.bouger_monstre(2)
 
                     # lancer un combat
                     elif doit_lancer_menu_monstre == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_lancer_combat.collidepoint(event.pos):
