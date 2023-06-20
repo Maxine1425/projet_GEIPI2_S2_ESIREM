@@ -789,7 +789,22 @@ class Menu:
                         afficher_monstre = False
                         afficher_regle_ulisisation_monstre = False
                         afficher_colection = False
+                        doit_lancer_menu_boutique = 0
+                        doit_lancer_menu_inventaire = 0
+                        doit_lancer_menu_monstre = 0
                         self.joueur.charger_joueur()
+                        if self.joueur.liste_monstre[0].rare == 0:
+                            afficher_info_monstre1_nom = False
+                            afficher_info_monstre1_type = False
+                            afficher_info_monstre1_rare = False
+                        if self.joueur.liste_monstre[1].rare == 0:
+                            afficher_info_monstre2_nom = False
+                            afficher_info_monstre2_type = False
+                            afficher_info_monstre2_rare = False
+                        if self.joueur.liste_monstre[2].rare == 0:
+                            afficher_info_monstre3_nom = False
+                            afficher_info_monstre3_type = False
+                            afficher_info_monstre3_rare = False
 
                     # sauvergarder
                     elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_sauvegarde.collidepoint(event.pos):
@@ -803,6 +818,10 @@ class Menu:
                         afficher_monstre = False
                         afficher_regle_ulisisation_monstre = False
                         afficher_colection = False
+                        doit_lancer_menu_boutique = 0
+                        doit_lancer_menu_inventaire = 0
+                        doit_lancer_menu_monstre = 0
+
                         self.joueur.tout_sauvegarder()
 
                 # permet de reactualiser le fond
