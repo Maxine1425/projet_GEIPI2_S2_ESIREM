@@ -830,7 +830,11 @@ class Menu:
                         doit_lancer_menu_boutique = 0
                         doit_lancer_menu_inventaire = 0
                         doit_lancer_menu_monstre = 0
-                        self.joueur.charger_joueur()
+                        try:
+                            self.joueur.charger_joueur()
+                        except:
+                            print("Pas de fichier de sauvegarde trouve !")
+                            
                         if self.joueur.liste_monstre[0].chemin_image == "images/pas_de_monstre.png":
                             afficher_info_monstre1_nom = False
                             afficher_info_monstre1_type = False

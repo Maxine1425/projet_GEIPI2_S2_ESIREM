@@ -9,7 +9,7 @@ def lancer_jeu():
     menu_accueil = MenuAccueil()
     menu_accueil.menu_accueil(lance=1)
     print("pseudo = " + menu_accueil.pseudo) # Debug
-    joueur = Joueur(menu_accueil.pseudo, 0, 1, 0, 0, 0)
+    joueur = Joueur(menu_accueil.pseudo, 100000, 1, 0, 0, 0)
     menu_principal = Menu(joueur)
 
     while True:
