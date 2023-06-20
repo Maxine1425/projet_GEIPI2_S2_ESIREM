@@ -3,6 +3,7 @@ import time
 import random
 from boutton import Button
 from logique_combat import LogiqueCombat
+import threading
 
 pygame.init()
 
@@ -14,7 +15,6 @@ def afficher_texte(screen, text, font, color, x, y):
     text_rect = text_surface.get_rect()
     text_rect.topleft = (x, y)
     screen.blit(text_surface, text_rect)
-
 
 def ecran_victoire(vainqueur):
     pygame.init()
@@ -59,7 +59,6 @@ def ecran_victoire(vainqueur):
         pygame.display.flip()
 
 
-
 def ecran_combat(joueur, opponent2):
     opponent1 = joueur.liste_monstre[0]
 
@@ -67,8 +66,11 @@ def ecran_combat(joueur, opponent2):
     opponent2.PV = opponent2.initial_max_PV
 
     combat = LogiqueCombat(joueur, opponent2)
+
     pygame.init()
+
     text_font = pygame.font.SysFont("Helvetica", 30)
+    text_font_combat = pygame.font.SysFont("PressStart2P-Regular", 30)
 
     SCREEN_WIDTH, SCREEN_HEIGHT = 990, 660
     WHITE, BLACK = (255, 255, 255), (0, 0, 0)
@@ -109,6 +111,7 @@ def ecran_combat(joueur, opponent2):
 
     running = True
     action_text = ""
+    doit_afficher = False
 
     while running:
         screen.blit(fond, (0, 0))
@@ -159,8 +162,13 @@ def ecran_combat(joueur, opponent2):
         attaque_button.dessiner(screen)
         soin_button.dessiner(screen)
 
-        afficher_texte(screen, pv1_text, text_font, WHITE, 70 + hp_images['FULL'].get_width() + 10, 300)
-        afficher_texte(screen, pv2_text, text_font, WHITE, 620 + hp_images['FULL'].get_width() + 10, 200)
+        afficher_texte(screen, pv1_text, text_font_combat, WHITE, 70 + hp_images['FULL'].get_width() + 10, 200)
+        afficher_texte(screen, pv2_text, text_font_combat, WHITE, 620 + hp_images['FULL'].get_width() + 10, 100)
+
+        afficher_texte(screen, opponent1.nom, text_font_combat, BLACK, 30 + (hp_images['FULL'].get_width() / 2), 180)
+        afficher_texte(screen, opponent2.nom, text_font_combat, BLACK, 580 + (hp_images['FULL'].get_width() / 2), 80)
+
+        afficher_texte(screen, action_text, text_font, BLACK, (SCREEN_WIDTH / 2) - 300, SCREEN_HEIGHT - 40)
 
         pygame.display.flip()
         time.sleep(1)
@@ -171,16 +179,14 @@ def ecran_combat(joueur, opponent2):
                 running = False
 
             if attaque_button.est_clique(event):
-                action_text = "ATTAQUE"
+                action_text = "Votre monstre a inflige " + str(round(combat.calcul_degats(combat.combattant1, combat.combattant2))) + " degats."
                 combat.choix_ordinateur()
                 combat.tour(1)
 
-
             if soin_button.est_clique(event):
-                action_text = "SOIN"
+                action_text = "Votre monstre s'est soigne de " + str(round(combat.calcul_soin(combat.combattant1))) + " PV."
                 combat.choix_ordinateur()
                 combat.tour(2)
-
 
             if combat.check_etat() == 1:
                 ecran_victoire(opponent1)
@@ -189,6 +195,5 @@ def ecran_combat(joueur, opponent2):
                 ecran_victoire(opponent2)
                 return
 
-        afficher_texte(screen, action_text, text_font, BLACK, SCREEN_WIDTH // 2, SCREEN_HEIGHT - 40)
         pygame.display.flip()
         pygame.time.wait(50)

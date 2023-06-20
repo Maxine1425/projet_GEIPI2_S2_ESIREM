@@ -160,11 +160,28 @@ class Monstre:
     def rev_mon(self):
         self.isKO = False
 
+    def bouger_item_monstre(self, prochain_monstre):
+        temp_epee = self.item_equipe_epee
+        temp_bouclier = self.item_equipe_bouclier
+        temp_bottes = self.item_equipe_bottes
+        temp_soupe = self.item_equipe_soupe
+
+        self.retirer_item_monstre(self.item_equipe_epee)
+        self.retirer_item_monstre(self.item_equipe_bouclier)
+        self.retirer_item_monstre(self.item_equipe_bottes)
+        self.retirer_item_monstre(self.item_equipe_soupe)
+
+        prochain_monstre.modifier_item_monstre(temp_epee)
+        prochain_monstre.modifier_item_monstre(temp_bouclier)
+        prochain_monstre.modifier_item_monstre(temp_bottes)
+        prochain_monstre.modifier_item_monstre(temp_soupe)
+
     def modifier_stat_monstre(self):
         self.ATQ += self.item_equipe_epee.valeur_atq
         self.DEF += self.item_equipe_bouclier.valeut_def
         self.VIT += self.item_equipe_bottes.valeur_vit
         self.PV += self.item_equipe_soupe.valeut_pv
+
     def modifier_item_monstre(self, item):
         if item.type == "epee":
             self.item_equipe_epee = item

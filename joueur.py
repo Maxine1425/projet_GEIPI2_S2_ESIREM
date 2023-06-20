@@ -111,6 +111,10 @@ class Joueur:
             else:
                 return 2
 
+    def bouger_monstre(self, emplacement):
+        temp = self.liste_monstre[0]
+        self.liste_monstre[0] = self.liste_monstre[emplacement]
+        self.liste_monstre[emplacement] = temp
 
     def retirer_monstre(self, emplacement):
         self.liste_monstre[emplacement].chemin_image = "images/pas_de_monstre.png"
