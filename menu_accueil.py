@@ -5,12 +5,14 @@ from pygame.locals import *
 class MenuAccueil:
 
     def __init__(self):
+        """
+        Menu permettant au joueur de rentrer son pseudo avant d'accéder au jeu.
+        """
         self.doit_lancer_menu_accueil = 1
         self.doit_lancer_menu = 0
         self.pseudo = ""
 
     def menu_accueil(self, lance):
-
         if lance == 1:
 
             pygame.init()
@@ -28,6 +30,7 @@ class MenuAccueil:
             continuer = True
             afficher_texte_pas_pseudo = False
 
+            # gestion des evenements
             while continuer:
                 for event in pygame.event.get():
                     if event.type == QUIT:

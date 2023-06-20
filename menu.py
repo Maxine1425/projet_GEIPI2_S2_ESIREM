@@ -10,19 +10,28 @@ from monstre import Monstre
 class Menu:
 
     def __init__(self, joueur):
+        """
+        Gere l'affichage et la logique d'affichage du menu principal.
+        Elle appelle les fonctions de la classe joueur, monstre, etc...
+        :param joueur: joueur controlant le menu.
+        """
         self.joueur = joueur
         self.doit_lancer_menu = 1
         self.doit_lancer_combat = 0
 
     def menu(self, lance):
-
+        """
+        Fonction gérant l'affichage et la logique d'affichage du menu principal.
+        :param lance: est ce que le menu doit etre lance.
+        """
         pygame.init()
 
         if lance == 1:
 
+            # Pour eviter d'ecrire la partie de droite en entier a chaque utilisation.
             argent = self.joueur.portefeuille
 
-            # creation de la fenetre principal
+            # creation de la fenetre principale
             fenetre = pygame.display.set_mode((990, 660))
 
             # nom du jeu apparait
@@ -135,19 +144,27 @@ class Menu:
             fenetre.blit(button_boutique, (30, 570))
             fenetre.blit(button_menu_monstre, (220, 570))
             fenetre.blit(button_inventaire, (460, 570))
+
             # Creation de la surface de l'ombre
             ombre = pygame.Surface(fond_donee.get_size()).convert_alpha()
             ombre.fill((0, 0, 0, 70))  # Couleur de l'ombre (noir semi-transparent)
+
             # Position de l'ombre
             x_ombre = 0 + 5  # Decalage horizontal de l'ombre
             y_ombre = 0 + 5  # Decalage vertical de l'ombre
+
             # Affichage de l'ombre
             fenetre.blit(ombre, (x_ombre, y_ombre))
             fenetre.blit(fond_donee, (0, 0))
 
             # definition de la fonction afficher_menu_boutique
             def afficher_menu_boutique(lance, fenetre):
-
+                """
+                Affiche ou nom le menu de la boutique.
+                Gere l'affichage des images et du texte.
+                :param lance: Est ce que le menu doit etre visible
+                :param fenetre: Sur quelle fenetre afficher le menu
+                """
                 if lance == 1:
 
                     # affichage des images de la boutique
@@ -210,9 +227,13 @@ class Menu:
                         texte_achat_monstre = font.render("Vous avez achete " + str(monstre.nom) + " de type " + str(monstre.type) + " et de rarete " + str(monstre.rare), True, (255, 255, 255))
                         fenetre.blit(texte_achat_monstre, (50, 450))
 
-            # definition de la fonction afficher_menu_monstre
             def afficher_menu_monstre(lance, fenetre):
-
+                """
+                Affiche ou nom le menu des monstres.
+                Gere l'affichage des images et du texte.
+                :param lance: Est ce que le menu doit etre visible
+                :param fenetre: Sur quelle fenetre afficher le menu
+                """
                 if lance == 1:
 
                     # affichage des images du menu monstre
@@ -270,9 +291,13 @@ class Menu:
                         texte_colection = police.render("collection : " + str(self.joueur.nombre_monstre_collection()) + "/10", True, (0, 0, 0))
                         fenetre.blit(texte_colection, (750, 390))
 
-            # definition de la fonnction afficher_menu_inventaire
             def afficher_menu_inventaire(lance, fenetre):
-
+                """
+                Affiche ou nom le menu de l'inventaire.
+                Gere l'affichage des images et du texte.
+                :param lance: Est ce que le menu doit etre visible
+                :param fenetre: Sur quelle fenetre afficher le menu
+                """
                 if lance == 1:
 
                     # affichage des images du menu inventaire et du texte sur l'ecran

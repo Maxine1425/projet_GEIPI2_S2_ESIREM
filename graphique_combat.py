@@ -11,12 +11,28 @@ pygame.font.init()
 
 
 def afficher_texte(screen, text, font, color, x, y):
+    """
+    Fonction permettant d'afficher du texte (?!)
+
+    :param screen: écran sur lequel afficher le texte
+    :param text: texte à afficher
+    :param font: police d'écriture du texte
+    :param color: couleur du texte
+    :param x: position x du texte
+    :param y: position y du texte
+    """
     text_surface = font.render(text, True, color)
     text_rect = text_surface.get_rect()
     text_rect.topleft = (x, y)
     screen.blit(text_surface, text_rect)
 
+
 def ecran_victoire(vainqueur):
+    """
+    Fonction permettant d'afficher l'écran de victoire pendant 2s, avec l'image du vainqueur
+
+    :param vainqueur: monstre vainqueur du combat.
+    """
     pygame.init()
 
     # Taille de la fenetre
@@ -54,21 +70,31 @@ def ecran_victoire(vainqueur):
                 return
 
         screen.blit(fond, (0, 0))
-        screen.blit(vainqueur_image, rect.topleft)
+        screen.blit(vainqueur_image, rect.topleft) # Affichage de l'image du vainqueur
         screen.blit(text, text_rect.topleft)  # Affichage du texte
         pygame.display.flip()
 
 
 def ecran_combat(joueur, opponent2):
-    opponent1 = joueur.liste_monstre[0]
+    """
+    Fonction permettant d'afficher le combat, et de gerer toutes les sorties des fonctions logiques.
 
+    :param joueur: Le joueur qui prend part au combat.
+    :param opponent2: L'adversaire.
+    """
+    opponent1 = joueur.liste_monstre[0] # On associe la variable opponent1 au monstre en premiere place de la liste
+                                        # de monstre du joueur.
+
+    # Soin des 2 combattants.
     opponent1.PV = opponent1.initial_max_PV
     opponent2.PV = opponent2.initial_max_PV
 
+    # Creation d'un combat entre les 2 adversaires pour gerer la partie logique.
     combat = LogiqueCombat(joueur, opponent2)
 
     pygame.init()
 
+    # Initialisation des polices
     text_font = pygame.font.SysFont("Helvetica", 30)
     text_font_combat = pygame.font.SysFont("PressStart2P-Regular", 30)
 
@@ -110,8 +136,10 @@ def ecran_combat(joueur, opponent2):
     hp_images['EMPTY'] = pygame.transform.scale_by(hp_images['EMPTY'], 0.25)
 
     running = True
+
+    # action_text est le texte a afficher a l'ecran pour connaitre l'etat du combat(degats infliges, soin procure,
+    # etc...)
     action_text = ""
-    doit_afficher = False
 
     while running:
         screen.blit(fond, (0, 0))
@@ -162,12 +190,15 @@ def ecran_combat(joueur, opponent2):
         attaque_button.dessiner(screen)
         soin_button.dessiner(screen)
 
+        # Affichage des pvs a cote de la barre d'hp
         afficher_texte(screen, pv1_text, text_font_combat, WHITE, 70 + hp_images['FULL'].get_width() + 10, 200)
         afficher_texte(screen, pv2_text, text_font_combat, WHITE, 620 + hp_images['FULL'].get_width() + 10, 100)
 
+        # affichage du nom des monstres au dessus de leurs pv respectifs
         afficher_texte(screen, opponent1.nom, text_font_combat, BLACK, 30 + (hp_images['FULL'].get_width() / 2), 180)
         afficher_texte(screen, opponent2.nom, text_font_combat, BLACK, 580 + (hp_images['FULL'].get_width() / 2), 80)
 
+        # Affichage du texte d'information
         afficher_texte(screen, action_text, text_font, BLACK, (SCREEN_WIDTH / 2) - 300, SCREEN_HEIGHT - 40)
 
         pygame.display.flip()
@@ -180,14 +211,15 @@ def ecran_combat(joueur, opponent2):
 
             if attaque_button.est_clique(event):
                 action_text = "Votre monstre a inflige " + str(round(combat.calcul_degats(combat.combattant1, combat.combattant2))) + " degats."
-                combat.choix_ordinateur()
-                combat.tour(1)
+                combat.choix_ordinateur() # Determinantion du choix de l'ordinateur
+                combat.tour(1) # On passe un tour avec comme parametre 1, qui correspond au fait que le joueur attaque
 
             if soin_button.est_clique(event):
                 action_text = "Votre monstre s'est soigne de " + str(round(combat.calcul_soin(combat.combattant1))) + " PV."
                 combat.choix_ordinateur()
-                combat.tour(2)
+                combat.tour(2) # On passe un tour avec comme parametre 2, qui correspond au fait que le jouer se soigne
 
+            # Check si un des deux est KO.
             if combat.check_etat() == 1:
                 ecran_victoire(opponent1)
                 return

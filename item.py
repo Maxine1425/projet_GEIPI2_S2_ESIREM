@@ -3,6 +3,10 @@ import random
 
 class Item:
     def __init__(self, rare, type):
+        """
+        :param rare: rarete de l'objet
+        :param type: type de l'objet
+        """
         self.type = type
         self.rare = rare
         if type == "epee":

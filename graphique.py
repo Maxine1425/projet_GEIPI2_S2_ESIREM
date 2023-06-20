@@ -8,17 +8,14 @@ from monstre import Monstre
 def lancer_jeu():
     menu_accueil = MenuAccueil()
     menu_accueil.menu_accueil(lance=1)
-    print("pseudo = " + menu_accueil.pseudo)
-    joueur = Joueur(menu_accueil.pseudo, 1000000, 1, 0, 0, 0)
+    print("pseudo = " + menu_accueil.pseudo) # Debug
+    joueur = Joueur(menu_accueil.pseudo, 0, 1, 0, 0, 0)
     menu_principal = Menu(joueur)
-    monstre_ordinateur = Monstre()
 
     while True:
 
         # recuperation des valeurs initiales
         lancer_menu = menu_principal.doit_lancer_menu
-        lancer_combat = menu_principal.doit_lancer_combat
-        lancer_menu_accueil = menu_accueil.doit_lancer_menu_accueil
         lancer_menu_pour_la_1ere_fois = menu_accueil.doit_lancer_menu
 
         if lancer_menu == 1 and lancer_menu_pour_la_1ere_fois:
@@ -27,7 +24,7 @@ def lancer_jeu():
             menu_principal.menu(lancer_menu)
 
         elif lancer_menu == 0:
-
+            # A chaque combat, on crée un nouveau monstre, pour éviter de combattre le meme à chaque fois.
             monstre_ordinateur = Monstre()
 
             # appel de la methode ecran_combat()

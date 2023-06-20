@@ -4,8 +4,8 @@ from item import *
 
 class Monstre:
     def __init__(self):
+        # Choix d'un nom aleatoire parmis la liste des 10 monstres.
         liste_nom = ["Crolite", "Wallabic", "Panthoal", "Crocodithe", "Whirlling", "Skeleroach", "Demeton", "Silverilla", "Pyrose", "Vaporc" ]
-        #self.nom = random.choices(liste_nom, weights=(25, 22, 20, 18, 15, 25, 22, 20, 18, 15), k=1)
         self.nom = random.choice(liste_nom)
         if self.nom == "Crolite":
             self.rare = 1  # Niveau de rarete de 1 à 5
@@ -58,8 +58,9 @@ class Monstre:
             self.chemin_image = "images/Vaporc.png"  # Chemin vers l'image du monstre
 
         self.est_ko = False  # Est-ce que le monstre est KO
-        self.choice = 1
+        self.choice = 1 # Choix du monstre durant le combat, de base a 1
 
+        # Meme probleme que dans Joueur, et meme solution que dans Joueur.
         epee = Item(1, "epee")
         bouclier = Item(1, "bouclier")
         bottes = Item(1, "bottes")
@@ -82,6 +83,7 @@ class Monstre:
         self.item_equipe_bottes = bottes
         self.item_equipe_soupe = soupe
 
+        # Definition des statistiques selon la rarete et le type.
         if self.rare == 1:
             if self.type == "Attaque":
                 self.PV = random.randint(100, 200)
@@ -144,26 +146,25 @@ class Monstre:
 
         self.initial_max_PV = self.PV
 
-    def get_stats(self):  # Renvoie un tableau avec les stats du monstre
-        stats = [self.nom, "PV = " + str(self.PV), "ATQ = " + str(self.ATQ), "DEF = " + str(self.DEF),
-                 "VIT = " + str(self.VIT)]
-        return stats
-
-    def get_Pv(self):
-        return self.PV
-
     def deal_damage(self, damage):
+        """
+        Fait des dégats sur une cible.
+        :param damage: degats a faire
+        """
         damage = damage + 0.3 * self.DEF
         self.PV = self.PV - damage
         if self.PV < 0:
             self.PV = 0
 
     def choix_attaque(self, opponent):
+        """
+        execute une attaque ou un soin selon le choix du monstre.
+        :param opponent: Adversaire sur lequel taper si on choisit d'attaquer.
+        """
         if self.choice == 1:
             self.attaque(opponent)
         elif self.choice == 2:
             self.soin()
-            print("SOIN OK")
 
     def attaque(self, target):
         target.deal_damage(self.ATQ * 1.5)
@@ -175,12 +176,22 @@ class Monstre:
             self.PV = self.initial_max_PV
 
     def ko_mon(self):
+        """
+        Met un monstre KO
+        """
         self.isKO = True
 
     def rev_mon(self):
+        """
+        Revive un monstre.
+        """
         self.isKO = False
 
     def bouger_item_monstre(self, prochain_monstre):
+        """
+        Echange les objets d'un monstre avec un autre
+        :param prochain_monstre: Monstre avec lesquels echanger les objets du monstre actuel.
+        """
         temp_epee = self.item_equipe_epee
         temp_bouclier = self.item_equipe_bouclier
         temp_bottes = self.item_equipe_bottes
@@ -197,12 +208,19 @@ class Monstre:
         prochain_monstre.modifier_item_monstre(temp_soupe)
 
     def modifier_stat_monstre(self):
+        """
+        Met a jour les stats du monstre selon les items equipes
+        """
         self.ATQ += self.item_equipe_epee.valeur_atq
         self.DEF += self.item_equipe_bouclier.valeur_def
         self.VIT += self.item_equipe_bottes.valeur_vit
         self.PV += self.item_equipe_soupe.valeur_pv
 
     def modifier_item_monstre(self, item):
+        """
+        Ajoute un item au monstre
+        :param item: Item a ajouter.
+        """
         if item.type == "epee":
             self.item_equipe_epee = item
         if item.type == "bouclier":
@@ -211,6 +229,7 @@ class Monstre:
             self.item_equipe_bottes = item
         if item.type == "soupe":
             self.item_equipe_soupe = item
+        # On met a jour les stast du monstre a chaque objet ajoute
         self.modifier_stat_monstre()
 
     def retirer_item_monstre(self, item):
@@ -227,6 +246,10 @@ class Monstre:
 
 class MonstreAttaque(Monstre):
     def define_stats(self):
+        """
+        Sous classes permettant d'optimiser la creation des monstres, elles ne sont pas utilisees pour l'instant mais
+        pourraient l'etre dans le futur
+        """
         PV = random.randint(100, 600)
         ATQ = random.randint(100, 160)
         DEF = random.randint(1, 15)
@@ -236,6 +259,10 @@ class MonstreAttaque(Monstre):
 
 class MonstreDefense(Monstre):
     def define_stats(self):
+        """
+        Sous classes permettant d'optimiser la creation des monstres, elles ne sont pas utilisees pour l'instant mais
+        pourraient l'etre dans le futur
+        """
         PV = random.randint(500, 1000)
         ATQ = random.randint(4, 60)
         DEF = random.randint(15, 30)

@@ -1,5 +1,10 @@
 import pygame
+
+
 class Button:
+    """
+    Classe permettant de créer des boutons et de gérer les fonctionnalités.
+    """
     def __init__(self, image, x, y):
         self.image = image
         self.rect = self.image.get_rect(topleft=(x, y))

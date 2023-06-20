@@ -1,12 +1,12 @@
 import threading
 import time
 
+
 class Compteur:
     def __init__(self):
-
         self.compteur = 0
         self.arret = False
-        self.mod = 1
+        self.mod = 1 # Combien d'argent le joueur genere par secondes.
 
     def incrementer(self):
         while not self.arret:

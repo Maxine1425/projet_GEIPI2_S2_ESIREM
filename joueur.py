@@ -9,13 +9,24 @@ from item import *
 class Joueur:
 
     def __init__(self, name, balance, mod, modp2, modp5, modp10):
+        """
+        :param name: Nom du joueur
+        :param balance: argent du joueur
+        :param mod: combien le joueur gagne par seconde
+        :param modp2: nombre de modificateurs 2 que le joueur a
+        :param modp5: nombre de modificateurs 5 que le joueur a
+        :param modp10: nombre de modificateurs 10 que le joueur a
+        """
         self.name = name
+        # On commence un thread pour garder une trace de l'argent du joueur.
         self.portefeuille = Compteur()
         if balance != 0:
             self.portefeuille.compteur = balance
         self.portefeuille.mod = mod
         self.liste_mod = [modp2, modp5, modp10]
 
+        # Le fait que le joueur n'ai pas de monstre posait probleme, on a donc simule ce procede en lui donnant des
+        # des monstres avec comme rarete 0 et comme image une image indiquant qu'il n'y a pas de monstre.z
         monstre1 = Monstre()
         monstre2 = Monstre()
         monstre3 = Monstre()
@@ -28,8 +39,10 @@ class Joueur:
         monstre2.chemin_image = "images/pas_de_monstre.png"
         monstre3.chemin_image = "images/pas_de_monstre.png"
 
-        self.liste_monstre = [monstre1, monstre2, monstre3]  # Liste contenant tout les monstres que le joueur possède
+        self.liste_monstre = [monstre1, monstre2, monstre3]  # Liste contenant tout les monstres que le joueur possède,
+                                                             # Il ne peut pas avoir plus de 3 monstres.
 
+        # Meme probleme que pour la liste monstre.
         epee = Item(1, "epee")
         bouclier = Item(1, "bouclier")
         bottes = Item(1, "bottes")
@@ -52,11 +65,16 @@ class Joueur:
         self.liste_bottes = bottes
         self.liste_soupe = soupe
 
+        # Attribut pour garder une trace de la collection du joueur, c'est à dire quels monstres il a deja eu.
         self.collection_monstre = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
+        # Debut du thread.
         self.portefeuille.demarrer()
 
     def nombre_monstre_collection(self):
+        """
+        :return: Le nombre de monstres que le joueur a deja eu.
+        """
         compteur = 0
         length = len(self.collection_monstre)
         for i in range(length):
@@ -65,6 +83,10 @@ class Joueur:
         return compteur
 
     def ajouter_collection(self, nom_monstre):
+        """
+        Fonction permettant de checker si le joueur a deja eu un monstre, et si non, lui ajoute a sa collection.
+        :param nom_monstre: nom du monstre que le joueur viens d'obtenir
+        """
         if nom_monstre == "Crolite":
             if self.collection_monstre[0] == 0:
                 self.collection_monstre[0] = 1
@@ -106,6 +128,11 @@ class Joueur:
                 self.collection_monstre[9] = 1
 
     def ajouter_item(self, item):
+        """
+        Fonction ajoutant un objet a la liste d'objets du joueur.
+        :param item: Objet a ajouter.
+        :return: 1 si l'objet a bien été ajouté, 2 sinon.
+        """
         if item.type == "epee" and self.liste_epee.rare == 0:
             self.liste_epee = item
             return 1
@@ -134,6 +161,10 @@ class Joueur:
             print("Type d'item invalide.")
 
     def supprimer_item(self, item):
+        """
+        Supprime l'item donne de la liste d'items du joueur.
+        :param item: item a supprim
+        """
         if item.type == "epee":
             self.liste_epee.rare = 0
             self.liste_epee.valeur_atq = 0
@@ -147,34 +178,53 @@ class Joueur:
             self.liste_soupe.rare = 0
             self.liste_soupe.valeur_pv = 0
 
-    def get_items(self):
-        return self.liste_soupe + self.liste_bottes + self.liste_epee + self.liste_bouclier
-
-    def ajouter_monstre(self, monstre):  # Ajoute un monstre à l'inventaire de monstres du joueur
-            if self.liste_monstre[0].chemin_image == "images/pas_de_monstre.png":
-                self.liste_monstre[0] = monstre
-                return 1
-            elif self.liste_monstre[1].chemin_image == "images/pas_de_monstre.png":
-                self.liste_monstre[1] = monstre
-                return 1
-            elif self.liste_monstre[2].chemin_image == "images/pas_de_monstre.png":
-                self.liste_monstre[2] = monstre
-                return 1
-            else:
-                return 2
+    def ajouter_monstre(self, monstre):
+        """
+        Ajoute un monstre a la liste de monstre du joueur.
+        :param monstre: Monstre a ajouter.
+        :return: 1 si le monstre a bien ete ajoute, 2 sinon.
+        """
+        # Check si l'image du monstre est l'image pas de monstre.
+        if self.liste_monstre[0].chemin_image == "images/pas_de_monstre.png":
+            self.liste_monstre[0] = monstre
+            return 1
+        elif self.liste_monstre[1].chemin_image == "images/pas_de_monstre.png":
+            self.liste_monstre[1] = monstre
+            return 1
+        elif self.liste_monstre[2].chemin_image == "images/pas_de_monstre.png":
+            self.liste_monstre[2] = monstre
+            return 1
+        else:
+            return 2
 
     def bouger_monstre(self, emplacement):
+        """
+        Bouge le monstre a l'emplacement choisi a la place du premier monstre, et bouge le premier a l'emplacement
+        choisi.
+        :param emplacement: Emplacement du monstre a echanger.
+        """
         temp = self.liste_monstre[0]
         self.liste_monstre[0] = self.liste_monstre[emplacement]
         self.liste_monstre[emplacement] = temp
 
     def retirer_monstre(self, emplacement):
+        """
+        Fonction retirant un monstre de la liste de monstre du joueur.
+        Il faut noter que on ne lui enleve pas reellement, mais que l'on met juste toutes ses stats a des
+        valeurs nulles.
+        :param emplacement: Emplacement du monstre a retirer.
+        """
         self.liste_monstre[emplacement].chemin_image = "images/pas_de_monstre.png"
         self.liste_monstre[emplacement].rare = 0
         self.liste_monstre[emplacement].nom = ""
         self.liste_monstre[emplacement].type = ""
 
     def check_argent(self, montant):
+        """
+        Check si le joueur a assez d'argent pour qu'on supprime le montant donné a sa fortune.
+        :param montant: Montant a supprimer.
+        :return: True si le montant peut etre enleve, False sinon.
+        """
         if self.portefeuille.compteur-montant >= 0:
             return True
         else:
@@ -189,37 +239,29 @@ class Joueur:
     def vendre(self, montant):
         self.portefeuille.compteur += montant
 
-    def print_nom_monstre(self):  # Affiche sur le terminal le nom de tout les monstres du joueur
-        length = len(self.liste_monstre)
-        for i in range(length):
-            print(self.liste_monstre[i].nom)
-
     def tout_sauvegarder(self):
+        """
+        Crée un dossier de sauvegarde pour le joueur si il n'en a pas deja un, puis executes toutes les fonctions
+        de sauvegarde dans ce fichier.
+        """
         try:
-            print("Debut de tout_sauvegarder")  # Debug
             chemin_base = "fichiers de sauvegarde"
             chemin_fichier_sauvegarde = os.path.join(chemin_base, self.name)
-
-            print("Chemin de sauvegarde:", chemin_fichier_sauvegarde)  # Debug
-
             if not os.path.exists(chemin_fichier_sauvegarde):
                 os.makedirs(chemin_fichier_sauvegarde, exist_ok=True)
-
-            print("Appel de sauvegarde_monstre")  # Debug
             self.sauvegarde_monstre(chemin_fichier_sauvegarde)
-
-            print("Appel de sauvegarde_argent")  # Debug
             self.sauvegarde_argent(chemin_fichier_sauvegarde)
-
-            print("Appel de sauvegarde_items")  # Debug
             self.sauvegarde_items(chemin_fichier_sauvegarde)
 
-            print("Fin de tout_sauvegarder")  # Debug
-
+        # Pour eviter que le programme ne crash
         except Exception as e:
             print("Une exception a ete levee:", e)
 
     def sauvegarde_argent(self, chemin_fichier_sauvegarde):
+        """
+        Sauvegarde les donnees relatives a l'argent du joueur dans un fichier argent.txt
+        :param chemin_fichier_sauvegarde: chemin du fichier de sauvegarde
+        """
         nom_fichier = "argent.txt"
         fichier_a_ouvrir = os.path.join(chemin_fichier_sauvegarde, nom_fichier)
         donnee_argent = str(self.portefeuille.compteur) + "\n" + str(self.portefeuille.mod) + "\n" + str(self.liste_mod)
@@ -227,7 +269,12 @@ class Joueur:
             current.write(donnee_argent)
         pass
 
-    def sauvegarde_monstre(self, chemin_fichier_sauvegarde):  # Sauvegarde les monstres du joueur dans un fichier nomdujoueur_monster.txt
+    def sauvegarde_monstre(self, chemin_fichier_sauvegarde):
+        """
+        Sauvegarde les monstres du joueur dans un fichier monstre.txt
+        :param chemin_fichier_sauvegarde: chemin du fichier de sauvegarde
+        :return:
+        """
         nom_fichier = "monstre.txt"
         fichier_a_ouvrir = os.path.join(chemin_fichier_sauvegarde, nom_fichier)
         longueur = len(self.liste_monstre)
@@ -253,6 +300,10 @@ class Joueur:
         pass
 
     def sauvegarde_items(self, chemin_fichier_sauvegarde):
+        """
+        Sauvegarde les objets du joueur dans un fichier item.txt
+        :param chemin_fichier_sauvegarde: chemin du fichier de sauvegarde
+        """
         nom_fichier = "item.txt"
         fichier_a_ouvrir = os.path.join(chemin_fichier_sauvegarde, nom_fichier)
         with open(fichier_a_ouvrir, 'w') as current:
@@ -300,6 +351,10 @@ class Joueur:
         pass
 
     def charger_joueur(self):
+        """
+        Fonction permettant de charger les données contenues dans les fichiers .txt, et d'overwrite les données
+        actuelles du joueurs avec celle-ci.
+        """
         chemin_fichier_sauvegarde = "fichiers de sauvegarde/" + self.name
 
         # Charger l'argent
