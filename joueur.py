@@ -319,7 +319,7 @@ class Joueur:
                 monstre.nom = lines[i].strip()
                 monstre.rare = lines[i + 1].strip()
                 monstre.type = lines[i + 2].strip()
-                monstre.PV = int(lines[i + 3])
+                monstre.PV = round(int(lines[i + 3]))
                 monstre.ATQ = int(lines[i + 4])
                 monstre.DEF = int(lines[i + 5])
                 monstre.VIT = int(lines[i + 6])
