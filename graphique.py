@@ -8,7 +8,7 @@ from monstre import Monstre
 menu_accueil = Menu_accueil()
 menu_accueil.menu_accueil(lance=1)
 print("pseudo = " + menu_accueil.pseudo)
-joueur = Joueur(menu_accueil.pseudo, 5000, 1, 0, 0, 0)
+joueur = Joueur(menu_accueil.pseudo, 1000000, 1, 0, 0, 0)
 menu_principal = Menu(joueur)
 monstre_ordinateur = Monstre()
 
