@@ -26,7 +26,7 @@ class Menu:
             fenetre = pygame.display.set_mode((990, 660))
 
             # nom du jeu apparait
-            pygame.display.set_caption("Jeux de Louis et Maxine")
+            pygame.display.set_caption(" Cash & Clash !")
 
             # initialisation des varriables et d'objets et de police ecriture
             lancer_menu = 1
