@@ -224,6 +224,38 @@ class Menu:
                     fenetre.blit(button_supprimer, (370,300))
                     fenetre.blit(button_supprimer, (570, 300))
                     fenetre.blit(button_supprimer, (770, 300))
+                    if self.joueur.liste_monstre[0].chemin_image == "images/pas_de_monstre.png":
+                        print("BOUCLE1")
+                        afficher_info_monstre1_nom = False
+                        afficher_info_monstre1_type = False
+                        afficher_info_monstre1_rare = False
+                    elif self.joueur.liste_monstre[0].chemin_image != "images/pas_de_monstre.png":
+                        print("BOUCLE1")
+                        afficher_info_monstre1_nom = True
+                        afficher_info_monstre1_type = True
+                        afficher_info_monstre1_rare = True
+
+                    if self.joueur.liste_monstre[1].chemin_image == "images/pas_de_monstre.png":
+                        print("BOUCLE2")
+                        afficher_info_monstre2_nom = False
+                        afficher_info_monstre2_type = False
+                        afficher_info_monstre2_rare = False
+                    elif self.joueur.liste_monstre[0].chemin_image != "images/pas_de_monstre.png":
+                        print("BOUCLE1")
+                        afficher_info_monstre2_nom = True
+                        afficher_info_monstre2_type = True
+                        afficher_info_monstre2_rare = True
+
+                    if self.joueur.liste_monstre[2].chemin_image == "images/pas_de_monstre.png":
+                        print("BOUCLE3")
+                        afficher_info_monstre3_nom = False
+                        afficher_info_monstre3_type = False
+                        afficher_info_monstre3_rare = False
+                    elif self.joueur.liste_monstre[0].chemin_image != "images/pas_de_monstre.png":
+                        print("BOUCLE1")
+                        afficher_info_monstre3_nom = True
+                        afficher_info_monstre3_type = True
+                        afficher_info_monstre3_rare = True
 
                     # affichage du texte menu monstre
                     if afficher_info_monstre1_nom:
@@ -792,19 +824,10 @@ class Menu:
                         doit_lancer_menu_boutique = 0
                         doit_lancer_menu_inventaire = 0
                         doit_lancer_menu_monstre = 0
+
                         self.joueur.charger_joueur()
-                        if self.joueur.liste_monstre[0].rare == 0:
-                            afficher_info_monstre1_nom = False
-                            afficher_info_monstre1_type = False
-                            afficher_info_monstre1_rare = False
-                        if self.joueur.liste_monstre[1].rare == 0:
-                            afficher_info_monstre2_nom = False
-                            afficher_info_monstre2_type = False
-                            afficher_info_monstre2_rare = False
-                        if self.joueur.liste_monstre[2].rare == 0:
-                            afficher_info_monstre3_nom = False
-                            afficher_info_monstre3_type = False
-                            afficher_info_monstre3_rare = False
+
+
 
                     # sauvergarder
                     elif event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_sauvegarde.collidepoint(event.pos):
