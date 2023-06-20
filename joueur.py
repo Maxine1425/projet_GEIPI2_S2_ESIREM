@@ -153,10 +153,10 @@ class Joueur:
             if self.liste_monstre[0].chemin_image != "images/pas_de_monstre.png":
                 self.liste_monstre[0] = monstre
                 return 1
-            elif self.liste_monstre[1].rare != "images/pas_de_monstre.png":
+            elif self.liste_monstre[1].chemin_image != "images/pas_de_monstre.png":
                 self.liste_monstre[1] = monstre
                 return 1
-            elif self.liste_monstre[2].rare != "images/pas_de_monstre.png":
+            elif self.liste_monstre[2].chemin_image != "images/pas_de_monstre.png":
                 self.liste_monstre[2] = monstre
                 return 1
             else:
