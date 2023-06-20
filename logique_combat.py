@@ -4,7 +4,7 @@ import time
 class LogiqueCombat:
     def __init__(self, joueur, monstre2):
         """
-        Classe permettant de gérer toute la partie logique du combat.
+        Classe permettant de gerer toute la partie logique du combat.
         :param joueur: joueur prenant part au combat.
         :param monstre2: adversaire du joueur.
         """
@@ -18,7 +18,7 @@ class LogiqueCombat:
     def comparaison_vitesse(self):
         """
         Fonction permettant de trouver le monstre le plus rapide entre les deux.
-        :return: Le monstre le plus rapide, si la vitesse est égale, un monstre au hasard.
+        :return: Le monstre le plus rapide, si la vitesse est egale, un monstre au hasard.
         """
         if self.combattant1.VIT > self.combattant2.VIT:
             return self.combattant1
@@ -30,7 +30,7 @@ class LogiqueCombat:
 
     def l_autre(self):
         """
-        Déduit le monstre le plus lent a partir du resultat de comparaison_vitesse()
+        Deduit le monstre le plus lent a partir du resultat de comparaison_vitesse()
         :return: Le monstre le plus lent.
         """
         if self.fast_one == self.combattant1:
@@ -54,7 +54,7 @@ class LogiqueCombat:
 
     def tour(self, choix):
         """
-        Fonction gérant le déroulement d'un tour.
+        Fonction gerant le deroulement d'un tour.
         :param choix: choix du joueur, 1 si il attaque, 2 si il se soigne.
         """
         self.combattant1.choice = choix
@@ -62,7 +62,7 @@ class LogiqueCombat:
         self.fast_one = self.comparaison_vitesse()
         self.slow_one = self.l_autre()
 
-        # Si le plus rapide a choisi d'attaquer, on ecrit le texte nécessaire.
+        # Si le plus rapide a choisi d'attaquer, on ecrit le texte necessaire.
         if self.fast_one.choice == 1:
             print(self.fast_one.nom + " attaque " + self.slow_one.nom + " !")
             self.fast_one.choix_attaque(self.slow_one)
@@ -93,7 +93,7 @@ class LogiqueCombat:
 
     def choix_ordinateur(self):
         """
-        Fonction permettant de déterminer le choix de l'ordinateur.
+        Fonction permettant de determiner le choix de l'ordinateur.
         Il va toujours attaquer, sauf si il est en dessous de 50% de sa vie, dans ce cas la il va choisir aleatoirement
         entre se soigner et attquer.
         """
@@ -115,7 +115,7 @@ class LogiqueCombat:
 
     def calcul_degats(self, attaquant, cible):
         """
-        Fonction permettant de calculer les dégats potentiels d'un attaquant sur une cible.
+        Fonction permettant de calculer les degats potentiels d'un attaquant sur une cible.
         :param attaquant: attaquant
         :param cible: cible
         :return: les degats

@@ -1,9 +1,7 @@
 import pygame
 import time
-import random
 from boutton import Button
 from logique_combat import LogiqueCombat
-import threading
 
 pygame.init()
 
@@ -14,9 +12,9 @@ def afficher_texte(screen, text, font, color, x, y):
     """
     Fonction permettant d'afficher du texte (?!)
 
-    :param screen: écran sur lequel afficher le texte
-    :param text: texte à afficher
-    :param font: police d'écriture du texte
+    :param screen: ecran sur lequel afficher le texte
+    :param text: texte a afficher
+    :param font: police d'ecriture du texte
     :param color: couleur du texte
     :param x: position x du texte
     :param y: position y du texte
@@ -29,7 +27,7 @@ def afficher_texte(screen, text, font, color, x, y):
 
 def ecran_victoire(vainqueur):
     """
-    Fonction permettant d'afficher l'écran de victoire pendant 2s, avec l'image du vainqueur
+    Fonction permettant d'afficher l'ecran de victoire pendant 2s, avec l'image du vainqueur
 
     :param vainqueur: monstre vainqueur du combat.
     """
@@ -43,7 +41,7 @@ def ecran_victoire(vainqueur):
     WHITE = (255, 255, 255)
     BLACK = (0, 0, 0)
 
-    # Création de la fenêtre
+    # Creation de la fenêtre
     screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
     fond = pygame.image.load("images/fond_menu.png").convert()
     screen.blit(fond, (0, 0))
@@ -53,13 +51,13 @@ def ecran_victoire(vainqueur):
     rect = vainqueur_image.get_rect()
     rect.center = (SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2)  # Centrer l'image
 
-    # Préparation du texte
+    # Preparation du texte
     font = pygame.font.SysFont('Helvetica', 40)
     text = font.render("Le vainqueur est " + vainqueur.nom, True, WHITE)
     text_rect = text.get_rect()
     text_rect.center = (SCREEN_WIDTH // 2, rect.top - text_rect.height)  # Positionner au-dessus de l'image
 
-    # Enregistrer le temps de début
+    # Enregistrer le temps de debut
     start_time = time.time()
 
     # Boucle pour afficher l'image pendant 2 secondes

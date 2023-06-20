@@ -131,7 +131,7 @@ class Joueur:
         """
         Fonction ajoutant un objet a la liste d'objets du joueur.
         :param item: Objet a ajouter.
-        :return: 1 si l'objet a bien été ajouté, 2 sinon.
+        :return: 1 si l'objet a bien ete ajoute, 2 sinon.
         """
         if item.type == "epee" and self.liste_epee.rare == 0:
             self.liste_epee = item
@@ -221,7 +221,7 @@ class Joueur:
 
     def check_argent(self, montant):
         """
-        Check si le joueur a assez d'argent pour qu'on supprime le montant donné a sa fortune.
+        Check si le joueur a assez d'argent pour qu'on supprime le montant donne a sa fortune.
         :param montant: Montant a supprimer.
         :return: True si le montant peut etre enleve, False sinon.
         """
@@ -241,7 +241,7 @@ class Joueur:
 
     def tout_sauvegarder(self):
         """
-        Crée un dossier de sauvegarde pour le joueur si il n'en a pas deja un, puis executes toutes les fonctions
+        Cree un dossier de sauvegarde pour le joueur si il n'en a pas deja un, puis executes toutes les fonctions
         de sauvegarde dans ce fichier.
         """
         try:
@@ -352,7 +352,7 @@ class Joueur:
 
     def charger_joueur(self):
         """
-        Fonction permettant de charger les données contenues dans les fichiers .txt, et d'overwrite les données
+        Fonction permettant de charger les donnees contenues dans les fichiers .txt, et d'overwrite les donnees
         actuelles du joueurs avec celle-ci.
         """
         chemin_fichier_sauvegarde = "fichiers de sauvegarde/" + self.name
@@ -401,7 +401,7 @@ class Joueur:
                 elif "valeur =" in line:
                     valeur = int(line.split('=')[1].strip())
 
-                    # Créer l'item approprié
+                    # Creer l'item approprie
                     if item_type == "epee":
                         item = Item(rare=rarete, type=item_type)
                         item.valeur_atq = valeur
@@ -415,7 +415,7 @@ class Joueur:
                         item = Item(rare=rarete, type=item_type, )
                         item.valeur_pv = valeur
 
-                    # Ajouter l'item à la liste appropriée
+                    # Ajouter l'item à la liste appropriee
                     if item_type == "epee":
                         liste_epee = item
                     elif item_type == "bouclier":

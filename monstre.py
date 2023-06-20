@@ -148,7 +148,7 @@ class Monstre:
 
     def deal_damage(self, damage):
         """
-        Fait des dégats sur une cible.
+        Fait des degats sur une cible.
         :param damage: degats a faire
         """
         damage = damage + 0.3 * self.DEF

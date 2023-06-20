@@ -3,7 +3,7 @@ import pygame
 
 class Button:
     """
-    Classe permettant de créer des boutons et de gérer les fonctionnalités.
+    Classe permettant de creer des boutons et de gerer les fonctionnalites.
     """
     def __init__(self, image, x, y):
         self.image = image

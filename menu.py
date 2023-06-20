@@ -21,7 +21,7 @@ class Menu:
 
     def menu(self, lance):
         """
-        Fonction gérant l'affichage et la logique d'affichage du menu principal.
+        Fonction gerant l'affichage et la logique d'affichage du menu principal.
         :param lance: est ce que le menu doit etre lance.
         """
         pygame.init()

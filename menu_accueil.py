@@ -6,7 +6,7 @@ class MenuAccueil:
 
     def __init__(self):
         """
-        Menu permettant au joueur de rentrer son pseudo avant d'accéder au jeu.
+        Menu permettant au joueur de rentrer son pseudo avant d'acceder au jeu.
         """
         self.doit_lancer_menu_accueil = 1
         self.doit_lancer_menu = 0
