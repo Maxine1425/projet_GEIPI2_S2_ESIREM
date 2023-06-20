@@ -266,6 +266,10 @@ class Menu:
                         texte_regle_ulisisation_monstre = police.render("Vous devez cliquer sur le monstre pour le selectionner.", True, (0, 0, 0))
                         fenetre.blit(texte_regle_ulisisation_monstre, (358, 20))
 
+                    if afficher_colection:
+                        texte_colection = police.render("collection : " + str(self.joueur.nombre_monstre_collection()) + "/10", True, (0, 0, 0))
+                        fenetre.blit(texte_colection, (750, 390))
+
             # definition de la fonnction afficher_menu_inventaire
             def afficher_menu_inventaire(lance, fenetre):
 
@@ -344,6 +348,7 @@ class Menu:
                         afficher_trop_de_monstre = False
                         afficher_monstre = False
                         afficher_regle_ulisisation_monstre = False
+                        afficher_colection = False
 
                         # gestion de fermeture et d'ouverture des differents menu secondaire
                         if doit_lancer_menu_boutique == 0:
@@ -576,6 +581,7 @@ class Menu:
                             if self.joueur.ajouter_monstre(monstre) == 1:
 
                                 self.joueur.achat(montant_monstre)
+                                self.joueur.ajouter_collection(monstre.nom)
                                 afficher_monstre = True
 
                             elif self.joueur.ajouter_monstre(monstre) == 2:
@@ -599,10 +605,12 @@ class Menu:
                         afficher_trop_de_monstre = False
                         afficher_monstre = False
                         afficher_regle_ulisisation_monstre = False
+                        afficher_colection = False
 
                         if doit_lancer_menu_monstre == 0:
 
                             afficher_regle_ulisisation_monstre = True
+                            afficher_colection = True
                             doit_lancer_menu_monstre = 1
                             doit_lancer_menu_boutique = 0
                             doit_lancer_menu_inventaire = 0
@@ -619,11 +627,23 @@ class Menu:
                             afficher_info_monstre1_type = True
                             afficher_info_monstre1_rare = True
 
+                        elif self.joueur.liste_monstre[0].rare == 0:
+
+                            afficher_info_monstre1_nom = False
+                            afficher_info_monstre1_type = False
+                            afficher_info_monstre1_rare = False
+
                         if self.joueur.liste_monstre[1].rare != 0:
 
                             afficher_info_monstre2_nom = True
                             afficher_info_monstre2_type = True
                             afficher_info_monstre2_rare = True
+
+                        elif self.joueur.liste_monstre[1].rare == 0:
+
+                            afficher_info_monstre2_nom = False
+                            afficher_info_monstre2_type = False
+                            afficher_info_monstre2_rare = False
 
                         if self.joueur.liste_monstre[2].rare != 0:
 
@@ -631,17 +651,45 @@ class Menu:
                             afficher_info_monstre3_type = True
                             afficher_info_monstre3_rare = True
 
+                        elif self.joueur.liste_monstre[2].rare == 0:
+
+                            afficher_info_monstre3_nom = False
+                            afficher_info_monstre3_type = False
+                            afficher_info_monstre3_rare = False
+
                     # choix du monstre pour le combat, le monstre pour le combat est le monstre le plus a gauche
                     elif doit_lancer_menu_monstre == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_monstre2.collidepoint(event.pos):
 
                         if self.joueur.liste_monstre[1].rare != 0:
 
+                            afficher_info_monstre1_nom = True
+                            afficher_info_monstre1_type = True
+                            afficher_info_monstre1_rare = True
+                            if self.joueur.liste_monstre[0].rare != 0:
+                                afficher_info_monstre2_nom = True
+                                afficher_info_monstre2_type = True
+                                afficher_info_monstre2_rare = True
+                            elif self.joueur.liste_monstre[0].rare == 0:
+                                afficher_info_monstre2_nom = False
+                                afficher_info_monstre2_type = False
+                                afficher_info_monstre2_rare = False
                             self.joueur.bouger_monstre(1)
 
                     elif doit_lancer_menu_monstre == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_monstre3.collidepoint(event.pos):
 
                         if self.joueur.liste_monstre[2].rare != 0:
 
+                            afficher_info_monstre1_nom = True
+                            afficher_info_monstre1_type = True
+                            afficher_info_monstre1_rare = True
+                            if self.joueur.liste_monstre[0].rare != 0:
+                                afficher_info_monstre3_nom = True
+                                afficher_info_monstre3_type = True
+                                afficher_info_monstre3_rare = True
+                            elif self.joueur.liste_monstre[0].rare == 0:
+                                afficher_info_monstre3_nom = False
+                                afficher_info_monstre3_type = False
+                                afficher_info_monstre3_rare = False
                             self.joueur.bouger_monstre(2)
 
                     # lancer un combat
@@ -697,6 +745,8 @@ class Menu:
                         afficher_deja_un = False
                         afficher_trop_de_monstre = False
                         afficher_monstre = False
+                        afficher_regle_ulisisation_monstre = False
+                        afficher_colection = False
 
                         if doit_lancer_menu_inventaire == 0:
                             doit_lancer_menu_inventaire = 1
@@ -737,6 +787,8 @@ class Menu:
                         afficher_deja_un = False
                         afficher_trop_de_monstre = False
                         afficher_monstre = False
+                        afficher_regle_ulisisation_monstre = False
+                        afficher_colection = False
                         self.joueur.charger_joueur()
 
                     # sauvergarder
@@ -749,6 +801,8 @@ class Menu:
                         afficher_deja_un = False
                         afficher_trop_de_monstre = False
                         afficher_monstre = False
+                        afficher_regle_ulisisation_monstre = False
+                        afficher_colection = False
                         self.joueur.tout_sauvegarder()
 
                 # permet de reactualiser le fond
