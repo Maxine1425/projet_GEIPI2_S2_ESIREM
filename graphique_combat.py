@@ -57,7 +57,6 @@ def ecran_victoire(vainqueur):
         screen.blit(vainqueur_image, rect.topleft)
         screen.blit(text, text_rect.topleft)  # Affichage du texte
         pygame.display.flip()
-        pygame.time.wait(50)  # Attendre un peu pour réduire l'utilisation du CPU
 
 
 
