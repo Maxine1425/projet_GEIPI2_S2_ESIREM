@@ -21,11 +21,14 @@ while True:
     lancer_menu_pour_la_1ere_fois = menu_accueil.doit_lancer_menu
 
     if lancer_menu == 1 and lancer_menu_pour_la_1ere_fois:
+
         # appel de la methode menu()
         menu_principal.menu(lancer_menu)
 
     elif lancer_menu == 0:
+
         monstre_ordinateur = Monstre()
+
         # appel de la methode ecran_combat()
         ecran_combat(joueur, monstre_ordinateur)
         menu_principal.doit_lancer_menu = 1
