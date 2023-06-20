@@ -59,10 +59,28 @@ class Monstre:
 
         self.est_ko = False  # Est-ce que le monstre est KO
         self.choice = 1
-        self.item_equipe_epee = 0
-        self.item_equipe_bouclier = 0
-        self.item_equipe_bottes = 0
-        self.item_equipe_soupe = 0
+
+        epee = Item(1, "epee")
+        bouclier = Item(1, "bouclier")
+        bottes = Item(1, "bottes")
+        soupe = Item(1, "soupe")
+
+        epee.rare = 0
+        epee.valeur_atq = 0
+
+        bouclier.rare = 0
+        bouclier.valeur_def = 0
+
+        bottes.rare = 0
+        bottes.valeur_vit = 0
+
+        soupe.rare = 0
+        soupe.valeur_pv = 0
+
+        self.item_equipe_epee = epee
+        self.item_equipe_bouclier = bouclier
+        self.item_equipe_bottes = bottes
+        self.item_equipe_soupe = soupe
 
         if self.rare == 1:
             if self.type == "Attaque":
@@ -182,7 +200,7 @@ class Monstre:
         self.ATQ += self.item_equipe_epee.valeur_atq
         self.DEF += self.item_equipe_bouclier.valeur_def
         self.VIT += self.item_equipe_bottes.valeur_vit
-        self.PV += self.item_equipe_soupe.valeut_pv
+        self.PV += self.item_equipe_soupe.valeur_pv
 
     def modifier_item_monstre(self, item):
         if item.type == "epee":
