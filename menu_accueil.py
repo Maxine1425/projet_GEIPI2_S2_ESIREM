@@ -2,7 +2,7 @@ import pygame
 from pygame.locals import *
 
 
-class Menu_accueil:
+class MenuAccueil:
 
     def __init__(self):
         self.doit_lancer_menu_accueil = 1

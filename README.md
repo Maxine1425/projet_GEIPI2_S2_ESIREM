@@ -80,7 +80,6 @@ Ce projet est sous licence MIT.
 
 ## Améliorations
 
-Si vous avez des questions ou des suggestions, n'hésitez pas à nous contacter par
 Pour améliorer ce projet, nous pourrions rajouter des fonctionnalités, tel que des combats en multijoueur ou bien rajouter plus de monstres.
 Au niveau du code, il faudrait optimiser la création de monstres et d'objets en utilisant des sous classes appropriées.
 

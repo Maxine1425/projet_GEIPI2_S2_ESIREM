@@ -1,11 +1,11 @@
 from graphique_combat import ecran_combat
 from joueur import Joueur
 from menu import Menu
-from menu_accueil import Menu_accueil
+from menu_accueil import MenuAccueil
 from monstre import Monstre
 
 # creation des objets
-menu_accueil = Menu_accueil()
+menu_accueil = MenuAccueil()
 menu_accueil.menu_accueil(lance=1)
 print("pseudo = " + menu_accueil.pseudo)
 joueur = Joueur(menu_accueil.pseudo, 1000000, 1, 0, 0, 0)
