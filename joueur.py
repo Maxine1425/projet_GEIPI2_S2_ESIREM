@@ -5,6 +5,7 @@ from argent import Compteur
 from monstre import *
 from item import *
 
+
 class Joueur:
 
     def __init__(self, name, balance, mod, modp2, modp5, modp10):
@@ -52,7 +53,7 @@ class Joueur:
         self.liste_soupe = soupe
 
         self.collection_monstre = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-        
+
         self.portefeuille.demarrer()
 
     def nombre_monstre_collection(self):
@@ -103,7 +104,7 @@ class Joueur:
         elif nom_monstre == "Vaporc":
             if self.collection_monstre[9] == 0:
                 self.collection_monstre[9] = 1
-            
+
     def ajouter_item(self, item):
         if item.type == "epee" and self.liste_epee.rare == 0:
             self.liste_epee = item
@@ -323,7 +324,7 @@ class Joueur:
                 monstre.ATQ = int(lines[i + 4])
                 monstre.DEF = int(lines[i + 5])
                 monstre.VIT = int(lines[i + 6])
-                monstre.chemin_image = lines[i + 7].strip()
+                monstre.chemin_image = str(lines[i + 7].strip())
                 monstre.initial_max_PV = monstre.PV
                 liste_monstre.append(monstre)
                 i += 9

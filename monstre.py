@@ -224,6 +224,7 @@ class Monstre:
             self.item_equipe_soupe = 0
         self.modifier_stat_monstre()
 
+
 class MonstreAttaque(Monstre):
     def define_stats(self):
         PV = random.randint(100, 600)

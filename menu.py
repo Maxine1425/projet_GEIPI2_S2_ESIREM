@@ -660,7 +660,7 @@ class Menu:
                     # choix du monstre pour le combat, le monstre pour le combat est le monstre le plus a gauche
                     elif doit_lancer_menu_monstre == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_monstre2.collidepoint(event.pos):
 
-                        if self.joueur.liste_monstre[1].chemin_image != "images/pas_de_monstres.png":
+                        if self.joueur.liste_monstre[1].chemin_image != "images/pas_de_monstres.png" and afficher_info_monstre1_nom:
 
                             afficher_info_monstre1_nom = True
                             afficher_info_monstre1_type = True
@@ -677,7 +677,7 @@ class Menu:
 
                     elif doit_lancer_menu_monstre == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_monstre3.collidepoint(event.pos):
 
-                        if self.joueur.liste_monstre[2].chemin_image != "images/pas_de_monstres.png":
+                        if self.joueur.liste_monstre[2].chemin_image != "images/pas_de_monstres.png" and afficher_info_monstre2_nom:
 
                             afficher_info_monstre1_nom = True
                             afficher_info_monstre1_type = True
