@@ -178,7 +178,7 @@ class Monstre:
 
     def modifier_stat_monstre(self):
         self.ATQ += self.item_equipe_epee.valeur_atq
-        self.DEF += self.item_equipe_bouclier.valeut_def
+        self.DEF += self.item_equipe_bouclier.valeur_def
         self.VIT += self.item_equipe_bottes.valeur_vit
         self.PV += self.item_equipe_soupe.valeut_pv
 
