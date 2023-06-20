@@ -51,8 +51,59 @@ class Joueur:
         self.liste_bottes = bottes
         self.liste_soupe = soupe
 
+        self.collection_monstre = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+        
         self.portefeuille.demarrer()
 
+    def nombre_monstre_collection(self):
+        compteur = 0
+        length = len(self.collection_monstre)
+        for i in range(length):
+            if self.collection_monstre[i] == 1:
+                compteur += 1
+        return compteur
+
+    def ajouter_collection(self, nom_monstre):
+        if nom_monstre == "Crolite":
+            if self.collection_monstre[0] == 0:
+                self.collection_monstre[0] = 1
+
+        elif nom_monstre == "Wallabic":
+            if self.collection_monstre[1] == 0:
+                self.collection_monstre[1] = 1
+
+        elif nom_monstre == "Panthoal":
+            if self.collection_monstre[2] == 0:
+                self.collection_monstre[2] = 1
+
+        elif nom_monstre == "Crocodithe":
+            if self.collection_monstre[3] == 0:
+                self.collection_monstre[3] = 1
+
+        elif nom_monstre == "Whirlling":
+            if self.collection_monstre[4] == 0:
+                self.collection_monstre[4] = 1
+
+        elif nom_monstre == "Skeleroach":
+            if self.collection_monstre[5] == 0:
+                self.collection_monstre[5] = 1
+
+        elif nom_monstre == "Demeton":
+            if self.collection_monstre[6] == 0:
+                self.collection_monstre[6] = 1
+
+        elif nom_monstre == "Silverilla":
+            if self.collection_monstre[7] == 0:
+                self.collection_monstre[7] = 1
+
+        elif nom_monstre == "Pyrose":
+            if self.collection_monstre[8] == 0:
+                self.collection_monstre[8] = 1
+
+        elif nom_monstre == "Vaporc":
+            if self.collection_monstre[9] == 0:
+                self.collection_monstre[9] = 1
+            
     def ajouter_item(self, item):
         if item.type == "epee" and self.liste_epee.rare == 0:
             self.liste_epee = item
