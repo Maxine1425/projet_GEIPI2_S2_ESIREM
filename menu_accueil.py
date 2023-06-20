@@ -26,6 +26,7 @@ class Menu_accueil:
             bouton_rect = pygame.Rect((460, 590), (100, 40))
 
             continuer = True
+            afficher_texte_pas_pseudo = False
 
             while continuer:
                 for event in pygame.event.get():
@@ -36,23 +37,26 @@ class Menu_accueil:
                             self.pseudo = self.pseudo[:-1]
 
                         elif event.key == K_RETURN:
-                            print(self.pseudo)
-                            self.doit_lancer_menu_accueil = 0
-                            self.doit_lancer_menu = 1
-                            continuer = False
+                            if self.pseudo:
+                                print(self.pseudo)
+                                self.doit_lancer_menu_accueil = 0
+                                self.doit_lancer_menu = 1
+                                continuer = False
+                            else:
+                                afficher_texte_pas_pseudo = True
 
                         else:
                             self.pseudo += event.unicode
 
-
                     elif event.type == MOUSEBUTTONDOWN:
                         if event.button == 1 and bouton_rect.collidepoint(event.pos):
-                            print(self.pseudo)
-                            self.doit_lancer_menu_accueil = 0
-                            self.doit_lancer_menu = 1
-
-                            continuer = False
-
+                            if self.pseudo:
+                                print(self.pseudo)
+                                self.doit_lancer_menu_accueil = 0
+                                self.doit_lancer_menu = 1
+                                continuer = False
+                            else:
+                                afficher_texte_pas_pseudo = True
 
                 fenetre.blit(fond, (0, 0))
                 texte_surface = police.render(self.pseudo, True, (255, 255, 255))
@@ -60,6 +64,10 @@ class Menu_accueil:
 
                 texte_label = police.render("Entrer votre nom d'utilisateur :", True, (255, 255, 255))
                 fenetre.blit(texte_label, (330, 230))
+
+                if afficher_texte_pas_pseudo:
+                    texte_pas_pseudo = police.render("Entrez votre pseudo avant de valider ! ", True, (255, 255, 255))
+                    fenetre.blit(texte_pas_pseudo, (330, 400))
 
                 pygame.draw.rect(fenetre, (0, 255, 0), bouton_rect)
                 bouton_texte = police.render("Valider", True, (255, 255, 255))
