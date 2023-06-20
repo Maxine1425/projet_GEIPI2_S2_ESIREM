@@ -240,7 +240,7 @@ class Menu:
                         afficher_info_monstre2_nom = False
                         afficher_info_monstre2_type = False
                         afficher_info_monstre2_rare = False
-                    elif self.joueur.liste_monstre[0].chemin_image != "images/pas_de_monstre.png":
+                    elif self.joueur.liste_monstre[1].chemin_image != "images/pas_de_monstre.png":
                         print("BOUCLE1")
                         afficher_info_monstre2_nom = True
                         afficher_info_monstre2_type = True
@@ -251,7 +251,7 @@ class Menu:
                         afficher_info_monstre3_nom = False
                         afficher_info_monstre3_type = False
                         afficher_info_monstre3_rare = False
-                    elif self.joueur.liste_monstre[0].chemin_image != "images/pas_de_monstre.png":
+                    elif self.joueur.liste_monstre[2].chemin_image != "images/pas_de_monstre.png":
                         print("BOUCLE1")
                         afficher_info_monstre3_nom = True
                         afficher_info_monstre3_type = True
