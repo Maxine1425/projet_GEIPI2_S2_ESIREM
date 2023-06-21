@@ -77,6 +77,8 @@ Ce projet est sous licence MIT.
 - [Thin Louis](https://github.com/LouisT1425) - Développeur Back End
 -  - Encadrante de projet
 -  - Encadrant de projet
+ 
+- [StackEdit](https://stackedit.io/app#) pour réaliser ce readme.
 
 ## Améliorations
 
