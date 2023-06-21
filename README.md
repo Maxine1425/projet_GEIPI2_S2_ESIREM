@@ -61,7 +61,7 @@ L'objectif était de créer une application en Python en utilisant la bibliothè
 
 ## Comment jouer
 
-1. Commencez par générer de l'argent, vous gagnez au départ 1€/s.
+1. Commencez par générer de l'argent, vous gagnez au départ 1po/s.
 2. Utilisez votre argent pour acheter des monstres, des objets et des bonus à partir du magasin.
 3. Sélectionnez les monstres que vous voulez utiliser et combattez contre des monstres gérés par l'ordinateur.
 4. Remportez des combats pour gagner plus d'argent et acheter des monstres plus puissants.
