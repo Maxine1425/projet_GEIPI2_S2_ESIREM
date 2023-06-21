@@ -35,7 +35,7 @@ class Menu:
             fenetre = pygame.display.set_mode((990, 660))
 
             # nom du jeu apparait
-            pygame.display.set_caption("Jeux de Louis et Maxine")
+            pygame.display.set_caption("Cash & Clash")
 
             # initialisation des varriables et d'objets et de police ecriture
             lancer_menu = 1
@@ -733,7 +733,7 @@ class Menu:
                     # lancer un combat
                     elif doit_lancer_menu_monstre == 1 and event.type == MOUSEBUTTONUP and event.button == 1 and clickable_area_lancer_combat.collidepoint(event.pos):
 
-                        if self.joueur.liste_monstre[0].chemin_image != "images/pas_de_monstre.png" :
+                        if self.joueur.liste_monstre[0].chemin_image != "images/pas_de_monstre.png":
 
                             self.doit_lancer_combat = 1
                             self.doit_lancer_menu = 0
