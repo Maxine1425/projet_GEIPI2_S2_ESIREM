@@ -5,7 +5,7 @@
 ![Licence](https://img.shields.io/badge/license-MIT-green)
 
 # Introduction :
-Ce jeu à été créé dans le cadre du projet de programmation en Python de GEIPI2.
+Ce jeu à été créé dans le cadre du projet de programmation en Python de GEIPI2 à l'ESIREM.
 L'objectif était de créer une application en Python en utilisant la bibliothèque Pygame, tout en faisant une introduction à la gestion de projet et la programmation en groupe.
 
 ![enter image description here](https://image.noelshack.com/fichiers/2023/25/2/1687286685-image-jeu.png)
